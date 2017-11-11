@@ -11,6 +11,8 @@ import { userReducer } from './reducers/userReducer'
 import { fetchUserData } from './actions/userActions'
 import { fileReducer } from './reducers/fileReducer'
 import { editorReducer } from './reducers/editorReducer'
+import { getPreferences } from './actions/preferencesActions'
+import { preferencesReducer } from './reducers/preferencesReducer'
 import 'bulma/css/bulma.css'
 import './index.css'
 import App from './layouts/App'
@@ -25,13 +27,15 @@ const store = createStore(
   combineReducers({
     editor: editorReducer,
     file: fileReducer,
-    user: userReducer,
-    router: routerReducer
+    preferences: preferencesReducer,
+    router: routerReducer,
+    user: userReducer
   }),
   applyMiddleware(middleware, createLogger(), thunkMiddleware)
 )
 
 store.dispatch(fetchUserData())
+store.dispatch(getPreferences())
 
 // Initialize React application
 ReactDOM.render(

@@ -5,6 +5,7 @@
   "dependencies": {
     "blockstack": "^0.13.4",
     "bulma": "^0.6.1",
+    "cool-checkboxes-for-bulma.io": "^1.1.0",
     "history": "^4.7.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",

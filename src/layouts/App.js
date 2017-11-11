@@ -10,6 +10,7 @@ import HandleLogin from '../pages/Login/HandleLogin'
 import Home from '../pages/Home/Home'
 import Login from '../pages/Login/Login'
 import Logout from '../pages/Logout/Logout'
+import Preferences from '../pages/Preferences/Preferences'
 import Secret from '../pages/Secret/Secret'
 
 const mapStateToProps = (state) => {
@@ -31,6 +32,7 @@ const App = ({user, ...rest}) => {
           }
           <Route path='/logout' exact component={Logout} />
           <Public path='/handle-login' name='handle-login' component={HandleLogin} />
+          <Authenticated path='/preferences' exact name='preferences' component={Preferences} />
         </div>
       </div>
     </main>
