@@ -13,7 +13,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     handleFileContentChange: (e) => {
       const { value } = e.target
-      console.log(value)
       dispatch(editorFileConentChange(value))
     },
     handleFilePathChange: (e) => {

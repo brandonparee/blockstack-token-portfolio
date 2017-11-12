@@ -11,7 +11,9 @@ import { userReducer } from './reducers/userReducer'
 import { fetchUserData } from './actions/userActions'
 import { fileReducer } from './reducers/fileReducer'
 import { editorReducer } from './reducers/editorReducer'
-import { getPreferences } from './actions/preferencesActions'
+import { portfolioReducer } from './reducers/portfolioReducer'
+import { fiatPriceUpdate } from './actions/priceActions'
+import { priceReducer } from './reducers/priceReducer'
 import { preferencesReducer } from './reducers/preferencesReducer'
 import 'bulma/css/bulma.css'
 import './index.css'
@@ -23,11 +25,13 @@ const history = createHistory()
 const middleware = routerMiddleware(history)
 
 // Setup for redux
-const store = createStore(
+export const store = createStore(
   combineReducers({
     editor: editorReducer,
     file: fileReducer,
+    portfolio: portfolioReducer,
     preferences: preferencesReducer,
+    price: priceReducer,
     router: routerReducer,
     user: userReducer
   }),
@@ -35,7 +39,7 @@ const store = createStore(
 )
 
 store.dispatch(fetchUserData())
-store.dispatch(getPreferences())
+store.dispatch(fiatPriceUpdate())
 
 // Initialize React application
 ReactDOM.render(

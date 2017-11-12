@@ -1,13 +1,15 @@
+import _ from 'lodash'
+
 const tokens = [
-  { name: 'Bitcoin', symbol: 'btc' },
-  { name: 'Bitcoin Cash', symbol: 'bch' },
-  { name: 'Ethereum', symbol: 'eth' },
-  { name: 'Ethereum Classic', symbol: 'etc' },
-  { name: 'Litecoin', symbol: 'ltc' },
-  { name: 'Dash', symbol: 'dash' },
-  { name: 'Monero', symbol: 'xmr' },
-  { name: 'Zcash', symbol: 'zec' },
-  { name: 'Ripple', symbol: 'xrp' }
+  { name: 'Bitcoin', abbreviation: 'BTC' },
+  { name: 'Bitcoin Cash', abbreviation: 'BCH' },
+  { name: 'Ethereum', abbreviation: 'ETH' },
+  { name: 'Ethereum Classic', abbreviation: 'ETC' },
+  { name: 'Litecoin', abbreviation: 'LTC' },
+  { name: 'Dash', abbreviation: 'DASH' },
+  { name: 'Monero', abbreviation: 'XMR' },
+  { name: 'Zcash', abbreviation: 'ZEC' },
+  { name: 'Ripple', abbreviation: 'XRP' }
 
 ]
 
@@ -30,4 +32,37 @@ export const getTokenList = () => {
 
 export const getFiatList = () => {
   return fiat
+}
+
+export const getSelectedTokens = (preferences) => {
+  const { tokens } = preferences
+  const tokenList = []
+
+  _.forEach(tokens, (value, key) => {
+    if (value) {
+      tokenList.push(key)
+    }
+  })
+
+  return tokenList
+}
+
+export const getTokenName = (code) => {
+  return _.find(tokens, { symbol: code})
+}
+
+export const getFiatInfo = (code) => {
+  return _.find(fiat, { abbreviation: code })
+}
+
+export const prettyFiat = (value) => {
+  if (value > 1) {
+    return value.toFixed(2)
+  }
+
+  return value.toFixed(6)
+}
+
+export const prettyCrypto = (value) => {
+  return value.toFixed(6)
 }

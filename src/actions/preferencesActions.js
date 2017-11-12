@@ -5,7 +5,6 @@ export const UPDATE_PREFERENCES = 'UPDATE_PREFERENCES'
 export const UPDATE_LOCAL_PREFERENCES = 'UPDATE_LOCAL_PREFERENCES'
 export const UPDATE_LOCAL_PREFERENCES_TOKEN = 'UPDATE_LOCAL_PREFERENCES_TOKEN'
 
-
 export const getPreferences = () => {
   return (dispatch) => {
     dispatch({ type: FETCH_PREFERENCES })
@@ -16,6 +15,7 @@ export const getPreferences = () => {
 
 export const updatePreferences = (preferences) => {
   preferences = JSON.stringify(preferences)
+  localStorage.setItem('preferences', preferences)
 
   return (dispatch) => {
     dispatch({ type: UPDATE_PREFERENCES })
@@ -24,9 +24,11 @@ export const updatePreferences = (preferences) => {
   }
 }
 
-export const updateFiatPreference = (value, currentPreferences) => {
-  const preferences = { tokens: {...currentPreferences.tokens}, fiat: value }
-  return (dispatch) => {
+export const updateFiatPreference = (value) => {
+  return (dispatch, getState) => {
+    const currentPreferences = getState().preferences
+    const preferences = { tokens: {...currentPreferences.tokens}, fiat: value }
+
     dispatch({
       type: UPDATE_LOCAL_PREFERENCES,
       payload: { ...preferences }
@@ -36,13 +38,13 @@ export const updateFiatPreference = (value, currentPreferences) => {
   }
 }
 
-export const updateTokenPreference = (value, selected, currentPreferences) => {
-  let preferences = { fiat: currentPreferences.fiat, tokens: {...currentPreferences.tokens} }
-  preferences.tokens[value] = selected
+export const updateTokenPreference = (value, selected) => {
+  return (dispatch, getState) => {
+    const currentPreferences = getState().preferences
 
-  console.log(preferences)
+    let preferences = { fiat: currentPreferences.fiat, tokens: {...currentPreferences.tokens} }
+    preferences.tokens[value] = selected
 
-  return (dispatch) => {
     dispatch({
       type: UPDATE_LOCAL_PREFERENCES,
       payload: { ...preferences }

@@ -16,21 +16,20 @@ const mapStateToProps = ({preferences}) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleFiatPreferenceChange: (e, currentPreferences) => {
+    handleFiatPreferenceChange: (e) => {
       const { value } = e.target
 
-      dispatch(updateFiatPreference(value, currentPreferences))
+      dispatch(updateFiatPreference(value))
     },
-    handleTokenPreferenceChange: (e, currentPreferences) => {
+    handleTokenPreferenceChange: (e) => {
       const { value, checked } = e.target
 
-      dispatch(updateTokenPreference(value, checked, currentPreferences))
+      dispatch(updateTokenPreference(value, checked))
     }
   }
 }
 
 const Preferences = ({preferences, handleFiatPreferenceChange, handleTokenPreferenceChange}) => {
-  console.log(preferences)
   return (
     <section className='section'>
       <div className='container'>
@@ -40,7 +39,7 @@ const Preferences = ({preferences, handleFiatPreferenceChange, handleTokenPrefer
           <div className='control'>
             <div className='select'>
               <select
-                onChange={(e) => handleFiatPreferenceChange(e, preferences)}
+                onChange={handleFiatPreferenceChange}
                 value={preferences.fiat} >
                 {
                   fiatList.map((fiat) => {
@@ -62,14 +61,14 @@ const Preferences = ({preferences, handleFiatPreferenceChange, handleTokenPrefer
           {
             tokenList.map((token) => {
               return (
-                <div key={token.symbol}>
+                <div key={token.abbreviation}>
                   <label className='checkbox'>
                     <input
                       type='checkbox'
-                      onChange={(e) => handleTokenPreferenceChange(e, preferences)}
-                      checked={preferences.tokens[token.symbol] ? 'checked' : ''}
-                      value={token.symbol} />
-                      {token.name} ({token.symbol})
+                      onChange={handleTokenPreferenceChange}
+                      checked={preferences.tokens[token.abbreviation] ? 'checked' : ''}
+                      value={token.abbreviation} />
+                    {token.name} ({token.abbreviation})
                     </label>
                 </div>
               )

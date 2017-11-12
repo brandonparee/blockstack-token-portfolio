@@ -3,11 +3,8 @@ import { FETCH_PREFERENCES, UPDATE_LOCAL_PREFERENCES } from '../actions/preferen
 
 const initialState = {
   isUpdating: false,
-  fiat: '',
-  tokens: {
-    btc: true,
-    eth: true
-  }
+  fiat: 'USD',
+  tokens: {}
 }
 
 const parsePreferences = (content) => {
@@ -23,6 +20,7 @@ export const preferencesReducer = (state = initialState, action) => {
     case FETCH_FILE_SUCCESS:
       if (action.payload.path === 'preferences.json') {
         const preferences = parsePreferences(action.payload.content)
+        localStorage.setItem('preferences', action.payload.content)
 
         return { ...state, isUpdating: false, ...preferences }
       }
@@ -33,7 +31,7 @@ export const preferencesReducer = (state = initialState, action) => {
 
         return { ...state, isUpdating: false, ...preferences }
       }
-      break
+      return { ...state }
     default:
       return state
   }
