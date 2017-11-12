@@ -27,6 +27,11 @@ const SingleHolding = ({portfolio, preferences, price, abbreviation, handleInput
   const inputClassName = `input${!portfolio.isEdit ? ' is-static' : ''}`
   const inputValue = `${tokens && tokens[abbreviation] ? tokens[abbreviation] : 0}`
 
+  const btcValue = (!(abbreviation === 'BTC') ? price.tokenRates[`BTC_${abbreviation}`].last : 1)
+  const fiatValue = btcValue * price.tokenRates.USDT_BTC.last * inputValue
+  const percentChange = 1 + parseFloat((!(abbreviation === 'BTC') ? price.tokenRates[`BTC_${abbreviation}`].percentChange : price.tokenRates[`USDT_BTC`].percentChange))
+  const dayChange = fiatValue - fiatValue / percentChange
+
   return (
     <div className='field is-horizontal'>
       <div className='field-label is-normal'>
@@ -43,7 +48,8 @@ const SingleHolding = ({portfolio, preferences, price, abbreviation, handleInput
               readOnly={!portfolio.isEdit}
               value={inputValue + (!portfolio.isEdit ? ` ${abbreviation}` : '')} />
           </p>
-          <p className='control'>{fiatInfo.symbol} {prettyFiat((1 / price.fiatPrice[abbreviation]) * inputValue)}</p>
+          <p className='control'>{fiatInfo.symbol}{prettyFiat(fiatValue)}</p>
+          <p className='control'>{fiatInfo.symbol}{prettyFiat(dayChange)}</p>
         </div>
       </div>
     </div>

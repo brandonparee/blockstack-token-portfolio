@@ -1,53 +1,41 @@
 import axios from 'axios'
-import _ from 'lodash'
 
-export const FIAT_PRICE_UPDATE_REQUEST = 'FIAT_PRICE_UPDATE_REQUEST'
-export const FIAT_PRICE_UPDATE_ERROR = 'FIAT_PRICE_UPDATE_ERROR'
-export const FIAT_PRICE_UPDATE_SUCCESS = 'FIAT_PRICE_UPDATE_SUCCESS'
+export const TOKEN_EXCHANGE_RATES_REQUEST = 'TOKEN_EXCHANGE_RATES_REQUEST'
+export const TOKEN_EXCHANGE_RATES_ERROR = 'TOKEN_EXCHANGE_RATES_ERROR'
+export const TOKEN_EXCHANGE_RATES_SUCCESS = 'TOKEN_EXCHANGE_RATES_SUCCESS'
+export const FIAT_EXCHANGE_RATES_REQUEST = 'FIAT_EXCHANGE_RATES_REQUEST'
+export const FIAT_EXCHANGE_RATES_ERROR = 'FIAT_EXCHANGE_RATES_ERROR'
+export const FIAT_EXCHANGE_RATES_SUCCESS = 'FIAT_EXCHANGE_RATES_SUCCESS'
 
 // TODO Refactor all of this, its pretty gross
 
-const cryptoCompare = `https://min-api.cryptocompare.com/data`
+// const cryptoCompare = `https://min-api.cryptocompare.com/data`
+const poloniex = `https://poloniex.com/public?command`
 
-const mapTokens = (tokens) => {
-  let tokenList = []
-
-  Object.keys(tokens).map((token) => {
-    if (tokens[token]) {
-      tokenList.push(token)
-    }
-  })
-
-  return tokenList
-}
-
-export const fiatPriceUpdate = () => {
+export const getFiatExchangeRates = () => {
   return (dispatch, getState) => {
-    dispatch({type: FIAT_PRICE_UPDATE_REQUEST})
+    dispatch({type: FIAT_EXCHANGE_RATES_REQUEST})
 
-    const localPreferences = JSON.parse(localStorage.getItem('preferences'))
-    const preferences = getState().preferences
-    let tokens
-
-    if (!_.isEmpty(preferences.tokens)) {
-      tokens = mapTokens(preferences.tokens)
-    } else {
-      tokens = mapTokens(localPreferences.tokens)
-    }
-
-    // TODO add timestamp, cache API call for 1 min
-
-    return axios.get(`${cryptoCompare}/price`, {
-      params: {
-        fsym: preferences.fiat ? preferences.fiat : localPreferences.fiat,
-        tsyms: tokens.toString()
-      }
-    })
+    return axios.get(`http://api.fixer.io/latest?base=USD`)
     .then((res) => {
-      dispatch({type: FIAT_PRICE_UPDATE_SUCCESS, payload: res.data})
+      dispatch({type: FIAT_EXCHANGE_RATES_SUCCESS, payload: res.data})
     })
     .catch((error) => {
-      dispatch({type: FIAT_PRICE_UPDATE_ERROR, payload: error})
+      dispatch({type: FIAT_EXCHANGE_RATES_ERROR, payload: error})
+    })
+  }
+}
+
+export const getTokenExchangeRates = () => {
+  return (dispatch, getState) => {
+    dispatch({type: TOKEN_EXCHANGE_RATES_REQUEST})
+
+    return axios.get(`${poloniex}=returnTicker`)
+    .then((res) => {
+      dispatch({type: TOKEN_EXCHANGE_RATES_SUCCESS, payload: res.data})
+    })
+    .catch((error) => {
+      dispatch({type: TOKEN_EXCHANGE_RATES_ERROR, payload: error})
     })
   }
 }

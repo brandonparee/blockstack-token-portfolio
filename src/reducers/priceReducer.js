@@ -1,23 +1,33 @@
 import {
-  FIAT_PRICE_UPDATE_REQUEST,
-  FIAT_PRICE_UPDATE_ERROR,
-  FIAT_PRICE_UPDATE_SUCCESS
+  TOKEN_EXCHANGE_RATES_REQUEST,
+  TOKEN_EXCHANGE_RATES_ERROR,
+  TOKEN_EXCHANGE_RATES_SUCCESS,
+  FIAT_EXCHANGE_RATES_REQUEST,
+  FIAT_EXCHANGE_RATES_ERROR,
+  FIAT_EXCHANGE_RATES_SUCCESS
 } from '../actions/priceActions'
 
 const initialState = {
   isUpdating: false,
-  fiatPrice: {},
+  tokenRates: {},
+  fiatRates: {},
   error: null
 }
 
 export const priceReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FIAT_PRICE_UPDATE_REQUEST:
+    case TOKEN_EXCHANGE_RATES_REQUEST:
       return { ...state, isUpdating: true }
-    case FIAT_PRICE_UPDATE_ERROR:
+    case TOKEN_EXCHANGE_RATES_ERROR:
       return { ...state, isUpdating: false, error: action.payload }
-    case FIAT_PRICE_UPDATE_SUCCESS:
-      return { ...state, isUpdating: false, fiatPrice: { ...action.payload } }
+    case TOKEN_EXCHANGE_RATES_SUCCESS:
+      return { ...state, isUpdating: false, tokenRates: { ...action.payload } }
+    case FIAT_EXCHANGE_RATES_REQUEST:
+      return { ...state, isUpdating: true }
+    case FIAT_EXCHANGE_RATES_ERROR:
+      return { ...state, isUpdating: false, error: action.payload }
+    case FIAT_EXCHANGE_RATES_SUCCESS:
+      return { ...state, isUpdating: false, fiatRates: { ...action.payload.rates } }
     default:
       return state
   }

@@ -12,13 +12,17 @@ import { fetchUserData } from './actions/userActions'
 import { fileReducer } from './reducers/fileReducer'
 import { editorReducer } from './reducers/editorReducer'
 import { portfolioReducer } from './reducers/portfolioReducer'
-import { fiatPriceUpdate } from './actions/priceActions'
+import { getTokenExchangeRates } from './actions/priceActions'
 import { priceReducer } from './reducers/priceReducer'
 import { preferencesReducer } from './reducers/preferencesReducer'
 import 'bulma/css/bulma.css'
 import './index.css'
 import App from './layouts/App'
 import registerServiceWorker from './registerServiceWorker'
+
+import * as blockstackJs from 'blockstack-storage'
+
+window.blockstackJS = blockstackJs
 
 // Setup for react-router
 const history = createHistory()
@@ -39,7 +43,7 @@ export const store = createStore(
 )
 
 store.dispatch(fetchUserData())
-store.dispatch(fiatPriceUpdate())
+store.dispatch(getTokenExchangeRates())
 
 // Initialize React application
 ReactDOM.render(

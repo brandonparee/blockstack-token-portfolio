@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fiatPriceUpdate } from '../../actions/priceActions'
+import { getTokenExchangeRates } from '../../actions/priceActions'
 import { portfolioEdit, portfolioEditCancel, portfolioSave } from '../../actions/portfolioActions'
 import { getSelectedTokens, getFiatInfo, prettyFiat } from '../../utils'
 
@@ -16,8 +16,8 @@ const mapStateToProps = ({portfolio, preferences, price}) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fiatPriceUpdate: () => {
-      dispatch(fiatPriceUpdate())
+    getTokenExchangeRates: () => {
+      dispatch(getTokenExchangeRates())
     },
     handlePortfolioEdit: () => {
       dispatch(portfolioEdit())
@@ -33,7 +33,7 @@ const mapDispatchToProps = (dispatch) => {
 
 class Portfolio extends Component {
   componentDidMount () {
-    this.props.fiatPriceUpdate()
+    this.props.getTokenExchangeRates()
   }
 
   render () {
@@ -49,19 +49,6 @@ class Portfolio extends Component {
         <h1 className='title'>Portfolio</h1>
         <p className='is-size-6 has-text-grey'>Input your holdings here by pressing the edit button.</p>
         <p className='is-size-6 has-text-grey'>Transaction functionality coming.</p>
-        {
-            tokenList.map((token) => {
-              if (price.fiatPrice[token] && fiat) {
-                return (
-                  <SingleHolding
-                    key={token}
-                    abbreviation={token}
-                    fiatPrice={prettyFiat(1 / price.fiatPrice[token])} />
-                )
-              }
-              return ''
-            })
-          }
         <div className='buttons'>
           {
               !portfolio.isEdit
@@ -75,6 +62,19 @@ class Portfolio extends Component {
               Save
             </span>
         </div>
+        {
+            tokenList.map((token) => {
+              if (token === 'BTC' || (price.tokenRates[`BTC_${token}`] && fiat)) {
+                return (
+                  <SingleHolding
+                    key={token}
+                    abbreviation={token}
+                    tokenRates={prettyFiat(1 / price.tokenRates[token])} />
+                )
+              }
+              return ''
+            })
+        }
       </section>
     )
   }
