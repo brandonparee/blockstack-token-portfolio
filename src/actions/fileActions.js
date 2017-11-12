@@ -7,20 +7,23 @@ export const PUT_FILE_REQUEST = 'PUT_FILE_REQUEST'
 export const PUT_FILE_SUCCESS = 'PUT_FILE_SUCCESS'
 export const PUT_FILE_ERROR = 'PUT_FILE_ERROR'
 
-export const getBlockstackFile = (path, decrypt = false) => {
+export const getBlockstackFile = (path, decrypt = false, cb) => {
   return (dispatch) => {
     dispatch({ type: FETCH_FILE_REQUEST })
 
     return blockstack.getFile(path, decrypt)
       .then(
-        res => dispatch({
-          type: FETCH_FILE_SUCCESS,
-          payload: {
-            isEncrypted: decrypt,
-            content: res,
-            path
-          }
-        }),
+        (res) => {
+          dispatch({
+            type: FETCH_FILE_SUCCESS,
+            payload: {
+              isEncrypted: decrypt,
+              content: res,
+              path
+            }
+          })
+          if (cb) dispatch(cb())
+        },
 
         error => dispatch({ type: FETCH_FILE_ERROR, payload: error })
       )
