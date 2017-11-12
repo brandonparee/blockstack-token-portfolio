@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import _ from 'lodash'
 import { connect } from 'react-redux'
 import { fiatPriceUpdate } from '../../actions/priceActions'
 import { portfolioEdit, portfolioEditCancel, portfolioSave } from '../../actions/portfolioActions'
-import { getSelectedTokens, getFiatInfo, prettyFiat, prettyCrypto } from '../../utils'
+import { getSelectedTokens, getFiatInfo, prettyFiat } from '../../utils'
 
 import SingleHolding from './SingleHolding'
 
@@ -49,14 +48,14 @@ class Portfolio extends Component {
       <section className='section'>
         <div className='container'>
           <h1 className='title'>Portfolio</h1>
-          <div className="buttons">
+          <div className='buttons'>
             {
               !portfolio.isEdit
-              ? <span className="button is-info" onClick={handlePortfolioEdit}>Edit</span>
-              : <span className="button is-danger" onClick={handlePortfolioEditCancel}>Cancel</span>
+              ? <span className='button is-info' onClick={handlePortfolioEdit}>Edit</span>
+              : <span className='button is-danger' onClick={handlePortfolioEditCancel}>Cancel</span>
             }
             <span
-              className="button is-success"
+              className='button is-success'
               disabled={!portfolio.isModified ? 'disabled' : ''}
               onClick={handlePorfolioSave}>
               Save
@@ -69,9 +68,10 @@ class Portfolio extends Component {
                   <SingleHolding
                     key={token}
                     abbreviation={token}
-                    fiatPrice={prettyFiat(1/price.fiatPrice[token])} />
+                    fiatPrice={prettyFiat(1 / price.fiatPrice[token])} />
                 )
               }
+              return ''
             })
           }
         </div>

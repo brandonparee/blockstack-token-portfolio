@@ -33,5 +33,5 @@ export const portfolioEditCancel = () => {
 }
 
 export const portfolioLocalEdit = (target, value) => {
-  return { type: PORTFOLIO_LOCAL_EDIT, payload: { target, value }}
+  return { type: PORTFOLIO_LOCAL_EDIT, payload: { target, value } }
 }

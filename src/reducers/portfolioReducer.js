@@ -3,7 +3,7 @@ import {
   PORTFOLIO_EDIT,
   PORTFOLIO_EDIT_CANCEL,
   PORTFOLIO_LOCAL_EDIT,
-  PORTFOLIO_SAVE,
+  PORTFOLIO_SAVE
 } from '../actions/portfolioActions'
 
 import {
@@ -22,7 +22,7 @@ const initialState = {
 export const portfolioReducer = (state = initialState, action) => {
   switch (action.type) {
     case PORTFOLIO_ADD_TRANSACTION:
-      break;
+      break
     case PORTFOLIO_EDIT:
       return { ...state, isEdit: true }
     case PORTFOLIO_EDIT_CANCEL:

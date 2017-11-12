@@ -48,7 +48,7 @@ export const getSelectedTokens = (preferences) => {
 }
 
 export const getTokenName = (code) => {
-  return _.find(tokens, { symbol: code})
+  return _.find(tokens, { symbol: code })
 }
 
 export const getFiatInfo = (code) => {
