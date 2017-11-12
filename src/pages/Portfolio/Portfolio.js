@@ -46,22 +46,10 @@ class Portfolio extends Component {
 
     return (
       <section className='section'>
-        <div className='container'>
-          <h1 className='title'>Portfolio</h1>
-          <div className='buttons'>
-            {
-              !portfolio.isEdit
-              ? <span className='button is-info' onClick={handlePortfolioEdit}>Edit</span>
-              : <span className='button is-danger' onClick={handlePortfolioEditCancel}>Cancel</span>
-            }
-            <span
-              className='button is-success'
-              disabled={!portfolio.isModified ? 'disabled' : ''}
-              onClick={handlePorfolioSave}>
-              Save
-            </span>
-          </div>
-          {
+        <h1 className='title'>Portfolio</h1>
+        <p className='is-size-6 has-text-grey'>Input your holdings here by pressing the edit button.</p>
+        <p className='is-size-6 has-text-grey'>Transaction functionality coming.</p>
+        {
             tokenList.map((token) => {
               if (price.fiatPrice[token] && fiat) {
                 return (
@@ -74,6 +62,18 @@ class Portfolio extends Component {
               return ''
             })
           }
+        <div className='buttons'>
+          {
+              !portfolio.isEdit
+              ? <span className='button is-info' onClick={handlePortfolioEdit}>Edit</span>
+              : <span className='button is-danger' onClick={handlePortfolioEditCancel}>Cancel</span>
+            }
+          <span
+            className='button is-success'
+            disabled={!portfolio.isModified ? 'disabled' : ''}
+            onClick={handlePorfolioSave}>
+              Save
+            </span>
         </div>
       </section>
     )

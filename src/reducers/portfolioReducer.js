@@ -39,7 +39,7 @@ export const portfolioReducer = (state = initialState, action) => {
         const portfolio = JSON.parse(action.payload.content)
         localStorage.setItem('portfolio', action.payload.content)
 
-        return { ...state, isUpdating: false, isModified: false, ...portfolio }
+        return { ...state, isUpdating: false, isModified: false, tokens: { ...portfolio } }
       }
       return { ...state }
     case PUT_FILE_SUCCESS:

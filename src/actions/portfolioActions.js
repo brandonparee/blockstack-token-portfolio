@@ -20,7 +20,7 @@ export const portfolioSave = () => {
     const portfolio = getState().portfolio.tokens
     dispatch({ type: PORTFOLIO_SAVE, payload: { ...portfolio } })
 
-    dispatch(putBlockstackFile('portfolio.json', portfolio, true))
+    dispatch(putBlockstackFile('portfolio.json', JSON.stringify(portfolio), true))
   }
 }
 

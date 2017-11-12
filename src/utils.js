@@ -48,7 +48,7 @@ export const getSelectedTokens = (preferences) => {
 }
 
 export const getTokenName = (code) => {
-  return _.find(tokens, { symbol: code })
+  return _.find(tokens, { abbreviation: code }).name
 }
 
 export const getFiatInfo = (code) => {
@@ -57,12 +57,12 @@ export const getFiatInfo = (code) => {
 
 export const prettyFiat = (value) => {
   if (value > 1) {
-    return value.toFixed(2)
+    return parseFloat(value).toFixed(2)
   }
 
-  return value.toFixed(6)
+  return parseFloat(value).toFixed(6)
 }
 
 export const prettyCrypto = (value) => {
-  return value.toFixed(6)
+  return parseFloat(value).toFixed(6)
 }
