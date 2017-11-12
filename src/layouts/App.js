@@ -58,13 +58,13 @@ class App extends Component {
           <div className='column'>
             {
                 (user.isAuthenticated)
-                ? <Authenticated path='/' exact name='home' component={Secret} />
+                ? <Authenticated path='/' exact name='portfolio' component={Portfolio} />
                 : <Public path='/' exact name='login' component={Login} />
               }
             <Route path='/logout' exact component={Logout} />
             <Public path='/handle-login' name='handle-login' component={HandleLogin} />
             <Authenticated path='/preferences' exact name='preferences' component={Preferences} />
-            <Authenticated path='/portfolio' exact name='portfolio' component={Portfolio} />
+            <Authenticated path='/secret' exact name='secret' component={Secret} />
           </div>
         </div>
       </main>

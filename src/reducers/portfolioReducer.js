@@ -30,7 +30,7 @@ export const portfolioReducer = (state = initialState, action) => {
     case CONVERT_PORTFOLIO_REQUEST:
       return { ...state, isConverting: true }
     case CONVERT_PORTFOLIO_SUCCESS:
-      return { ...state, isConverting: false, convertedPortfolio: { ...action.payload} }
+      return { ...state, isConverting: false, convertedPortfolio: { ...action.payload.convertedPortfolio}, totalValue: action.payload.totalValue, dayChange: action.payload.dayChange }
     case PORTFOLIO_EDIT:
       return { ...state, isEdit: true }
     case PORTFOLIO_EDIT_CANCEL:

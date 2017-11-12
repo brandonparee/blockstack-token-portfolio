@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { getConvertedPortfolio } from './portfolioActions'
 
 export const TOKEN_EXCHANGE_RATES_REQUEST = 'TOKEN_EXCHANGE_RATES_REQUEST'
 export const TOKEN_EXCHANGE_RATES_ERROR = 'TOKEN_EXCHANGE_RATES_ERROR'
@@ -11,6 +12,14 @@ export const FIAT_EXCHANGE_RATES_SUCCESS = 'FIAT_EXCHANGE_RATES_SUCCESS'
 
 // const cryptoCompare = `https://min-api.cryptocompare.com/data`
 const poloniex = `https://poloniex.com/public?command`
+
+export const getExchangeRates = () => {
+  return (dispatch) => {
+    dispatch(getFiatExchangeRates())
+    dispatch(getTokenExchangeRates())
+    dispatch(getConvertedPortfolio())
+  }
+}
 
 export const getFiatExchangeRates = () => {
   return (dispatch, getState) => {

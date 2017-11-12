@@ -30,20 +30,24 @@ export const getBlockstackFile = (path, decrypt = false, cb) => {
   }
 }
 
-export const putBlockstackFile = (path, content, encrypt = false) => {
+export const putBlockstackFile = (path, content, encrypt = false, cb) => {
   return (dispatch) => {
     dispatch({ type: PUT_FILE_REQUEST })
 
     return blockstack.putFile(path, content, encrypt)
       .then(
-        res => dispatch({
-          type: PUT_FILE_SUCCESS,
-          payload: {
-            isEncrypted: encrypt,
-            content,
-            path
-          }
-        }),
+        (res) => {
+          dispatch({
+            type: PUT_FILE_SUCCESS,
+            payload: {
+              isEncrypted: encrypt,
+              content,
+              path
+            }
+          })
+
+          if (cb) dispatch(cb())
+        },
 
         error => dispatch({ type: PUT_FILE_ERROR, payload: error })
       )
