@@ -56,7 +56,7 @@ export const getFiatInfo = (code) => {
 }
 
 export const prettyFiat = (value) => {
-  if (value > 1) {
+  if (Math.abs(value) > 1) {
     return parseFloat(value).toFixed(2)
   }
 
