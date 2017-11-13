@@ -1,4 +1,6 @@
 import * as blockstack from 'blockstack'
+import { defaultConfig } from '../utils'
+import { getPortfolio } from './portfolioActions'
 
 export const FETCH_FILE_REQUEST = 'FETCH_FILE_REQUEST'
 export const FETCH_FILE_SUCCESS = 'FETCH_FILE_SUCCESS'
@@ -25,7 +27,22 @@ export const getBlockstackFile = (path, decrypt = false, cb) => {
           if (cb) dispatch(cb())
         },
 
-        error => dispatch({ type: FETCH_FILE_ERROR, payload: error })
+        (error) => {
+          dispatch({ type: FETCH_FILE_ERROR, payload: error })
+
+          blockstack.getFile(path)
+            .then(
+              (res) => {
+                console.log(res)
+                if (res === null) {
+                  if (path === 'preferences.json' || path === 'portfolio.json') {
+                    dispatch(putBlockstackFile(path, JSON.stringify(defaultConfig[path]), true, getPortfolio))
+                  }
+                }
+              },
+              err => dispatch({ type: FETCH_FILE_ERROR, payload: error })
+            )
+        }
       )
   }
 }

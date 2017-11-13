@@ -1,5 +1,19 @@
 import _ from 'lodash'
 
+export const defaultConfig = {
+  'preferences.json': {
+    fiat: 'USD',
+    tokens: {
+      BTC: true,
+      ETH: true
+    }
+  },
+  'portfolio.json': {
+    BTC: 0,
+    ETH: 0
+  }
+}
+
 const tokens = [
   { name: 'Bitcoin', abbreviation: 'BTC' },
   { name: 'Bitcoin Cash', abbreviation: 'BCH' },
@@ -56,7 +70,7 @@ export const getFiatInfo = (code) => {
 }
 
 export const prettyFiat = (value) => {
-  if (Math.abs(value) > 1) {
+  if (Math.abs(value) > 1 || value === 0) {
     return parseFloat(value).toFixed(2)
   }
 

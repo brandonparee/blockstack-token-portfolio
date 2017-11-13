@@ -24,13 +24,13 @@ const mapDispatchToProps = (dispatch) => {
 
 const SingleHolding = ({portfolio, preferences, price, abbreviation, handleInputChange}) => {
   const { tokens, convertedPortfolio } = portfolio
-  const currentStats = convertedPortfolio[abbreviation] ? convertedPortfolio[abbreviation] : null
+  const currentStats = convertedPortfolio[abbreviation] ? convertedPortfolio[abbreviation] : {amount: 0, fiatValue: 0, dayChange: 0, percentChange: 0}
   const fiatInfo = getFiatInfo(preferences.fiat)
 
   return (
     <div>
       {
-        currentStats
+        preferences.tokens[abbreviation]
         ? <div className='field is-horizontal'>
           <div className='field-label is-normal'>
             <label className='label'>{getTokenName(abbreviation)} ({abbreviation})</label>
@@ -44,7 +44,7 @@ const SingleHolding = ({portfolio, preferences, price, abbreviation, handleInput
                   className={`input${!portfolio.isEdit ? ' is-static' : ''}`}
                   onChange={handleInputChange}
                   readOnly={!portfolio.isEdit}
-                  value={currentStats.amount + (!portfolio.isEdit ? ` ${abbreviation}` : '')} />
+                  value={currentStats.amount ? currentStats.amount + (!portfolio.isEdit ? ` ${abbreviation}` : '') : 0} />
               </p>
               <p className='control'>{fiatInfo.symbol}{prettyFiat(currentStats.fiatValue)}</p>
               <p
