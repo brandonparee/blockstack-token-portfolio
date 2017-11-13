@@ -42,8 +42,8 @@ export const portfolioLocalEdit = (target, value) => {
 export const getConvertedPortfolio = () => {
   return (dispatch, getState) => {
     const { portfolio, price, preferences } = getState()
-    let totalValue = 0;
-    let totalDayChange = 0;
+    let totalValue = 0
+    let totalDayChange = 0
 
     if (!portfolio.isConverting) {
       dispatch({ type: CONVERT_PORTFOLIO_REQUEST })
@@ -52,21 +52,23 @@ export const getConvertedPortfolio = () => {
       const convertedPortfolio = {}
 
       _.forEach(tokenPortfolio, (value, abbreviation) => {
-        const btcValue = (!(abbreviation === 'BTC') ? price.tokenRates[`BTC_${abbreviation}`].last : 1)
-        const conversion = preferences.fiat === 'USD' ? 1 : price.fiatRates[preferences.fiat]
-        const fiatValue = btcValue * price.tokenRates.USDT_BTC.last * value * conversion
-        const percentChange = parseFloat((!(abbreviation === 'BTC') ? price.tokenRates[`BTC_${abbreviation}`].percentChange : price.tokenRates[`USDT_BTC`].percentChange))
-        const dayChange = fiatValue - fiatValue / (1 + percentChange)
+        if (preferences.tokens[abbreviation] === true) {
+          const btcValue = (!(abbreviation === 'BTC') ? price.tokenRates[`BTC_${abbreviation}`].last : 1)
+          const conversion = preferences.fiat === 'USD' ? 1 : price.fiatRates[preferences.fiat]
+          const fiatValue = btcValue * price.tokenRates.USDT_BTC.last * value * conversion
+          const percentChange = parseFloat((!(abbreviation === 'BTC') ? price.tokenRates[`BTC_${abbreviation}`].percentChange : price.tokenRates[`USDT_BTC`].percentChange))
+          const dayChange = fiatValue - fiatValue / (1 + percentChange)
 
-        totalValue += fiatValue
-        totalDayChange += dayChange
+          totalValue += fiatValue
+          totalDayChange += dayChange
 
-        convertedPortfolio[abbreviation] = {
-          amount: value,
-          btcValue,
-          fiatValue,
-          percentChange,
-          dayChange
+          convertedPortfolio[abbreviation] = {
+            amount: value,
+            btcValue,
+            fiatValue,
+            percentChange,
+            dayChange
+          }
         }
       })
 

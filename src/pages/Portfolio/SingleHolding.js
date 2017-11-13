@@ -30,8 +30,8 @@ const SingleHolding = ({portfolio, preferences, price, abbreviation, handleInput
   return (
     <div>
       {
-        currentStats ?
-        <div className='field is-horizontal'>
+        currentStats
+        ? <div className='field is-horizontal'>
           <div className='field-label is-normal'>
             <label className='label'>{getTokenName(abbreviation)} ({abbreviation})</label>
           </div>

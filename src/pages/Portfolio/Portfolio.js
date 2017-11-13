@@ -47,10 +47,10 @@ class Portfolio extends Component {
     return (
       <section className='section'>
         <h1 className='title'>Portfolio</h1>
-        <div className="hero">
-          <div className="hero-body">
-            <div className="container">
-              <h1 className="title">
+        <div className='hero'>
+          <div className='hero-body'>
+            <div className='container'>
+              <h1 className='title'>
                 {fiat.symbol}{prettyFiat(portfolio.totalValue)}
               </h1>
               <h2 className={`subtitle ${Math.sign(portfolio.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'}`}>
