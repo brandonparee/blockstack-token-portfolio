@@ -56,7 +56,7 @@ export const getConvertedPortfolio = () => {
           const btcValue = (!(abbreviation === 'BTC') ? price.tokenRates[`BTC_${abbreviation}`].last : 1)
           const conversion = preferences.fiat === 'USD' ? 1 : price.fiatRates[preferences.fiat]
           const fiatValue = btcValue * price.tokenRates.USDT_BTC.last * value * conversion
-          const percentChange = !value === 0 ? parseFloat((!(abbreviation === 'BTC') ? price.tokenRates[`BTC_${abbreviation}`].percentChange : price.tokenRates[`USDT_BTC`].percentChange)) : 0
+          const percentChange = parseFloat((!(abbreviation === 'BTC') ? price.tokenRates[`BTC_${abbreviation}`].percentChange : price.tokenRates[`USDT_BTC`].percentChange))
           const dayChange = fiatValue - fiatValue / (1 + percentChange)
 
           totalValue += fiatValue
