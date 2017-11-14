@@ -1,13 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Route, Redirect } from 'react-router-dom'
-import * as blockstack from 'blockstack'
 
 // Public routes are only accessible when not signed in with Blockstack
-const Public = ({component, ...rest}) => {
-  // This will be stored in redux eventually
-  const isAuthenticated = blockstack.isUserSignedIn()
-
+const Public = ({component, isAuthenticated, ...rest}) => {
   return (
     <Route
       {...rest}

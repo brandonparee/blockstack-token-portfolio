@@ -49,6 +49,8 @@ class App extends Component {
 
   render () {
     const { user } = this.props
+    const { isAuthenticated } = user
+
     return (
       <main>
         <div className='columns is-gapless'>
@@ -58,13 +60,13 @@ class App extends Component {
           <div className='column'>
             {
                 (user.isAuthenticated)
-                ? <Authenticated path='/' exact name='portfolio' component={Portfolio} />
-                : <Public path='/' exact name='login' component={Login} />
+                ? <Authenticated path='/' exact name='portfolio' component={Portfolio} isAuthenticated={isAuthenticated} />
+                : <Public path='/' exact name='login' component={Login} isAuthenticated={isAuthenticated} />
               }
             <Route path='/logout' exact component={Logout} />
-            <Public path='/handle-login' name='handle-login' component={HandleLogin} />
-            <Authenticated path='/preferences' exact name='preferences' component={Preferences} />
-            <Authenticated path='/secret' exact name='secret' component={Secret} />
+            <Public path='/handle-login' name='handle-login' component={HandleLogin} isAuthenticated={isAuthenticated} />
+            <Authenticated path='/preferences' exact name='preferences' component={Preferences} isAuthenticated={isAuthenticated} />
+            <Authenticated path='/secret' exact name='secret' component={Secret} isAuthenticated={isAuthenticated}/>
           </div>
         </div>
       </main>
