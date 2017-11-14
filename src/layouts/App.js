@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getPortfolio } from '../actions/portfolioActions'
 import { getPreferences } from '../actions/preferencesActions'
@@ -60,13 +60,19 @@ class App extends Component {
           <div className='column'>
             {
                 (user.isAuthenticated)
-                ? <Authenticated path='/' exact name='portfolio' component={Portfolio} isAuthenticated={isAuthenticated} />
-                : <Public path='/' exact name='login' component={Login} isAuthenticated={isAuthenticated} />
+                ?
+                <Switch>
+                  <Authenticated path='/' exact name='portfolio' component={Portfolio} isAuthenticated={isAuthenticated} />
+                  <Authenticated path='/preferences' exact name='preferences' component={Preferences} isAuthenticated={isAuthenticated} />
+                  <Authenticated path='/secret' exact name='secret' component={Secret} isAuthenticated={isAuthenticated}/>
+                </Switch>
+                :
+                <Switch>
+                  <Public path='/' exact name='login' component={Login} isAuthenticated={isAuthenticated} />
+                  <Public path='/handle-login' name='handle-login' component={HandleLogin} isAuthenticated={isAuthenticated} />
+                </Switch>
               }
             <Route path='/logout' exact component={Logout} />
-            <Public path='/handle-login' name='handle-login' component={HandleLogin} isAuthenticated={isAuthenticated} />
-            <Authenticated path='/preferences' exact name='preferences' component={Preferences} isAuthenticated={isAuthenticated} />
-            <Authenticated path='/secret' exact name='secret' component={Secret} isAuthenticated={isAuthenticated}/>
           </div>
         </div>
       </main>
