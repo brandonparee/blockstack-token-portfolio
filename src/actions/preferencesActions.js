@@ -1,5 +1,5 @@
 import { getBlockstackFile, putBlockstackFile } from './fileActions'
-import { getExchangeRates } from './priceActions'
+import { getConvertedPortfolio } from './portfolioActions'
 
 export const FETCH_PREFERENCES = 'FETCH_PREFERENCES'
 export const UPDATE_PREFERENCES = 'UPDATE_PREFERENCES'
@@ -10,7 +10,7 @@ export const getPreferences = () => {
   return (dispatch) => {
     dispatch({ type: FETCH_PREFERENCES })
 
-    dispatch(getBlockstackFile('preferences.json', true, getExchangeRates))
+    dispatch(getBlockstackFile('preferences.json', true, getConvertedPortfolio))
   }
 }
 
@@ -21,7 +21,7 @@ export const updatePreferences = (preferences) => {
   return (dispatch) => {
     dispatch({ type: UPDATE_PREFERENCES })
 
-    dispatch(putBlockstackFile('preferences.json', preferences, true, getExchangeRates))
+    dispatch(putBlockstackFile('preferences.json', preferences, true, getConvertedPortfolio))
   }
 }
 

@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getPortfolio } from '../actions/portfolioActions'
 import { getPreferences } from '../actions/preferencesActions'
-import { getTokenExchangeRates, getFiatExchangeRates } from '../actions/priceActions'
+import { getExchangeRates } from '../actions/priceActions'
 
 import Authenticated from '../components/Authenticated/Authenticated'
 import Public from '../components/Public/Public'
@@ -25,11 +25,8 @@ const mapDispatchToProps = (dispatch) => {
     getPreferences: () => {
       dispatch(getPreferences())
     },
-    getTokenExchangeRates: () => {
-      dispatch(getTokenExchangeRates())
-    },
-    getFiatExchangeRates: () => {
-      dispatch(getFiatExchangeRates())
+    getExchangeRates: () => {
+      dispatch(getExchangeRates())
     },
     getPortfolio: () => {
       dispatch(getPortfolio())
@@ -41,8 +38,7 @@ class App extends Component {
   componentDidMount () {
     if (this.props.user.isAuthenticated) {
       this.props.getPreferences()
-      this.props.getTokenExchangeRates()
-      this.props.getFiatExchangeRates()
+      this.props.getExchangeRates()
       this.props.getPortfolio()
     }
   }

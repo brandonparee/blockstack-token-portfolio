@@ -12,7 +12,6 @@ import { fetchUserData } from './actions/userActions'
 import { fileReducer } from './reducers/fileReducer'
 import { editorReducer } from './reducers/editorReducer'
 import { portfolioReducer } from './reducers/portfolioReducer'
-import { getTokenExchangeRates } from './actions/priceActions'
 import { priceReducer } from './reducers/priceReducer'
 import { preferencesReducer } from './reducers/preferencesReducer'
 import 'bulma/css/bulma.css'
@@ -39,7 +38,6 @@ export const store = createStore(
 )
 
 store.dispatch(fetchUserData())
-store.dispatch(getTokenExchangeRates())
 
 // Initialize React application
 ReactDOM.render(

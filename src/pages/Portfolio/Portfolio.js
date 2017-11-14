@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getTokenExchangeRates } from '../../actions/priceActions'
-import { portfolioEdit, portfolioEditCancel, portfolioSave, getConvertedPortfolio } from '../../actions/portfolioActions'
+import { getExchangeRates } from '../../actions/priceActions'
+import { portfolioEdit, portfolioEditCancel, portfolioSave } from '../../actions/portfolioActions'
 import { getSelectedTokens, getFiatInfo, prettyFiat } from '../../utils'
 
 import SingleHolding from './SingleHolding'
@@ -17,7 +17,7 @@ const mapStateToProps = ({portfolio, preferences, price}) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getInitialData: () => {
-      dispatch(getTokenExchangeRates())
+      dispatch(getExchangeRates())
     },
     handlePortfolioEdit: () => {
       dispatch(portfolioEdit())

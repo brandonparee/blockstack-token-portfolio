@@ -14,9 +14,16 @@ export const FIAT_EXCHANGE_RATES_SUCCESS = 'FIAT_EXCHANGE_RATES_SUCCESS'
 const poloniex = `https://poloniex.com/public?command`
 
 export const getExchangeRates = () => {
-  return (dispatch) => {
-    dispatch(getFiatExchangeRates())
-    dispatch(getTokenExchangeRates())
+  return (dispatch, getState) => {
+    const { isUpdatingFiatRates, isUpdatingTokenRates } = getState().price
+    if (!isUpdatingFiatRates) {
+      dispatch(getFiatExchangeRates())
+    }
+
+    if (!isUpdatingTokenRates) {
+      dispatch(getTokenExchangeRates())
+    }
+
     dispatch(getConvertedPortfolio())
   }
 }

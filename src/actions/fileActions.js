@@ -30,10 +30,10 @@ export const getBlockstackFile = (path, decrypt = false, cb) => {
         (error) => {
           dispatch({ type: FETCH_FILE_ERROR, payload: error })
 
+          // TODO Clean this up
           blockstack.getFile(path)
             .then(
               (res) => {
-                console.log(res)
                 if (res === null) {
                   if (path === 'preferences.json' || path === 'portfolio.json') {
                     dispatch(putBlockstackFile(path, JSON.stringify(defaultConfig[path]), true, getPortfolio))
