@@ -1,4 +1,6 @@
-# Blockstack React Redux Starter
+# Blockstack Token Portfolio
+
+[![Build Status](https://drone.swannairlines.com/api/badges/brandonparee/blockstack-token-portfolio/status.svg)](https://drone.swannairlines.com/brandonparee/blockstack-token-portfolio)
 
 > This is a work in progress. It is also my first exposure to Redux (and Blockstack), so any comments on how to improve anything are appreciated!
 
@@ -47,3 +49,7 @@ You'll need to enable CORS stuff for only `localhost:3000`. I use
 [Allow-Control-Allow-Origin: *](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi/related?hl=en)
 for Chrome.
 The only rule I have enabled in the extension is `http://localhost:3000/*`. You'll need to disable the catch all rule (`*://*/*`). If you are still getting the error open the extension and disable then re-enable it using the switch.  
+
+### Special Thanks
+
+Shoutout to [Conner Swann](https://github.com/yourbuddyconner) (https://connerswann.me/) for help with DevOps stuff.

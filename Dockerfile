@@ -9,6 +9,7 @@ COPY yarn.lock yarn.lock
 RUN yarn --pure-lockfile
 
 COPY public ./public
+COPY public/manifest-prod.json ./public/manifest.json
 COPY config ./config
 COPY scripts ./scripts
 COPY src ./src
