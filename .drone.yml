@@ -1,0 +1,22 @@
+pipeline:  
+  test:
+    image: node:9.1.0
+    commands: 
+      - echo 'testing'
+  publish:
+    image: plugins/ecr
+    repo: 449620138405.dkr.ecr.us-west-1.amazonaws.com/swannairlines/blockstack-token-portfolio
+    registry: 449620138405.dkr.ecr.us-west-1.amazonaws.com
+    region: us-west-1
+    access_key: ${ecr_access_key}
+    secret_key: ${ecr_secret_key}
+    prune: false
+  deploy: 
+    image: peloton/drone-rancher
+    url: http://rancher.swannairlines.com
+    access_key: ${RANCHER_ACCESS}
+    secret_key: ${RANCHER_SECRET}
+    service: token-portfolio/app
+    docker_image: 449620138405.dkr.ecr.us-west-1.amazonaws.com/swannairlines/blockstack-token-portfolio
+    confirm: true
+    timeout: 120
