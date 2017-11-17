@@ -1,15 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import Section from '../../components/Bulma/Section'
+
 const mapStateToProps = ({}) => {
   return {}
 }
 
 const Home = ({}) => {
   return (
-    <div>
-      <h1>Home</h1>
-    </div>
+    <Section title='Home'>
+    </Section>
   )
 }
 
