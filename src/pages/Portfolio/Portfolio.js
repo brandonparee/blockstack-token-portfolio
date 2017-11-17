@@ -7,6 +7,7 @@ import { getSelectedTokens, getFiatInfo, prettyFiat } from '../../utils'
 import SingleHolding from './SingleHolding'
 
 import Hero from '../../components/Bulma/Hero'
+import Section from '../../components/Bulma/Section'
 
 const mapStateToProps = ({portfolio, preferences, price}) => {
   return {
@@ -47,8 +48,7 @@ class Portfolio extends Component {
     const fiat = getFiatInfo(preferences.fiat)
 
     return (
-      <section className='section'>
-        <h1 className='title'>Portfolio</h1>
+      <Section title='Portfolio'>
         <Hero
           title={`${fiat.symbol} ${prettyFiat(portfolio.totalValue)}`}
           subtitle={`${fiat.symbol} ${prettyFiat(portfolio.dayChange)}`}
@@ -81,7 +81,7 @@ class Portfolio extends Component {
               return ''
             })
         }
-      </section>
+      </Section>
     )
   }
 }

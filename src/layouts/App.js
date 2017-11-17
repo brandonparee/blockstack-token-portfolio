@@ -55,19 +55,17 @@ class App extends Component {
           <div className='column is-one-quarter'>
             <Sidebar />
           </div>
-          <div className='column'>
+          <div className='column is-three-quarters'>
             {
                 (user.isAuthenticated)
-                ?
-                <Switch>
-                  <Authenticated path='/' exact name='home' component component={Home} isAuthenticated={isAuthenticated} />
+                ? <Switch>
+                  <Authenticated path='/' exact name='home' component={Home} isAuthenticated={isAuthenticated} />
                   <Authenticated path='/portfolio' exact name='portfolio' component={Portfolio} isAuthenticated={isAuthenticated} />
                   <Authenticated path='/portfolio/:abbreviation' component={IndividualPortfolio} isAuthenticated={isAuthenticated} />
                   <Authenticated path='/preferences' exact name='preferences' component={Preferences} isAuthenticated={isAuthenticated} />
-                  <Authenticated path='/secret' exact name='secret' component={Secret} isAuthenticated={isAuthenticated}/>
+                  <Authenticated path='/secret' exact name='secret' component={Secret} isAuthenticated={isAuthenticated} />
                 </Switch>
-                :
-                <Switch>
+                : <Switch>
                   <Public path='/' exact name='login' component={Login} isAuthenticated={isAuthenticated} />
                   <Public path='/handle-login' name='handle-login' component={HandleLogin} isAuthenticated={isAuthenticated} />
                 </Switch>

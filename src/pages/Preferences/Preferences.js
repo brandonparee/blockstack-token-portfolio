@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import Section from '../../components/Bulma/Section'
+
 import { updateFiatPreference, updateTokenPreference } from '../../actions/preferencesActions'
 import { getFiatList, getTokenList } from '../../utils'
 
@@ -31,17 +33,15 @@ const mapDispatchToProps = (dispatch) => {
 
 const Preferences = ({preferences, handleFiatPreferenceChange, handleTokenPreferenceChange}) => {
   return (
-    <section className='section'>
-      <div className='container'>
-        <h1 className='title'>Preferences</h1>
-        <div className='field'>
-          <label className='label'>Fiat</label>
-          <div className='control'>
-            <div className='select'>
-              <select
-                onChange={handleFiatPreferenceChange}
-                value={preferences.fiat} >
-                {
+    <Section title='Preferences'>
+      <div className='field'>
+        <label className='label'>Fiat</label>
+        <div className='control'>
+          <div className='select'>
+            <select
+              onChange={handleFiatPreferenceChange}
+              value={preferences.fiat} >
+              {
                   fiatList.map((fiat) => {
                     return (
                       <option
@@ -52,13 +52,13 @@ const Preferences = ({preferences, handleFiatPreferenceChange, handleTokenPrefer
                     )
                   })
                 }
-              </select>
-            </div>
+            </select>
           </div>
-          <div className='field'>
-            <label className='label'>Cryptocurrenies (Tokens)</label>
-          </div>
-          {
+        </div>
+        <div className='field'>
+          <label className='label'>Cryptocurrenies (Tokens)</label>
+        </div>
+        {
             tokenList.map((token) => {
               return (
                 <div key={token.abbreviation}>
@@ -74,9 +74,8 @@ const Preferences = ({preferences, handleFiatPreferenceChange, handleTokenPrefer
               )
             })
           }
-        </div>
       </div>
-    </section>
+    </Section>
   )
 }
 
