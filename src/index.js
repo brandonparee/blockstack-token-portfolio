@@ -7,6 +7,7 @@ import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-r
 import { createLogger } from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 
+import { reducer as formReducer } from 'redux-form'
 import { userReducer } from './reducers/userReducer'
 import { fetchUserData } from './actions/userActions'
 import { fileReducer } from './reducers/fileReducer'
@@ -32,7 +33,8 @@ export const store = createStore(
     preferences: preferencesReducer,
     price: priceReducer,
     router: routerReducer,
-    user: userReducer
+    user: userReducer,
+    form: formReducer
   }),
   applyMiddleware(middleware, createLogger(), thunkMiddleware)
 )

@@ -10,6 +10,8 @@ import Public from '../components/Public/Public'
 import Sidebar from '../components/Sidebar/Sidebar'
 
 import HandleLogin from '../pages/Login/HandleLogin'
+import Home from '../pages/Home/Home'
+import IndividualPortfolio from '../pages/IndividualPortfolio/IndividualPortfolio'
 import Login from '../pages/Login/Login'
 import Logout from '../pages/Logout/Logout'
 import Portfolio from '../pages/Portfolio/Portfolio'
@@ -58,7 +60,9 @@ class App extends Component {
                 (user.isAuthenticated)
                 ?
                 <Switch>
-                  <Authenticated path='/' exact name='portfolio' component={Portfolio} isAuthenticated={isAuthenticated} />
+                  <Authenticated path='/' exact name='home' component component={Home} isAuthenticated={isAuthenticated} />
+                  <Authenticated path='/portfolio' exact name='portfolio' component={Portfolio} isAuthenticated={isAuthenticated} />
+                  <Authenticated path='/portfolio/:abbreviation' component={IndividualPortfolio} isAuthenticated={isAuthenticated} />
                   <Authenticated path='/preferences' exact name='preferences' component={Preferences} isAuthenticated={isAuthenticated} />
                   <Authenticated path='/secret' exact name='secret' component={Secret} isAuthenticated={isAuthenticated}/>
                 </Switch>
