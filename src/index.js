@@ -22,7 +22,6 @@ import registerServiceWorker from './registerServiceWorker'
 
 // Setup for react-router
 const history = createHistory()
-const middleware = routerMiddleware(history)
 
 // Setup for redux
 export const store = createStore(
@@ -36,7 +35,7 @@ export const store = createStore(
     user: userReducer,
     form: formReducer
   }),
-  applyMiddleware(middleware, createLogger(), thunkMiddleware)
+  applyMiddleware(routerMiddleware(history), thunkMiddleware, createLogger())
 )
 
 store.dispatch(fetchUserData())
