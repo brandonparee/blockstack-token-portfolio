@@ -1,15 +1,36 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import _ from 'lodash'
+import { getFiatInfo, prettyFiat } from '../../utils'
 
-const mapStateToProps = ({}) => {
-  return {}
+import Section from '../../components/Bulma/Section'
+import Hero from '../../components/Bulma/Hero'
+
+const mapStateToProps = ({portfolio, preferences}, ownProps) => {
+  const { abbreviation } = ownProps.match.params
+  return {
+    abbreviation,
+    portfolio,
+    preferences
+  }
 }
 
-const IndividualPortfolio = ({}) => {
+const IndividualPortfolio = ({portfolio, preferences, abbreviation}) => {
+  abbreviation = _.upperCase(abbreviation)
+  const convertedPortfolio = portfolio.convertedPortfolio[abbreviation]
+  const fiat = getFiatInfo(preferences.fiat)
+
   return (
     <div>
-      <h1>IndividualPortfolio</h1>
+      {convertedPortfolio ?
+        <Section title={abbreviation}>
+        <Hero
+          title={`${fiat.symbol} ${prettyFiat(convertedPortfolio.fiatValue)}`}
+          subtitle={`${fiat.symbol} ${prettyFiat(convertedPortfolio.dayChange)}`}
+          subtitleClassName={Math.sign(convertedPortfolio.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'} />
+        </Section> : ''}
     </div>
+
   )
 }
 
