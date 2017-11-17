@@ -52,7 +52,7 @@ class App extends Component {
     return (
       <main>
         <div className='columns is-gapless'>
-          <div className='column is-one-quarter'>
+          <div className='column is-one-quarter is-light-grey is-full-height'>
             <Sidebar />
           </div>
           <div className='column is-three-quarters'>

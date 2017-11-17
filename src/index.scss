@@ -1,4 +1,5 @@
 $blockstack-primary: #270f34;
+$light-grey: #eee4ee;
 $white: #fff;
 
 body {
@@ -12,8 +13,17 @@ body {
   color: $white;
 }
 
+
 .hero {
   &.is-blockstack {
     @extend %is-blockstack;
   }
+}
+
+.is-light-grey {
+  background-color: $light-grey;
+}
+
+.is-full-height {
+  min-height: 100vh;
 }
