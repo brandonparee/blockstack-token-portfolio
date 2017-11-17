@@ -6,6 +6,8 @@ import { getSelectedTokens, getFiatInfo, prettyFiat } from '../../utils'
 
 import SingleHolding from './SingleHolding'
 
+import Hero from '../../components/Bulma/Hero'
+
 const mapStateToProps = ({portfolio, preferences, price}) => {
   return {
     portfolio,
@@ -47,18 +49,10 @@ class Portfolio extends Component {
     return (
       <section className='section'>
         <h1 className='title'>Portfolio</h1>
-        <div className='hero'>
-          <div className='hero-body'>
-            <div className='container'>
-              <h1 className='title'>
-                {fiat.symbol}{prettyFiat(portfolio.totalValue)}
-              </h1>
-              <h2 className={`subtitle ${Math.sign(portfolio.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'}`}>
-                {fiat.symbol} {prettyFiat(portfolio.dayChange)}
-              </h2>
-            </div>
-          </div>
-        </div>
+        <Hero
+          title={`${fiat.symbol} ${prettyFiat(portfolio.totalValue)}`}
+          subtitle={`${fiat.symbol} ${prettyFiat(portfolio.dayChange)}`}
+          subtitleClassName={Math.sign(portfolio.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'} />
         <p className='is-size-6 has-text-grey'>Input your holdings here by pressing the edit button.</p>
         <p className='is-size-6 has-text-grey'>Transaction functionality coming.</p>
         <div className='buttons'>
