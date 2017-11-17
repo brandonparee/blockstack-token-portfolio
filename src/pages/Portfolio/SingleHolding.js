@@ -3,11 +3,10 @@ import { connect } from 'react-redux'
 import { portfolioLocalEdit, getConvertedPortfolio } from '../../actions/portfolioActions'
 import { getTokenName, getFiatInfo, prettyFiat } from '../../utils'
 
-const mapStateToProps = ({portfolio, preferences, price}) => {
+const mapStateToProps = ({portfolio, preferences}) => {
   return {
     portfolio,
-    preferences,
-    price
+    preferences
   }
 }
 
@@ -22,7 +21,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const SingleHolding = ({portfolio, preferences, price, abbreviation, handleInputChange}) => {
+const SingleHolding = ({portfolio, preferences, abbreviation, handleInputChange}) => {
   const { convertedPortfolio } = portfolio
   const currentStats = convertedPortfolio[abbreviation] ? convertedPortfolio[abbreviation] : {amount: 0, fiatValue: 0, dayChange: 0, percentChange: 0}
   const fiatInfo = getFiatInfo(preferences.fiat)
