@@ -1,6 +1,6 @@
 FROM node:8.7.0
 
-ENV NPM_CONFIG_LOGLEVEL WARN
+ENV NPM_CONFIG_LOGLEVEL warn
 
 RUN npm install -g yarn
 
