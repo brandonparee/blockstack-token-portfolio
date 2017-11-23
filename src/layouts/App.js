@@ -52,10 +52,10 @@ class App extends Component {
     return (
       <main>
         <div className='columns is-gapless'>
-          <div className='column is-one-quarter is-light-grey is-full-height'>
+          <div className='column is-one-quarter is-prim is-full-height'>
             <Sidebar />
           </div>
-          <div className='column is-three-quarters'>
+          <div className='column is-three-quarters is-alabaster is-full-height'>
             {
                 (user.isAuthenticated)
                 ? <Switch>
