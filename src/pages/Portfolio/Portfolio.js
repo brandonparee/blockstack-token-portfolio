@@ -1,3 +1,5 @@
+// TODO Make this the 'simple portfolio', no transactions just edit values
+
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getExchangeRates } from '../../actions/priceActions'
@@ -6,6 +8,7 @@ import { getSelectedTokens, getFiatInfo, prettyFiat } from '../../utils'
 
 import SingleHolding from './SingleHolding'
 
+import TransactionForm from '../../components/Forms/TransactionForm'
 import Hero from '../../components/Bulma/Hero'
 import Section from '../../components/Bulma/Section'
 
@@ -53,6 +56,7 @@ class Portfolio extends Component {
           title={`${fiat.symbol} ${prettyFiat(portfolio.totalValue)}`}
           subtitle={`${fiat.symbol} ${prettyFiat(portfolio.dayChange)}`}
           subtitleClassName={Math.sign(portfolio.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'} />
+        <TransactionForm />
         <p className='is-size-6 has-text-grey'>Input your holdings here by pressing the edit button.</p>
         <p className='is-size-6 has-text-grey'>Transaction functionality coming.</p>
         <div className='buttons'>
