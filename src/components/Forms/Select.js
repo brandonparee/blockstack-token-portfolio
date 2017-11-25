@@ -5,7 +5,7 @@ export const RenderSelect = ({ input, meta, label, options }) => {
     <div className='field'>
       <div className='control'>
         <label className='label'>{label}</label>
-        <div className="select">
+        <div className='select'>
           <select {...input}>
             <option value='' disabled>Select</option>
             {

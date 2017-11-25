@@ -14,6 +14,11 @@ class RenderDatePicker extends Component {
     }
   }
 
+  handleDateChange = (date) => {
+    this.setState({date})
+    this.props.input.onChange(date.valueOf())
+  }
+
   render() {
     const { input, meta, label } = this.props
 
@@ -23,13 +28,13 @@ class RenderDatePicker extends Component {
           <label className='label'>{label}</label>
           <SingleDatePicker
             date={this.state.date}
-            onDateChange={date => this.setState({ date })}
+            onDateChange={this.handleDateChange}
             isOutsideRange={() => false}
             focused={this.state.focused}
             onFocusChange={({ focused }) => this.setState({ focused })}
             initialVisibleMonth={() => moment().subtract(1, 'months')}
             showClearDate />
-          <input className='is-hidden' {...input} value={this.state.date || ''} />
+          <input className='is-hidden' {...input} />
           {
             meta.error && meta.touched &&
               <p className='help is-danger'>{meta.error}</p>
