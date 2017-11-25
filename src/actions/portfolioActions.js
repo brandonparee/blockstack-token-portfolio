@@ -1,8 +1,8 @@
 import _ from 'lodash'
 import { getBlockstackFile, putBlockstackFile } from './fileActions'
+import { getTransactions } from './transactionActions'
 
 export const FETCH_PORTFOLIO = 'FETCH_PORTFOLIO'
-export const PORTFOLIO_ADD_TRANSACTION = 'PORTFOLIO_ADD_TRANSACTION'
 export const PORTFOLIO_EDIT = 'PORTFOLIO_EDIT'
 export const PORTFOLIO_EDIT_CANCEL = 'PORTFOLIO_EDIT_CANCEL'
 export const PORTFOLIO_LOCAL_EDIT = 'PORTFOLIO_LOCAL_EDIT'
@@ -15,6 +15,7 @@ export const getPortfolio = () => {
     dispatch({ type: FETCH_PORTFOLIO })
 
     dispatch(getBlockstackFile('portfolio.json', true, getConvertedPortfolio))
+    dispatch(getTransactions())
   }
 }
 

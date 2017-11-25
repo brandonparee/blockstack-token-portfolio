@@ -1,5 +1,6 @@
+$alabaster: #f8f8fd;
 $blockstack-primary: #270f34;
-$light-grey: #eee4ee;
+$prim: #e5e4ef;
 $white: #fff;
 
 body {
@@ -20,8 +21,12 @@ body {
   }
 }
 
-.is-light-grey {
-  background-color: $light-grey;
+.is-alabaster {
+  background-color: $alabaster;
+}
+
+.is-prim {
+  background-color: $prim;
 }
 
 .is-full-height {

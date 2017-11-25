@@ -1,5 +1,4 @@
 import {
-  PORTFOLIO_ADD_TRANSACTION,
   PORTFOLIO_EDIT,
   PORTFOLIO_EDIT_CANCEL,
   PORTFOLIO_LOCAL_EDIT,
@@ -25,12 +24,10 @@ const initialState = {
 
 export const portfolioReducer = (state = initialState, action) => {
   switch (action.type) {
-    case PORTFOLIO_ADD_TRANSACTION:
-      break
     case CONVERT_PORTFOLIO_REQUEST:
       return { ...state, isConverting: true }
     case CONVERT_PORTFOLIO_SUCCESS:
-      return { ...state, isConverting: false, convertedPortfolio: { ...action.payload.convertedPortfolio}, totalValue: action.payload.totalValue, dayChange: action.payload.dayChange }
+      return { ...state, isConverting: false, convertedPortfolio: { ...action.payload.convertedPortfolio }, totalValue: action.payload.totalValue, dayChange: action.payload.dayChange }
     case PORTFOLIO_EDIT:
       return { ...state, isEdit: true }
     case PORTFOLIO_EDIT_CANCEL:

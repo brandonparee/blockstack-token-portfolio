@@ -11,7 +11,8 @@ export const defaultConfig = {
   'portfolio.json': {
     BTC: 0,
     ETH: 0
-  }
+  },
+  'transactions.json': []
 }
 
 const tokens = [

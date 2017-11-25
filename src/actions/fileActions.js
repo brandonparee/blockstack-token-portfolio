@@ -35,7 +35,8 @@ export const getBlockstackFile = (path, decrypt = false, cb) => {
             .then(
               (res) => {
                 if (res === null) {
-                  if (path === 'preferences.json' || path === 'portfolio.json') {
+                  // TODO Put default files into an array and use a lodash includes
+                  if (path === 'preferences.json' || path === 'portfolio.json' || path === 'transactions.json') {
                     dispatch(putBlockstackFile(path, JSON.stringify(defaultConfig[path]), true, getPortfolio))
                   }
                 }

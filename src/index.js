@@ -6,6 +6,7 @@ import createHistory from 'history/createBrowserHistory'
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux'
 import { createLogger } from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
+import 'react-dates/initialize'
 
 import { reducer as formReducer } from 'redux-form'
 import { userReducer } from './reducers/userReducer'
@@ -13,6 +14,7 @@ import { fetchUserData } from './actions/userActions'
 import { fileReducer } from './reducers/fileReducer'
 import { editorReducer } from './reducers/editorReducer'
 import { portfolioReducer } from './reducers/portfolioReducer'
+import { transactionReducer } from './reducers/transactionReducer'
 import { priceReducer } from './reducers/priceReducer'
 import { preferencesReducer } from './reducers/preferencesReducer'
 import 'bulma/css/bulma.css'
@@ -29,6 +31,7 @@ export const store = createStore(
     editor: editorReducer,
     file: fileReducer,
     portfolio: portfolioReducer,
+    transactions: transactionReducer,
     preferences: preferencesReducer,
     price: priceReducer,
     router: routerReducer,
