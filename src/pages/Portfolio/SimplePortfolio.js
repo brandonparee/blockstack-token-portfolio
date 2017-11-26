@@ -24,6 +24,15 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getInitialData: () => {
       dispatch(getExchangeRates())
+    },
+    handlePortfolioEdit: () => {
+      dispatch(portfolioEdit())
+    },
+    handlePortfolioEditCancel: () => {
+      dispatch(portfolioEditCancel())
+    },
+    handlePorfolioSave: () => {
+      dispatch(portfolioSave())
     }
   }
 }
@@ -48,6 +57,21 @@ class Portfolio extends Component {
           subtitle={`${fiat.symbol} ${prettyFiat(portfolio.dayChange)}`}
           subtitleClassName={Math.sign(portfolio.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'} />
         <TransactionForm />
+        <p className='is-size-6 has-text-grey'>Input your holdings here by pressing the edit button.</p>
+        <p className='is-size-6 has-text-grey'>Transaction functionality coming.</p>
+        <div className='buttons'>
+          {
+              !portfolio.isEdit
+              ? <span className='button is-info' onClick={handlePortfolioEdit}>Edit</span>
+              : <span className='button is-danger' onClick={handlePortfolioEditCancel}>Cancel</span>
+            }
+          <span
+            className='button is-success'
+            disabled={!portfolio.isModified ? 'disabled' : ''}
+            onClick={handlePorfolioSave}>
+              Save
+            </span>
+        </div>
         {
             tokenList.map((token) => {
               if (token === 'BTC' || (price.tokenRates[`BTC_${token}`] && fiat)) {
