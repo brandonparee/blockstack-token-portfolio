@@ -1,4 +1,6 @@
 import {
+  CHART_DATA_REQUEST,
+  CHART_DATA_SUCCESS,
   TOKEN_EXCHANGE_RATES_REQUEST,
   TOKEN_EXCHANGE_RATES_ERROR,
   TOKEN_EXCHANGE_RATES_SUCCESS,
@@ -10,13 +12,19 @@ import {
 const initialState = {
   isUpdatingTokenRates: false,
   isUpdatingFiatRates: false,
+  isUpdatingPriceChart: false,
   tokenRates: {},
   fiatRates: {},
+  priceChartData: {},
   error: null
 }
 
 export const priceReducer = (state = initialState, action) => {
   switch (action.type) {
+    case CHART_DATA_REQUEST:
+      return { ...state, isUpdatingPriceChart: true }
+    case CHART_DATA_SUCCESS:
+      return { ...state, isUpdatingPriceChart: false, priceChartData: { ...action.payload } }
     case TOKEN_EXCHANGE_RATES_REQUEST:
       return { ...state, isUpdatingTokenRates: true }
     case TOKEN_EXCHANGE_RATES_ERROR:

@@ -1,6 +1,9 @@
 import axios from 'axios'
+import moment from 'moment'
 import { getConvertedPortfolio } from './portfolioActions'
 
+export const CHART_DATA_REQUEST = 'CHART_DATA_REQUEST'
+export const CHART_DATA_SUCCESS = 'CHART_DATA_SUCCESS'
 export const TOKEN_EXCHANGE_RATES_REQUEST = 'TOKEN_EXCHANGE_RATES_REQUEST'
 export const TOKEN_EXCHANGE_RATES_ERROR = 'TOKEN_EXCHANGE_RATES_ERROR'
 export const TOKEN_EXCHANGE_RATES_SUCCESS = 'TOKEN_EXCHANGE_RATES_SUCCESS'
@@ -55,3 +58,68 @@ export const getTokenExchangeRates = () => {
     })
   }
 }
+
+const getSingleChart = ({ token, startTime, endTime }) => {
+  const start = startTime || moment().subtract(1, 'month')
+  const end = endTime || moment()
+  // Temporary
+  const period = 14400
+
+  return axios.get(`${poloniex}=returnChartData`, {
+    params: {
+      currencyPair: `USDT_${token}`,
+      start: start.unix(),
+      end: end.unix(),
+      period
+    }
+  })
+  .then((res) => {
+    // Add a field for token so we can merge all histories
+    res.data.map((value) => {
+      value.abbreviation = token
+    })
+    return {
+      [token]: res.data
+    }
+  })
+}
+
+// TODO Poloniex says to limit API requests to 6 per second or you can risk an IP ban
+export const getChartData = ({ tokens, startTime, endTime }) => {
+  return (dispatch, getState) => {
+    dispatch({ type: CHART_DATA_REQUEST})
+
+    let singleCharts = []
+
+    tokens.map((token) => {
+      singleCharts.push(getSingleChart({ token, startTime, endTime }))
+    })
+
+    // Wait for all requests from Poloniex to finish, then dispatch success
+    Promise.all(singleCharts)
+      .then(values => {
+          // Turn values into object
+        const chartData = Object.assign({}, ...values)
+        const chartMap = new Map()
+        const combinedValues = [].concat(...Object.values(chartData))
+
+        combinedValues.map((obj) => {
+          const previousState = chartMap.get(obj.date) || {}
+          chartMap.set(obj.date, {
+            ...previousState,
+            date: obj.date,
+            low: previousState.low && previousState.low < obj.close ? previousState.low : obj.close,
+            high: previousState.high && previousState.high > obj.close ? previousState.high : obj.close,
+            [obj.abbreviation]: {...obj}
+          })
+        })
+
+        const combinedChartData = Array.from(chartMap.values())
+
+        dispatch({ type: CHART_DATA_SUCCESS, payload: {...chartData, combinedChartData } })
+      }
+      )
+  }
+}
+
+window.getChartData = getChartData

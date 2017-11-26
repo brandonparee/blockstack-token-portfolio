@@ -1,5 +1,6 @@
+import _ from 'lodash'
 import { getBlockstackFile, putBlockstackFile } from './fileActions'
-import { getConvertedPortfolio } from './portfolioActions'
+import { getPortfolioOverview } from './portfolioActions'
 
 export const ADD_TRANSACTION_REQUEST = 'ADD_TRANSACTION_REQUEST'
 export const ADD_TRANSACTION_SUCCESS = 'ADD_TRANSACTION_SUCCESS'
@@ -8,16 +9,20 @@ export const FETCH_TRANSACTIONS = 'FETCH_TRANSACTIONS'
 export const getTransactions = () => {
   return (dispatch) => {
     dispatch({ type: FETCH_TRANSACTIONS })
-    dispatch(getBlockstackFile('transactions.json', true, getConvertedPortfolio))
+    dispatch(getBlockstackFile('transactions.json', true, getPortfolioOverview))
   }
 }
 
 export const addTransaction = (transaction) => {
   return (dispatch, getState) => {
-    const { transactions } = getState().transactions
+    let { transactions } = getState().transactions
+    transaction.amount = transaction.type === 'BUY' ? transaction.amount : -transaction.amount
+    transaction.purchasePrice = transaction.type === 'BUY' ? transaction.purchasePrice : -transaction.purchasePrice
     dispatch({ type: ADD_TRANSACTION_REQUEST })
     transactions.push(transaction)
 
-    dispatch(putBlockstackFile('transactions.json', JSON.stringify(transactions), true, getConvertedPortfolio))
+    transactions = _.sortBy(transactions, 'date')
+
+    dispatch(putBlockstackFile('transactions.json', JSON.stringify(transactions), true, getPortfolioOverview))
   }
 }
