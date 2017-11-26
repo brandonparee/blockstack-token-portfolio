@@ -22,12 +22,12 @@ const IndividualPortfolio = ({portfolio, preferences, abbreviation}) => {
 
   return (
     <div>
-      {convertedPortfolio ?
-        <Section title={abbreviation}>
-        <Hero
-          title={`${fiat.symbol} ${prettyFiat(convertedPortfolio.fiatValue)}`}
-          subtitle={`${fiat.symbol} ${prettyFiat(convertedPortfolio.dayChange)}`}
-          subtitleClassName={Math.sign(convertedPortfolio.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'} />
+      {convertedPortfolio
+        ? <Section title={abbreviation}>
+          <Hero
+            title={`${fiat.symbol} ${prettyFiat(convertedPortfolio.fiatValue)}`}
+            subtitle={`${fiat.symbol} ${prettyFiat(convertedPortfolio.dayChange)}`}
+            subtitleClassName={Math.sign(convertedPortfolio.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'} />
         </Section> : ''}
     </div>
 
