@@ -20,7 +20,7 @@ class RenderDatePicker extends Component {
   }
 
   render() {
-    const { input, meta, label } = this.props
+    const { meta, label } = this.props
 
     return (
       <div className='field'>
@@ -34,7 +34,6 @@ class RenderDatePicker extends Component {
             onFocusChange={({ focused }) => this.setState({ focused })}
             initialVisibleMonth={() => moment().subtract(1, 'months')}
             showClearDate />
-          <input className='is-hidden' {...input} />
           {
             meta.error && meta.touched &&
               <p className='help is-danger'>{meta.error}</p>
