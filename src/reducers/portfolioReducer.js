@@ -1,4 +1,6 @@
 import {
+  FETCH_PORTFOLIO_OVERVIEW_REQUEST,
+  FETCH_PORTFOLIO_OVERVIEW_SUCCESS,
   PORTFOLIO_EDIT,
   PORTFOLIO_EDIT_CANCEL,
   PORTFOLIO_LOCAL_EDIT,
@@ -19,7 +21,9 @@ const initialState = {
   isModified: false,
   isConverting: false,
   tokens: {},
-  convertedPortfolio: {}
+  convertedPortfolio: {},
+  portfolioHistory: {},
+  portfolioOverview: {}
 }
 
 export const portfolioReducer = (state = initialState, action) => {
@@ -28,6 +32,12 @@ export const portfolioReducer = (state = initialState, action) => {
       return { ...state, isConverting: true }
     case CONVERT_PORTFOLIO_SUCCESS:
       return { ...state, isConverting: false, convertedPortfolio: { ...action.payload.convertedPortfolio }, totalValue: action.payload.totalValue, dayChange: action.payload.dayChange }
+    case FETCH_PORTFOLIO_OVERVIEW_REQUEST: {
+      return { ...state, isFetching: true }
+    }
+    case FETCH_PORTFOLIO_OVERVIEW_SUCCESS: {
+      return { ...state, isFetching: false, ...action.payload }
+    }
     case PORTFOLIO_EDIT:
       return { ...state, isEdit: true }
     case PORTFOLIO_EDIT_CANCEL:

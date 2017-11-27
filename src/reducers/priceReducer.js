@@ -10,8 +10,10 @@ import {
 const initialState = {
   isUpdatingTokenRates: false,
   isUpdatingFiatRates: false,
+  isUpdatingPriceChart: false,
   tokenRates: {},
   fiatRates: {},
+  priceChartData: {},
   error: null
 }
 

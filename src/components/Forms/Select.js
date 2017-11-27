@@ -9,9 +9,14 @@ export const RenderSelect = ({ input, meta, label, options }) => {
           <select {...input}>
             <option value='' disabled>Select</option>
             {
-              options.map(({ name, abbreviation }) => {
-                return <option key={abbreviation} value={abbreviation}>{`${name} (${abbreviation})`}</option>
-              })
+                options.map((value) => {
+                  if (typeof value === 'object') {
+                    const { abbreviation, name } = value
+                    return <option key={abbreviation} value={abbreviation}>{`${name} (${abbreviation})`}</option>
+                  } else {
+                    return <option key={value} value={value.toUpperCase()}>{value}</option>
+                  }
+                })
             }
           </select>
         </div>

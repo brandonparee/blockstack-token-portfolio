@@ -20,6 +20,12 @@ const mapDispatchToProps = (dispatch) => {
 const TransactionForm = ({ handleSubmit, addTransaction }) => {
   return (
     <form onSubmit={handleSubmit(addTransaction)}>
+      <Field name='type'
+        label='Transaction Type'
+        type='string'
+        options={['Buy', 'Sell']}
+        component={RenderSelect}
+        validate={[required]} />
       <Field name='abbreviation'
         label='Cryptocurrency'
         type='string'
