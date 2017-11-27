@@ -80,8 +80,6 @@ export const getTransactionChartData = ({ token }) => {
     const priceChartData = getState().charts.priceChartData[token]
     const transactions = getState().portfolio.portfolioHistory[token]
 
-    console.log(priceChartData, transactions)
-
     if (transactions && priceChartData) {
       let transactionIndex = 0
       let firstTransactionDate = moment(transactions[0].date)
