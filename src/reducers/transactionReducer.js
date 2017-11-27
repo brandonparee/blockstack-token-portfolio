@@ -25,7 +25,7 @@ export const transactionReducer = (state = initialState, action) => {
         const transactions = JSON.parse(action.payload.content)
         localStorage.setItem('transactions', action.payload.content)
 
-        return { ...state, isUpdating: false, transactions: [...transactions] }
+        return { ...state, isFetching: false, transactions: [...transactions] }
       }
 
       return { ...state }
