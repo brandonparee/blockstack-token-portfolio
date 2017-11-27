@@ -3,7 +3,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getExchangeRates } from '../../actions/priceActions'
-import { portfolioEdit, portfolioEditCancel, portfolioSave } from '../../actions/portfolioActions'
 import { getSelectedTokens, getFiatInfo, prettyFiat } from '../../utils'
 
 import SingleHolding from './SingleHolding'
@@ -34,10 +33,7 @@ class Portfolio extends Component {
   }
 
   render () {
-    const {
-      portfolio, preferences, price, handlePorfolioSave,
-      handlePortfolioEdit, handlePortfolioEditCancel
-    } = this.props
+    const { portfolio, preferences, price } = this.props
     const tokenList = getSelectedTokens(preferences)
     const fiat = getFiatInfo(preferences.fiat)
 
