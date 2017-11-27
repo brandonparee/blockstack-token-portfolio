@@ -6,6 +6,8 @@ import { getTransactions } from './transactionActions'
 export const FETCH_PORTFOLIO = 'FETCH_PORTFOLIO'
 export const FETCH_PORTFOLIO_OVERVIEW_REQUEST = 'FETCH_PORTFOLIO_OVERVIEW_REQUEST'
 export const FETCH_PORTFOLIO_OVERVIEW_SUCCESS = 'FETCH_PORTFOLIO_OVERVIEW_SUCCESS'
+export const FETCH_TRANSACTION_CHART_REQUEST = 'FETCH_TRANSACTION_CHART_REQUEST'
+export const FETCH_TRANSACTION_CHART_SUCCESS = 'FETCH_TRANSACTION_CHART_SUCCESS'
 export const PORTFOLIO_EDIT = 'PORTFOLIO_EDIT'
 export const PORTFOLIO_EDIT_CANCEL = 'PORTFOLIO_EDIT_CANCEL'
 export const PORTFOLIO_LOCAL_EDIT = 'PORTFOLIO_LOCAL_EDIT'
@@ -74,12 +76,31 @@ export const getPortfolioOverview = () => {
 
 export const getTransactionChartData = ({ token }) => {
   return (dispatch, getState) => {
-    const priceChartData = getState().price.priceChartData[token]
-    let transactionIndex = 0
+    dispatch({ type: FETCH_TRANSACTION_CHART_REQUEST })
+    const priceChartData = getState().charts.priceChartData[token]
+    const transactions = getState().portfolio.portfolioHistory[token]
 
-    let convertedPortfolio = priceChartData.map((singlePrice) => {
+    console.log(priceChartData, transactions)
 
-    })
+    if (transactions && priceChartData) {
+      let transactionIndex = 0
+      let firstTransactionDate = moment(transactions[0].date)
+
+      let convertedPortfolio = priceChartData.map((singlePrice) => {
+        const { date } = singlePrice
+        const singlePriceDate = moment.unix(date)
+        const currentTransaction = transactions[transactionIndex]
+        const transactionDate = moment(currentTransaction.date)
+
+        if (singlePriceDate.isBefore(firstTransactionDate)) {
+          // return { date, currentAmount: 0 }
+        } else if (singlePriceDate.isAfter(transactionDate)) {
+          transactionIndex = transactionIndex < transactions.length - 1 ? transactionIndex + 1 : transactionIndex
+        }
+        return { date, currentAmount: currentTransaction.totalAmount * singlePrice.close }
+      })
+      dispatch({ type: FETCH_TRANSACTION_CHART_SUCCESS, payload: { [token]: convertedPortfolio} })
+    }
   }
 }
 

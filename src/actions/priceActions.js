@@ -1,9 +1,9 @@
 import axios from 'axios'
 import moment from 'moment'
-import { getConvertedPortfolio } from './portfolioActions'
+import { getConvertedPortfolio, getTransactionChartData } from './portfolioActions'
 
-export const CHART_DATA_REQUEST = 'CHART_DATA_REQUEST'
-export const CHART_DATA_SUCCESS = 'CHART_DATA_SUCCESS'
+export const PRICE_CHART_DATA_REQUEST = 'PRICE_CHART_DATA_REQUEST'
+export const PRICE_CHART_DATA_SUCCESS = 'PRICE_CHART_DATA_SUCCESS'
 export const TOKEN_EXCHANGE_RATES_REQUEST = 'TOKEN_EXCHANGE_RATES_REQUEST'
 export const TOKEN_EXCHANGE_RATES_ERROR = 'TOKEN_EXCHANGE_RATES_ERROR'
 export const TOKEN_EXCHANGE_RATES_SUCCESS = 'TOKEN_EXCHANGE_RATES_SUCCESS'
@@ -37,6 +37,7 @@ export const getFiatExchangeRates = () => {
 
     return axios.get(`http://api.fixer.io/latest?base=USD`)
     .then((res) => {
+
       dispatch({type: FIAT_EXCHANGE_RATES_SUCCESS, payload: res.data})
     })
     .catch((error) => {
@@ -59,11 +60,11 @@ export const getTokenExchangeRates = () => {
   }
 }
 
-const getSingleChart = ({ token, startTime, endTime }) => {
-  const start = startTime || moment().subtract(1, 'month')
+const getSingleChart = ({ token, startTime, endTime, timePeriod }) => {
+  const start = startTime || moment().subtract(5, 'days')
   const end = endTime || moment()
   // Temporary
-  const period = 14400
+  const period = timePeriod || 1800
 
   return axios.get(`${poloniex}=returnChartData`, {
     params: {
@@ -85,14 +86,14 @@ const getSingleChart = ({ token, startTime, endTime }) => {
 }
 
 // TODO Poloniex says to limit API requests to 6 per second or you can risk an IP ban
-export const getChartData = ({ tokens, startTime, endTime }) => {
+export const getChartData = ({ tokens, startTime, endTime, period }) => {
   return (dispatch, getState) => {
-    dispatch({ type: CHART_DATA_REQUEST})
+    dispatch({ type: PRICE_CHART_DATA_REQUEST})
 
     let singleCharts = []
 
     tokens.map((token) => {
-      singleCharts.push(getSingleChart({ token, startTime, endTime }))
+      singleCharts.push(getSingleChart({ token, startTime, endTime, period }))
     })
 
     // Wait for all requests from Poloniex to finish, then dispatch success
@@ -116,10 +117,8 @@ export const getChartData = ({ tokens, startTime, endTime }) => {
 
         const combinedChartData = Array.from(chartMap.values())
 
-        dispatch({ type: CHART_DATA_SUCCESS, payload: {...chartData, combinedChartData } })
-      }
-      )
+        dispatch({ type: PRICE_CHART_DATA_SUCCESS, payload: {...chartData, combinedChartData } })
+        tokens.map((token) => dispatch(getTransactionChartData({ token })))
+      })
   }
 }
-
-window.getChartData = getChartData

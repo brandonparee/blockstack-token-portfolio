@@ -3,9 +3,9 @@ import moment from 'moment'
 import { connect } from 'react-redux'
 import { LineChart, Line, Tooltip, XAxis, YAxis } from 'recharts'
 
-const mapStateToProps = ({ price }) => {
+const mapStateToProps = ({ charts }) => {
   return {
-    chartData: price.priceChartData.combinedChartData
+    chartData: charts.priceChartData.combinedChartData
   }
 }
 
