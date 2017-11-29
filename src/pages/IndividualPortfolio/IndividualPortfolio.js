@@ -6,6 +6,7 @@ import { getFiatInfo, prettyFiat } from '../../utils'
 import Section from '../../components/Bulma/Section'
 import Hero from '../../components/Bulma/Hero'
 import TransactionChart from '../../components/Charts/TransactionChart'
+import TransactionTable from '../../components/Tables/TransactionTable'
 
 const mapStateToProps = ({portfolio, preferences, charts}, ownProps) => {
   const { abbreviation } = ownProps.match.params
@@ -24,19 +25,26 @@ class IndividualPortfolio extends Component {
     const { portfolio, preferences, transactionChartData, isFetching } = this.props
     let { abbreviation } = this.props
     abbreviation = _.upperCase(abbreviation)
-    const convertedPortfolio = portfolio.convertedPortfolio[abbreviation]
+    let convertedPortfolio = portfolio.convertedPortfolio[abbreviation] || {}
+    convertedPortfolio.fiatValue = convertedPortfolio.fiatValue || 0
+    convertedPortfolio.dayChange = convertedPortfolio.dayChange || 0
     const fiat = getFiatInfo(preferences.fiat)
 
     return (
       <div>
-        {convertedPortfolio
-          ? <Section title={abbreviation}>
-            <Hero
-              title={`${fiat.symbol} ${prettyFiat(convertedPortfolio.fiatValue)}`}
-              subtitle={`${fiat.symbol} ${prettyFiat(convertedPortfolio.dayChange)}`}
-              subtitleClassName={Math.sign(convertedPortfolio.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'} />
-            <TransactionChart token={abbreviation} transactionChartData={transactionChartData[abbreviation]} isFetching={isFetching} />
-          </Section> : ''}
+        <Section title={abbreviation}>
+          <Hero
+          title={`${fiat.symbol} ${prettyFiat(convertedPortfolio.fiatValue)}`}
+          subtitle={`${fiat.symbol} ${prettyFiat(convertedPortfolio.dayChange)}`}
+          subtitleClassName={Math.sign(convertedPortfolio.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'} />
+          { convertedPortfolio
+            ? <div>
+              <TransactionChart token={abbreviation} transactionChartData={transactionChartData[abbreviation]} isFetching={isFetching} />
+              <TransactionTable abbreviation={abbreviation} />
+            </div>
+            : ''
+          }
+        </Section>
       </div>
 
     )
