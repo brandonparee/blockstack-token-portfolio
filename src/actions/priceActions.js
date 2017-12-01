@@ -75,6 +75,7 @@ const getSingleChart = ({ token, startTime, endTime, timePeriod }) => {
     }
   })
   .then((res) => {
+    console.log(res.data)
     // Add a field for token so we can merge all histories
     res.data.map((value) => {
       value.abbreviation = token

@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import ReactTable from 'react-table'
+import { Link } from 'react-router-dom'
 import moment from 'moment'
 import { prettyCrypto, prettyFiat } from '../../utils'
 import 'react-table/react-table.css'
@@ -31,6 +32,7 @@ const TransactionTable = ({ marketData, fiatPreference }) => {
           {
             Header: 'Name',
             accessor: 'name',
+            Cell: (marketData) => <Link to={`/market-data/${marketData.original.symbol.toLowerCase()}`}>{marketData.original.name}</Link>
           }, {
             Header: `Market Cap (${fiatPreference})`,
             accessor: 'market_cap_usd',
