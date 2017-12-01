@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { getPortfolio } from '../actions/portfolioActions'
 import { getPreferences } from '../actions/preferencesActions'
 import { getExchangeRates } from '../actions/priceActions'
+import { getMarketData } from '../actions/marketDataActions'
 
 import Authenticated from '../components/Authenticated/Authenticated'
 import Public from '../components/Public/Public'
@@ -14,6 +15,7 @@ import Home from '../pages/Home/Home'
 import IndividualPortfolio from '../pages/IndividualPortfolio/IndividualPortfolio'
 import Login from '../pages/Login/Login'
 import Logout from '../pages/Logout/Logout'
+import MarketData from '../pages/MarketData/MarketData'
 import Portfolio from '../pages/Portfolio/Portfolio'
 import Preferences from '../pages/Preferences/Preferences'
 import Secret from '../pages/Secret/Secret'
@@ -32,6 +34,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     getPortfolio: () => {
       dispatch(getPortfolio())
+    },
+    getMarketData: () => {
+      dispatch(getMarketData())
     }
   }
 }
@@ -42,6 +47,7 @@ class App extends Component {
       this.props.getPreferences()
       this.props.getExchangeRates()
       this.props.getPortfolio()
+      this.props.getMarketData()
     }
   }
 
@@ -60,6 +66,7 @@ class App extends Component {
                 (user.isAuthenticated)
                 ? <Switch>
                   <Authenticated path='/' exact name='home' component={Home} isAuthenticated={isAuthenticated} />
+                  <Authenticated path='/market-data' exact name='market-data' component={MarketData} isAuthenticated={isAuthenticated} />
                   <Authenticated path='/portfolio' exact name='portfolio' component={Portfolio} isAuthenticated={isAuthenticated} />
                   <Authenticated path='/portfolio/:abbreviation' component={IndividualPortfolio} isAuthenticated={isAuthenticated} />
                   <Authenticated path='/preferences' exact name='preferences' component={Preferences} isAuthenticated={isAuthenticated} />
