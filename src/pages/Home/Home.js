@@ -11,7 +11,6 @@ const mapStateToProps = ({}) => {
 const Home = ({}) => {
   return (
     <Section title='Home'>
-      <PriceChart />
     </Section>
   )
 }

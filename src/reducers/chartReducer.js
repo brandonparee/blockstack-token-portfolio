@@ -19,7 +19,7 @@ export const chartReducer = (state = initialState, action) => {
     case PRICE_CHART_DATA_REQUEST:
       return { ...state, isFetching: true }
     case PRICE_CHART_DATA_SUCCESS:
-      return { ...state, isFetching: false, priceChartData: { ...action.payload } }
+      return { ...state, isFetching: false, priceChartData: { ...state.priceChartData, ...action.payload } }
     case FETCH_TRANSACTION_CHART_REQUEST: {
       return { ...state, isFetching: true }
     }

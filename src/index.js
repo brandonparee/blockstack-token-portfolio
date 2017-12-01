@@ -18,6 +18,7 @@ import { transactionReducer } from './reducers/transactionReducer'
 import { priceReducer } from './reducers/priceReducer'
 import { preferencesReducer } from './reducers/preferencesReducer'
 import { chartReducer } from './reducers/chartReducer'
+import { marketDataReducer } from './reducers/marketDataReducer'
 import 'bulma/css/bulma.css'
 import './index.css'
 import App from './layouts/App'
@@ -38,7 +39,8 @@ export const store = createStore(
     router: routerReducer,
     user: userReducer,
     form: formReducer,
-    charts: chartReducer
+    charts: chartReducer,
+    marketData: marketDataReducer
   }),
   applyMiddleware(routerMiddleware(history), thunkMiddleware, createLogger())
 )

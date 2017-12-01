@@ -34,7 +34,7 @@ const SingleHolding = ({portfolio, preferences, abbreviation, handleInputChange}
         ? <div className='field is-horizontal'>
           <div className='field-label is-normal'>
             <label className='label'>
-              <Link to={`/portfolio/${abbreviation}`}>{getTokenName(abbreviation)} ({abbreviation})</Link>
+              <Link to={`/portfolio/${abbreviation.toLowerCase()}`}>{getTokenName(abbreviation)} ({abbreviation})</Link>
             </label>
           </div>
           <div className='field-body'>

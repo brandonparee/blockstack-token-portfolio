@@ -33,11 +33,11 @@ export const getExchangeRates = () => {
 
 export const getFiatExchangeRates = () => {
   return (dispatch, getState) => {
-    dispatch({type: FIAT_EXCHANGE_RATES_REQUEST})
+    dispatch({ type: FIAT_EXCHANGE_RATES_REQUEST })
 
     return axios.get(`http://api.fixer.io/latest?base=USD`)
     .then((res) => {
-
+      res.data.rates.USD = 1
       dispatch({type: FIAT_EXCHANGE_RATES_SUCCESS, payload: res.data})
     })
     .catch((error) => {
@@ -64,7 +64,7 @@ const getSingleChart = ({ token, startTime, endTime, timePeriod }) => {
   const start = startTime || moment().subtract(5, 'days')
   const end = endTime || moment()
   // Temporary
-  const period = timePeriod || 1800
+  const period = timePeriod || 14400
 
   return axios.get(`${poloniex}=returnChartData`, {
     params: {
@@ -75,6 +75,7 @@ const getSingleChart = ({ token, startTime, endTime, timePeriod }) => {
     }
   })
   .then((res) => {
+    console.log(res.data)
     // Add a field for token so we can merge all histories
     res.data.map((value) => {
       value.abbreviation = token
