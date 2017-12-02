@@ -57,32 +57,33 @@ class App extends Component {
     const { isAuthenticated } = user
 
     return (
-      <main>
-        <div className='columns is-gapless'>
-          <div className='column is-one-quarter is-prim is-full-height'>
-            <Sidebar />
-          </div>
-          <div className='column is-three-quarters is-alabaster is-full-height'>
-            {
-                (user.isAuthenticated)
-                ? <Switch>
-                  <Authenticated path='/' exact name='home' component={Home} isAuthenticated={isAuthenticated} />
-                  <Authenticated path='/market-data' exact name='market-data' component={MarketData} isAuthenticated={isAuthenticated} />
-                  <Authenticated path='/market-data/:abbreviation' component={IndividualMarketData} isAuthenticated={isAuthenticated} />
-                  <Authenticated path='/portfolio' exact name='portfolio' component={Portfolio} isAuthenticated={isAuthenticated} />
-                  <Authenticated path='/portfolio/:abbreviation' component={IndividualPortfolio} isAuthenticated={isAuthenticated} />
-                  <Authenticated path='/preferences' exact name='preferences' component={Preferences} isAuthenticated={isAuthenticated} />
-                  <Authenticated path='/secret' exact name='secret' component={Secret} isAuthenticated={isAuthenticated} />
-                </Switch>
-                : <Switch>
-                  <Public path='/' exact name='login' component={Login} isAuthenticated={isAuthenticated} />
-                  <Public path='/handle-login' name='handle-login' component={HandleLogin} isAuthenticated={isAuthenticated} />
-                </Switch>
-              }
-            <Route path='/logout' exact component={Logout} />
-          </div>
+      <div className='layout'>
+        <div className="header">HEADER</div>
+        <div className="sidebar"></div>
+        <div className='navigation is-bastille'>
+          <Sidebar />
         </div>
-      </main>
+        <div className='main is-alabaster'>
+          {
+              (user.isAuthenticated)
+              ? <Switch>
+                <Authenticated path='/' exact name='home' component={Home} isAuthenticated={isAuthenticated} />
+                <Authenticated path='/market-data' exact name='market-data' component={MarketData} isAuthenticated={isAuthenticated} />
+                <Authenticated path='/market-data/:abbreviation' component={IndividualMarketData} isAuthenticated={isAuthenticated} />
+                <Authenticated path='/portfolio' exact name='portfolio' component={Portfolio} isAuthenticated={isAuthenticated} />
+                <Authenticated path='/portfolio/:abbreviation' component={IndividualPortfolio} isAuthenticated={isAuthenticated} />
+                <Authenticated path='/preferences' exact name='preferences' component={Preferences} isAuthenticated={isAuthenticated} />
+                <Authenticated path='/secret' exact name='secret' component={Secret} isAuthenticated={isAuthenticated} />
+              </Switch>
+              : <Switch>
+                <Public path='/' exact name='login' component={Login} isAuthenticated={isAuthenticated} />
+                <Public path='/handle-login' name='handle-login' component={HandleLogin} isAuthenticated={isAuthenticated} />
+              </Switch>
+            }
+          <Route path='/logout' exact component={Logout} />
+        </div>
+        <div className="footer">FOOTER</div>
+      </div>
     )
   }
 }

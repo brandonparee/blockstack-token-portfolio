@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import { portfolioLocalEdit, getConvertedPortfolio } from '../../actions/portfolioActions'
 import { getTokenName, getFiatInfo, prettyFiat, prettyCrypto } from '../../utils'
 
+import PrettyPercent from '../../components/Helpers/PrettyPercent'
+
 const mapStateToProps = ({portfolio, preferences}) => {
   return {
     portfolio,
@@ -11,57 +13,29 @@ const mapStateToProps = ({portfolio, preferences}) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    handleInputChange: (e) => {
-      const { id, value } = e.target
-
-      dispatch(portfolioLocalEdit(id, value))
-      dispatch(getConvertedPortfolio())
-    }
-  }
-}
-
-const SingleHolding = ({portfolio, preferences, abbreviation, handleInputChange}) => {
+const SingleHolding = ({portfolio, preferences, abbreviation}) => {
   const { convertedPortfolio } = portfolio
   const currentStats = convertedPortfolio[abbreviation] ? convertedPortfolio[abbreviation] : {amount: 0, fiatValue: 0, dayChange: 0, percentChange: 0}
   const fiatInfo = getFiatInfo(preferences.fiat)
+  console.log(currentStats)
 
   return (
-    <div>
-      {
-        preferences.tokens[abbreviation]
-        ? <div className='field is-horizontal'>
-          <div className='field-label is-normal'>
-            <label className='label'>
-              <Link to={`/portfolio/${abbreviation.toLowerCase()}`}>{getTokenName(abbreviation)} ({abbreviation})</Link>
-            </label>
+    <div className='SingleHolding'>
+      <Link to={`/portfolio/${abbreviation.toLowerCase()}`}>
+        <div className="box">
+          <div className="media-content">
+            <Link to={`/portfolio/${abbreviation.toLowerCase()}`}>{getTokenName(abbreviation)} ({abbreviation})</Link>
+            <p>{`${prettyCrypto(currentStats.amount)}${abbreviation}`}</p>
+            <p>{fiatInfo.symbol}{prettyFiat(currentStats.fiatValue)}</p>
+            <PrettyPercent value={prettyFiat(currentStats.percentChange * 100)} />
           </div>
-          <div className='field-body'>
-            <div className='field'>
-              <p className='control'>
-                <input
-                  id={abbreviation}
-                  type='text'
-                  className={`input${!portfolio.isEdit ? ' is-static' : ''}`}
-                  onChange={handleInputChange}
-                  readOnly={!portfolio.isEdit}
-                  value={currentStats.amount ? (!portfolio.isEdit ? prettyCrypto(currentStats.amount) : currentStats.amount) + (!portfolio.isEdit ? ` ${abbreviation}` : '') : 0} />
-              </p>
-              <p className='control'>{fiatInfo.symbol}{prettyFiat(currentStats.fiatValue)}</p>
-              <p
-                className={`control ${Math.sign(currentStats.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'}`}>
-                {fiatInfo.symbol}{prettyFiat(currentStats.dayChange)} ({prettyFiat(currentStats.percentChange * 100)}%)
-              </p>
-            </div>
-          </div>
-        </div> : ''
-      }
+        </div>
+      </Link>
     </div>
 
   )
 }
 
-const SingleHoldingContainer = connect(mapStateToProps, mapDispatchToProps)(SingleHolding)
+const SingleHoldingContainer = connect(mapStateToProps)(SingleHolding)
 
 export default SingleHoldingContainer

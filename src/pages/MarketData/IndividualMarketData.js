@@ -7,23 +7,26 @@ import Section from '../../components/Bulma/Section'
 import PriceChart from '../../components/Charts/PriceChart'
 import LiveTradeData from '../../components/Tables/LiveTradeData'
 
-const mapStateToProps = ({}, ownProps) => {
+const mapStateToProps = ({ marketData }, ownProps) => {
   const { abbreviation } = ownProps.match.params
   return {
-    abbreviation
+    abbreviation,
+    marketData: marketData.marketData
   }
 }
 
-const IndividualMarketData = ({ abbreviation }) => {
-
+const IndividualMarketData = ({ abbreviation, marketData }) => {
   abbreviation = _.upperCase(abbreviation)
+  const singleMarketData = _.find(marketData, ['symbol', abbreviation])
 
   return (
     <div>
-      <Section title={abbreviation}>
-        <PriceChart token={abbreviation} />
-        <LiveTradeData token={abbreviation} />
-      </Section>
+      { singleMarketData &&
+        <Section title={`${singleMarketData.name} (${abbreviation})`}>
+          <PriceChart token={abbreviation} />
+          <LiveTradeData token={abbreviation} />
+        </Section>
+      }
     </div>
   )
 }

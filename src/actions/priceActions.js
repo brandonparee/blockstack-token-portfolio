@@ -60,11 +60,10 @@ export const getTokenExchangeRates = () => {
   }
 }
 
-const getSingleChart = ({ token, startTime, endTime, timePeriod }) => {
-  const start = startTime || moment().subtract(5, 'days')
-  const end = endTime || moment()
-  // Temporary
-  const period = timePeriod || 14400
+const getSingleChart = ({ token, chartRange }) => {
+  const start = moment().subtract(...chartRange.moment)
+  const end = moment()
+  const period = chartRange.period
 
   return axios.get(`${poloniex}=returnChartData`, {
     params: {
@@ -75,7 +74,6 @@ const getSingleChart = ({ token, startTime, endTime, timePeriod }) => {
     }
   })
   .then((res) => {
-    console.log(res.data)
     // Add a field for token so we can merge all histories
     res.data.map((value) => {
       value.abbreviation = token
@@ -90,11 +88,12 @@ const getSingleChart = ({ token, startTime, endTime, timePeriod }) => {
 export const getChartData = ({ tokens, startTime, endTime, period }) => {
   return (dispatch, getState) => {
     dispatch({ type: PRICE_CHART_DATA_REQUEST})
+    const chartRange = getState().charts.chartRange
 
     let singleCharts = []
 
     tokens.map((token) => {
-      singleCharts.push(getSingleChart({ token, startTime, endTime, period }))
+      singleCharts.push(getSingleChart({ token, chartRange }))
     })
 
     // Wait for all requests from Poloniex to finish, then dispatch success

@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Hero = ({title, subtitle, titleClassName, subtitleClassName}) => (
-  <div className='hero'>
+const Hero = ({title, subtitle, backgroundColor, titleClassName, subtitleClassName}) => (
+  <div className={`hero is-${backgroundColor}`}>
     <div className='hero-body'>
-      <div className='container'>
+      <div>
         <h1 className={`title ${titleClassName}`}>
           {title}
         </h1>

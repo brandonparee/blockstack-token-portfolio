@@ -91,11 +91,11 @@ export const getTransactionChartData = ({ token }) => {
         const transactionDate = moment(currentTransaction.date)
 
         if (singlePriceDate.isBefore(firstTransactionDate)) {
-          // return { date, currentAmount: 0 }
+          return { date, currentAmount: 0 }
         } else if (singlePriceDate.isAfter(transactionDate)) {
           transactionIndex = transactionIndex < transactions.length - 1 ? transactionIndex + 1 : transactionIndex
+          return { date, currentAmount: currentTransaction.totalAmount * singlePrice.close }
         }
-        return { date, currentAmount: currentTransaction.totalAmount * singlePrice.close }
       })
       dispatch({ type: FETCH_TRANSACTION_CHART_SUCCESS, payload: { [token]: convertedPortfolio} })
     }
