@@ -58,8 +58,8 @@ class App extends Component {
 
     return (
       <div className='layout'>
-        <div className="header">HEADER</div>
-        <div className="sidebar"></div>
+        <div className='header'>HEADER</div>
+        <div className='sidebar' />
         <div className='navigation is-bastille'>
           <Sidebar />
         </div>
@@ -82,7 +82,7 @@ class App extends Component {
             }
           <Route path='/logout' exact component={Logout} />
         </div>
-        <div className="footer">FOOTER</div>
+        <div className='footer'>FOOTER</div>
       </div>
     )
   }

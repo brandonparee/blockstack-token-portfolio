@@ -22,8 +22,8 @@ const SingleHolding = ({portfolio, preferences, abbreviation}) => {
   return (
     <div className='SingleHolding'>
       <Link to={`/portfolio/${abbreviation.toLowerCase()}`}>
-        <div className="box">
-          <div className="media-content">
+        <div className='box'>
+          <div className='media-content'>
             <Link to={`/portfolio/${abbreviation.toLowerCase()}`}>{getTokenName(abbreviation)} ({abbreviation})</Link>
             <p>{`${prettyCrypto(currentStats.amount)}${abbreviation}`}</p>
             <p>{fiatInfo.symbol}{prettyFiat(currentStats.fiatValue)}</p>

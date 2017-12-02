@@ -40,27 +40,27 @@ class Portfolio extends Component {
     const fiat = getFiatInfo(preferences.fiat)
 
     return (
-      <div className="Portfolio">
+      <div className='Portfolio'>
         <Section title='Portfolio'>
-        <Hero
-        title={`${fiat.symbol} ${prettyFiat(portfolio.totalValue)}`}
-        subtitle={`${fiat.symbol} ${prettyFiat(portfolio.dayChange)}`}
-        subtitleClassName={Math.sign(portfolio.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'} />
-        <div className="SingleHoldingLayout">
-          {
+          <Hero
+            title={`${fiat.symbol} ${prettyFiat(portfolio.totalValue)}`}
+            subtitle={`${fiat.symbol} ${prettyFiat(portfolio.dayChange)}`}
+            subtitleClassName={Math.sign(portfolio.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'} />
+          <div className='SingleHoldingLayout'>
+            {
             tokenList.map((token) => {
               if (token === 'BTC' || (price.tokenRates[`BTC_${token}`] && fiat)) {
                 return (
                   <SingleHolding
-                  key={token}
-                  abbreviation={token}
-                  tokenRates={prettyFiat(1 / price.tokenRates[token])} />
+                    key={token}
+                    abbreviation={token}
+                    tokenRates={prettyFiat(1 / price.tokenRates[token])} />
                 )
               }
               return ''
             })
           }
-        </div>
+          </div>
         </Section>
       </div>
     )

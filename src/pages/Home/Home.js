@@ -10,8 +10,7 @@ const mapStateToProps = ({}) => {
 
 const Home = ({}) => {
   return (
-    <Section title='Home'>
-    </Section>
+    <Section title='Home' />
   )
 }
 

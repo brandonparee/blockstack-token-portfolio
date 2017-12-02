@@ -21,8 +21,8 @@ const ChartTimeRange = ({ setChartTimeRange, abbreviation }) => {
         return <span
           key={singleChartTime.text}
           onClick={() => setChartTimeRange(singleChartTime, abbreviation)}>
-            {singleChartTime.text} 
-          </span>
+          {singleChartTime.text}
+        </span>
       })}
     </div>
   )

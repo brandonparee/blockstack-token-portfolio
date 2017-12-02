@@ -21,28 +21,27 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 class PriceChart extends Component {
-  componentDidMount() {
+  componentDidMount () {
     this.props.getInitialData(this.props.token)
   }
 
-  render() {
+  render () {
     const { token, priceChartData } = this.props
     const chartData = priceChartData[token]
 
     return (
       <div>
-      <ChartTimeRange abbreviation={token.toUpperCase()} />
-      { chartData
-        ?
-            <LineChart data={chartData} width={800} height={500} margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-            <XAxis dataKey='date' type='number' scale='time' domain={['dataMin', 'dataMax']} tickFormatter={tick => moment.unix(tick).format('MM/DD')} />
-            <YAxis />
-            <Tooltip />
-            <Line dot={false} type='monotone' dataKey='close' />
-            </LineChart>
+        <ChartTimeRange abbreviation={token.toUpperCase()} />
+        { chartData
+        ? <LineChart data={chartData} width={800} height={500} margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+          <XAxis dataKey='date' type='number' scale='time' domain={['dataMin', 'dataMax']} tickFormatter={tick => moment.unix(tick).format('MM/DD')} />
+          <YAxis />
+          <Tooltip />
+          <Line dot={false} type='monotone' dataKey='close' />
+        </LineChart>
            : '' }
-        </div>
-      )
+      </div>
+    )
   }
 }
 

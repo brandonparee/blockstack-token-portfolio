@@ -11,7 +11,6 @@ const mapStateToProps = ({ preferences, price }) => {
 }
 
 const Fiat = ({ fiatRates, value, fiatPreference }) => {
-
   return (
     <span>{currencyFormatter.format(value * fiatRates[fiatPreference], { code: fiatPreference })}</span>
   )

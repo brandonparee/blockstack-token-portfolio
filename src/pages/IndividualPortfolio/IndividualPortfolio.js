@@ -21,7 +21,7 @@ const mapStateToProps = ({portfolio, preferences, charts}, ownProps) => {
 }
 
 class IndividualPortfolio extends Component {
-  render() {
+  render () {
     const { portfolio, preferences, transactionChartData, isFetching } = this.props
     let { abbreviation } = this.props
     abbreviation = _.upperCase(abbreviation)
@@ -34,9 +34,9 @@ class IndividualPortfolio extends Component {
       <div>
         <Section title={abbreviation}>
           <Hero
-          title={`${fiat.symbol} ${prettyFiat(fiatValue)}`}
-          subtitle={`${fiat.symbol} ${prettyFiat(dayChange)}`}
-          subtitleClassName={Math.sign(dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'} />
+            title={`${fiat.symbol} ${prettyFiat(fiatValue)}`}
+            subtitle={`${fiat.symbol} ${prettyFiat(dayChange)}`}
+            subtitleClassName={Math.sign(dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'} />
           { convertedPortfolio
             ? <div>
               <TransactionChart token={abbreviation} transactionChartData={transactionChartData[abbreviation]} isFetching={isFetching} />

@@ -29,7 +29,7 @@ const TransactionTable = ({ abbreviation, portfolioHistory }) => {
           {
             Header: 'Date',
             accessor: (tokenHistory) => moment(tokenHistory.date).format('YYYY-MM-DD'),
-            id: 'transactionDate',
+            id: 'transactionDate'
           }, {
             Header: 'Type',
             accessor: 'type'
