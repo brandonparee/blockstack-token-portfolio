@@ -5,7 +5,14 @@ export const defaultConfig = {
     fiat: 'USD',
     tokens: {
       BTC: true,
-      ETH: true
+      ETH: true,
+      BCH: true,
+      ETC: true,
+      LTC: true,
+      DASH: true,
+      XMR: true,
+      ZEC: true,
+      XPR: true
     }
   },
   'portfolio.json': {

@@ -1,0 +1,19 @@
+@import "../../index.scss";
+
+.Portfolio {
+  .SingleHoldingLayout {
+    display: flex;
+    flex-wrap: wrap;
+
+    .SingleHolding {
+      width: 33%;
+      min-width: 300px;
+      padding: 15px;
+      box-sizing: border-box;
+
+      .link-style {
+        color: $link-blue;
+      }
+    }
+  }
+}

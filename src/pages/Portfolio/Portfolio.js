@@ -7,15 +7,18 @@ import { getSelectedTokens, getFiatInfo, prettyFiat } from '../../utils'
 
 import SingleHolding from './SingleHolding'
 
-import TransactionForm from '../../components/Forms/TransactionForm'
+import TransactionToggle from '../../components/Helpers/TransactionToggle'
 import Hero from '../../components/Bulma/Hero'
 import Section from '../../components/Bulma/Section'
 
-const mapStateToProps = ({portfolio, preferences, price}) => {
+import './Portfolio.css'
+
+const mapStateToProps = ({ portfolio, preferences, price, transactions }) => {
   return {
     portfolio,
     preferences,
-    price
+    price,
+    transactionView: transactions.transactionView
   }
 }
 
@@ -33,18 +36,26 @@ class Portfolio extends Component {
   }
 
   render () {
-    const { portfolio, preferences, price } = this.props
+    const { portfolio, preferences, price, transactionView } = this.props
     const tokenList = getSelectedTokens(preferences)
     const fiat = getFiatInfo(preferences.fiat)
 
     return (
-      <Section title='Portfolio'>
-        <Hero
-          title={`${fiat.symbol} ${prettyFiat(portfolio.totalValue)}`}
-          subtitle={`${fiat.symbol} ${prettyFiat(portfolio.dayChange)}`}
-          subtitleClassName={Math.sign(portfolio.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'} />
-        <TransactionForm />
-        {
+      <div className='Portfolio'>
+        <Section title='Portfolio'>
+          <Hero
+            title={`${fiat.symbol} ${prettyFiat(portfolio.totalValue)}`}
+            subtitle={`${fiat.symbol} ${prettyFiat(portfolio.dayChange)}`}
+            subtitleClassName={Math.sign(portfolio.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'} />
+          <TransactionToggle>
+            {
+              (!transactionView)
+                ? <a className='button'>Add Transaction</a>
+                : <a className='button'>Close</a>
+            }
+          </TransactionToggle>
+          <div className='SingleHoldingLayout'>
+            {
             tokenList.map((token) => {
               if (token === 'BTC' || (price.tokenRates[`BTC_${token}`] && fiat)) {
                 return (
@@ -56,8 +67,10 @@ class Portfolio extends Component {
               }
               return ''
             })
-        }
-      </Section>
+          }
+          </div>
+        </Section>
+      </div>
     )
   }
 }

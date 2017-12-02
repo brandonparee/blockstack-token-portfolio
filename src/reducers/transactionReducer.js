@@ -1,6 +1,7 @@
 import {
   FETCH_TRANSACTIONS,
-  ADD_TRANSACTION_REQUEST
+  ADD_TRANSACTION_REQUEST,
+  TRANSACTION_TOGGLE
 } from '../actions/transactionActions'
 
 import {
@@ -11,11 +12,14 @@ import {
 const initialState = {
   isFetching: false,
   isUpdating: false,
-  transactions: []
+  transactions: [],
+  transactionView: false
 }
 
 export const transactionReducer = (state = initialState, action) => {
   switch (action.type) {
+    case TRANSACTION_TOGGLE:
+      return { ...state, transactionView: !state.transactionView }
     case FETCH_TRANSACTIONS:
       return { ...state, isFetching: true }
     case ADD_TRANSACTION_REQUEST:
