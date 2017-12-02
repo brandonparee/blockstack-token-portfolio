@@ -1,6 +1,7 @@
 $alabaster: #f8f8fd;
 $bastille: #2a202f;
 $blockstack-primary: #270f34;
+$link-blue: #3273dc;
 $prim: #e5e4ef;
 $white: #fff;
 
@@ -19,6 +20,21 @@ body {
   grid-template-areas: "navigation header"
                         "navigation main"
                         "footer footer";
+  &.transaction-mode {
+    grid-template-columns: 15% 1fr 25%;
+    grid-template-rows: 3rem 1fr 3rem;
+    grid-template-areas: "navigation header header"
+                          "navigation main sidePane"
+                          "footer footer footer";
+  }
+}
+
+.side-pane {
+  grid-area: sidePane;
+  padding: 1rem;
+  input, select, .select {
+    width: 100%;
+  }
 }
 
 .header {

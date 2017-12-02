@@ -5,6 +5,7 @@ import { getPortfolioOverview } from './portfolioActions'
 export const ADD_TRANSACTION_REQUEST = 'ADD_TRANSACTION_REQUEST'
 export const ADD_TRANSACTION_SUCCESS = 'ADD_TRANSACTION_SUCCESS'
 export const FETCH_TRANSACTIONS = 'FETCH_TRANSACTIONS'
+export const TRANSACTION_TOGGLE = 'TOGGLE_ADD_TRANSACTION'
 
 export const getTransactions = () => {
   return (dispatch) => {
@@ -25,4 +26,8 @@ export const addTransaction = (transaction) => {
 
     dispatch(putBlockstackFile('transactions.json', JSON.stringify(transactions), true, getPortfolioOverview))
   }
+}
+
+export const handleTransactionToggle = () => {
+  return { type: TRANSACTION_TOGGLE }
 }

@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import AuthenticatedSidebar from './AuthenticatedSidebar'
 import PublicSidebar from './PublicSidebar'
 
+import './Sidebar.css'
+
 const mapStateToProps = ({user, router}) => {
   return {
     user,
@@ -13,7 +15,7 @@ const mapStateToProps = ({user, router}) => {
 
 const Sidebar = ({user, ...rest}) => {
   return (
-    <div>
+    <div className='Sidebar'>
       {
         (user.isAuthenticated)
         ? <AuthenticatedSidebar user={user} {...rest} />

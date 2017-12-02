@@ -14,15 +14,15 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const ChartTimeRange = ({ setChartTimeRange, abbreviation }) => {
-  console.log(chartTimes)
   return (
     <div>
       {Object.values(chartTimes).map((singleChartTime) => {
-        return <span
+        return <button
+          className='button is-small'
           key={singleChartTime.text}
           onClick={() => setChartTimeRange(singleChartTime, abbreviation)}>
           {singleChartTime.text}
-        </span>
+        </button>
       })}
     </div>
   )

@@ -1,0 +1,14 @@
+@import "../../index.scss";
+
+.Sidebar {
+  color: $alabaster;
+
+  a {
+    color: $alabaster;
+  }
+
+  .sidebar-active {
+    background-color: $alabaster;
+    color: $bastille;
+  }
+}

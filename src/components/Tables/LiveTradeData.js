@@ -9,10 +9,10 @@ const cryptoCompare = `https://min-api.cryptocompare.com/data`
 const cryptoCompareWS = 'https://streamer.cryptocompare.com/'
 
 class LiveTradeData extends Component {
-  state = { data: [], subscriptions: [] }
+  state = { data: [], subscriptions: [], enabled: false, isSetup: false }
   socket = io(cryptoCompareWS)
 
-  componentDidMount() {
+  setupLiveData() {
     const fsym = this.props.token.toUpperCase()
     axios.get(`${cryptoCompare}/subs`, {
       params: {
@@ -33,6 +33,20 @@ class LiveTradeData extends Component {
 
   componentWillUnmount() {
     this.socket.close()
+  }
+
+  toggleLiveData() {
+    if (this.state.enabled) {
+      this.socket.emit('SubRemove', { subs: this.state.subscriptions })
+    } else {
+      if (this.state.isSetup) {
+        this.socket.emit('SubAdd', { subs: this.state.subscriptions })
+      } else {
+        this.setupLiveData()
+      }
+    }
+
+    this.setState({ enabled: !this.state.enabled })
   }
 
   handleSocketData(data) {
@@ -62,9 +76,12 @@ class LiveTradeData extends Component {
     const { token } = this.props
 
     return (
-      <ReactTable
+      <div>
+        <h1 className="subtitle">Live Trade Data</h1>
+        <a className="button" onClick={this.toggleLiveData.bind(this)}>Toggle Live Data</a>
+        <ReactTable
         data={this.state.data}
-        noDataText='Live Trade Data Table coming soon'
+        noDataText='Click Toggle Live Data to enable Live Trade Data'
         columns={[
           {
             Header: 'Type',
@@ -86,7 +103,8 @@ class LiveTradeData extends Component {
           }
         ]}
         defaultPageSize={15}
-      />
+        />
+      </div>
     )
   }
 }

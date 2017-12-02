@@ -20,6 +20,7 @@ import IndividualMarketData from '../pages/MarketData/IndividualMarketData'
 import Portfolio from '../pages/Portfolio/Portfolio'
 import Preferences from '../pages/Preferences/Preferences'
 import Secret from '../pages/Secret/Secret'
+import TransactionFormSidebar from '../components/Sidebar/TransactionFormSidebar'
 
 const mapStateToProps = (state) => {
   return state
@@ -53,13 +54,12 @@ class App extends Component {
   }
 
   render () {
-    const { user } = this.props
+    const { user, transactions } = this.props
     const { isAuthenticated } = user
 
     return (
-      <div className='layout'>
+      <div className={`layout ${transactions.transactionView ? 'transaction-mode' : ''}`}>
         <div className='header'>HEADER</div>
-        <div className='sidebar' />
         <div className='navigation is-bastille'>
           <Sidebar />
         </div>
@@ -82,6 +82,11 @@ class App extends Component {
             }
           <Route path='/logout' exact component={Logout} />
         </div>
+        {
+          (user.isAuthenticated && transactions.transactionView)
+          ? <TransactionFormSidebar />
+          : null
+        }
         <div className='footer'>FOOTER</div>
       </div>
     )

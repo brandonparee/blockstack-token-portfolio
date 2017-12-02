@@ -17,14 +17,13 @@ const SingleHolding = ({portfolio, preferences, abbreviation}) => {
   const { convertedPortfolio } = portfolio
   const currentStats = convertedPortfolio[abbreviation] ? convertedPortfolio[abbreviation] : {amount: 0, fiatValue: 0, dayChange: 0, percentChange: 0}
   const fiatInfo = getFiatInfo(preferences.fiat)
-  console.log(currentStats)
 
   return (
     <div className='SingleHolding'>
       <Link to={`/portfolio/${abbreviation.toLowerCase()}`}>
         <div className='box'>
           <div className='media-content'>
-            <Link to={`/portfolio/${abbreviation.toLowerCase()}`}>{getTokenName(abbreviation)} ({abbreviation})</Link>
+            <p className='link-style'>{getTokenName(abbreviation)} ({abbreviation})</p>
             <p>{`${prettyCrypto(currentStats.amount)}${abbreviation}`}</p>
             <p>{fiatInfo.symbol}{prettyFiat(currentStats.fiatValue)}</p>
             <PrettyPercent value={prettyFiat(currentStats.percentChange * 100)} />
