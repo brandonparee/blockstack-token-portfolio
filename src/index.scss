@@ -16,16 +16,14 @@ body {
   width: 100vw;
   display: grid;
   grid-template-columns: 15% 1fr;
-  grid-template-rows: 3rem 1fr 3rem;
-  grid-template-areas: "navigation header"
-                        "navigation main"
-                        "footer footer";
+  grid-template-rows: 1fr;
+  grid-template-areas: "navigation main"
+                        "navigation main";
   &.transaction-mode {
     grid-template-columns: 15% 1fr 25%;
-    grid-template-rows: 3rem 1fr 3rem;
-    grid-template-areas: "navigation header header"
-                          "navigation main sidePane"
-                          "footer footer footer";
+    grid-template-rows: 1fr;
+    grid-template-areas: "navigation main sidePane"
+                          "navigation main sidePane";
   }
 }
 

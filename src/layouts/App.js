@@ -59,7 +59,6 @@ class App extends Component {
 
     return (
       <div className={`layout ${transactions.transactionView ? 'transaction-mode' : ''}`}>
-        <div className='header'>HEADER</div>
         <div className='navigation is-bastille'>
           <Sidebar />
         </div>
@@ -67,7 +66,7 @@ class App extends Component {
           {
               (user.isAuthenticated)
               ? <Switch>
-                <Authenticated path='/' exact name='home' component={Home} isAuthenticated={isAuthenticated} />
+                <Authenticated path='/' exact name='home' component={Portfolio} isAuthenticated={isAuthenticated} />
                 <Authenticated path='/market-data' exact name='market-data' component={MarketData} isAuthenticated={isAuthenticated} />
                 <Authenticated path='/market-data/:abbreviation' component={IndividualMarketData} isAuthenticated={isAuthenticated} />
                 <Authenticated path='/portfolio' exact name='portfolio' component={Portfolio} isAuthenticated={isAuthenticated} />
@@ -87,7 +86,6 @@ class App extends Component {
           ? <TransactionFormSidebar />
           : null
         }
-        <div className='footer'>FOOTER</div>
       </div>
     )
   }
