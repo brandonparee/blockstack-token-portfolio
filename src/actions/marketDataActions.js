@@ -1,6 +1,6 @@
 import axios from 'axios'
 import _ from 'lodash'
-import cc from 'cryptocompare'
+import cc from '../uncompiledDependencies/cryptocompare'
 import { getConvertedPortfolio } from './portfolioActions'
 import { getTokenList } from '../utils'
 

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import moment from 'moment'
-import cc from 'cryptocompare'
+import cc from '../uncompiledDependencies/cryptocompare'
 import { getConvertedPortfolio, getTransactionChartData } from './portfolioActions'
 
 export const PRICE_CHART_DATA_REQUEST = 'PRICE_CHART_DATA_REQUEST'

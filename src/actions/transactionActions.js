@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import cc from 'cryptocompare'
+import cc from '../uncompiledDependencies/cryptocompare'
 import moment from 'moment'
 import { getBlockstackFile, putBlockstackFile } from './fileActions'
 import { getPortfolioOverview } from './portfolioActions'

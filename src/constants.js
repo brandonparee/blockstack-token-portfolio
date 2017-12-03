@@ -1,4 +1,4 @@
-import cc from 'cryptocompare'
+import cc from './uncompiledDependencies/cryptocompare'
 
 const ONE_HOUR_MINUTES = 60
 const ONE_DAY_HOURS = 24

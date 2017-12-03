@@ -93,14 +93,14 @@ export const getTransactionChartData = ({ token }) => {
         const { time } = singlePrice
         const singlePriceDate = moment.unix(time)
         const currentTransaction = transactions[transactionIndex]
-        const transactionDate = moment(currentTransaction.date)
+        const transactionDate = moment.unix(currentTransaction.date)
+
+        console.log(time, singlePrice.time)
 
         if (singlePriceDate.isBefore(firstTransactionDate)) {
           return { time, currentAmount: 0 }
-        } else if (singlePriceDate.isAfter(transactionDate)) {
-          console.log(singlePriceDate.isAfter(transactionDate))
+        } else if (singlePriceDate.isSameOrAfter(transactionDate)) {
           transactionIndex = transactionIndex < transactions.length - 1 ? transactionIndex + 1 : transactionIndex
-          console.log(singlePriceDate, transactionDate, currentTransaction.totalAmount, singlePrice.close)
         }
         return { time, currentAmount: currentTransaction.totalAmount * singlePrice.close }
       })
