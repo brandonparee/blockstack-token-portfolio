@@ -4,14 +4,13 @@ import { connect } from 'react-redux'
 import { getPortfolio } from '../actions/portfolioActions'
 import { getPreferences } from '../actions/preferencesActions'
 import { getExchangeRates } from '../actions/priceActions'
-import { getMarketData } from '../actions/marketDataActions'
+import { getCoinList, getMarketData } from '../actions/marketDataActions'
 
 import Authenticated from '../components/Authenticated/Authenticated'
 import Public from '../components/Public/Public'
 import Sidebar from '../components/Sidebar/Sidebar'
 
 import HandleLogin from '../pages/Login/HandleLogin'
-import Home from '../pages/Home/Home'
 import IndividualPortfolio from '../pages/IndividualPortfolio/IndividualPortfolio'
 import Login from '../pages/Login/Login'
 import Logout from '../pages/Logout/Logout'
@@ -39,6 +38,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     getMarketData: () => {
       dispatch(getMarketData())
+      dispatch(getCoinList())
     }
   }
 }

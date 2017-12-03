@@ -35,15 +35,14 @@ const TransactionTable = ({ abbreviation, portfolioHistory }) => {
             accessor: 'type'
           }, {
             Header: 'Pair',
-            accessor: (tokenHistory) => `${tokenHistory.abbreviation}/${tokenHistory.fiat}`,
-            id: 'pair'
+            accessor: 'pair'
           }, {
             Header: 'Amount',
             accessor: (tokenHistory) => `${prettyCrypto(tokenHistory.amount)} ${abbreviation}`,
             id: 'toAmount'
           }, {
             Header: 'Total',
-            accessor: (tokenHistory) => `${prettyFiat(tokenHistory.purchasePrice)} ${tokenHistory.fiat}`,
+            accessor: (tokenHistory) => `${prettyFiat(tokenHistory.purchasePrice)} ${tokenHistory.pairedSymbol}`,
             id: 'fromAmout'
           }, {
             Header: 'Balance',

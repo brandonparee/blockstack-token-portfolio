@@ -1,39 +1,50 @@
-const FIVE_MINUTES = 300
-const FIFTEEN_MINUTES = 900
-const THIRTY_MINUTES = 1800
-const TWO_HOURS = 7200
-const FOUR_HOURS = 14400
-const ONE_DAY = 86400
+import cc from './uncompiledDependencies/cryptocompare'
+
+const ONE_HOUR_MINUTES = 60
+const ONE_DAY_HOURS = 24
+const ONE_MONTH_DAYS = 30
 
 export const chartTimes = {
   LAST_HOUR: {
-    moment: [1, 'hour'],
-    period: FIVE_MINUTES,
-    text: '1h'
+    text: '1h',
+    ccFunction: cc.histoMinute,
+    options: {
+      limit: ONE_HOUR_MINUTES
+    }
   },
   LAST_DAY: {
-    moment: [1, 'day'],
-    period: THIRTY_MINUTES,
-    text: '1d'
+    text: '1d',
+    ccFunction: cc.histoHour,
+    options: {
+      limit: ONE_DAY_HOURS
+    }
   },
   LAST_THREE_DAYS: {
-    moment: [3, 'days'],
-    period: TWO_HOURS,
-    text: '3d'
+    text: '3d',
+    ccFunction: cc.histoHour,
+    options: {
+      limit: ONE_DAY_HOURS * 3
+    }
   },
   LAST_WEEK: {
-    moment: [7, 'days'],
-    period: TWO_HOURS,
-    text: '7d'
+    text: '7d',
+    ccFunction: cc.histoHour,
+    options: {
+      limit: ONE_DAY_HOURS * 7
+    }
   },
   LAST_MONTH: {
-    moment: [1, 'month'],
-    period: ONE_DAY,
-    text: '1m'
+    text: '1m',
+    ccFunction: cc.histoDay,
+    options: {
+      limit: ONE_MONTH_DAYS
+    }
   },
   LAST_YEAR: {
-    moment: [1, 'year'],
-    period: ONE_DAY,
-    text: '1y'
+    text: '1y',
+    ccFunction: cc.histoDay,
+    options: {
+      limit: ONE_MONTH_DAYS * 12
+    }
   }
 }

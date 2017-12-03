@@ -1,9 +1,8 @@
 // TODO Make this the 'simple portfolio', no transactions just edit values
-
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getExchangeRates } from '../../actions/priceActions'
-import { getSelectedTokens, getFiatInfo, prettyFiat } from '../../utils'
+import { getFiatInfo, prettyFiat } from '../../utils'
 
 import SingleHolding from './SingleHolding'
 
@@ -36,8 +35,7 @@ class Portfolio extends Component {
   }
 
   render () {
-    const { portfolio, preferences, price, transactionView } = this.props
-    const tokenList = getSelectedTokens(preferences)
+    const { portfolio, preferences, transactionView } = this.props
     const fiat = getFiatInfo(preferences.fiat)
 
     return (
@@ -56,18 +54,15 @@ class Portfolio extends Component {
           </TransactionToggle>
           <div className='SingleHoldingLayout'>
             {
-            tokenList.map((token) => {
-              if (token === 'BTC' || (price.tokenRates[`BTC_${token}`] && fiat)) {
+              Object.keys(portfolio.portfolioOverview).map((token) => {
                 return (
                   <SingleHolding
                     key={token}
-                    abbreviation={token}
-                    tokenRates={prettyFiat(1 / price.tokenRates[token])} />
+                    abbreviation={token} />
                 )
               }
-              return ''
-            })
-          }
+              )
+            }
           </div>
         </Section>
       </div>

@@ -6,7 +6,8 @@ import {
   PORTFOLIO_LOCAL_EDIT,
   PORTFOLIO_SAVE,
   CONVERT_PORTFOLIO_REQUEST,
-  CONVERT_PORTFOLIO_SUCCESS
+  CONVERT_PORTFOLIO_SUCCESS,
+  CONVERT_PORTFOLIO_ERROR
 } from '../actions/portfolioActions'
 
 import {
@@ -23,7 +24,11 @@ const initialState = {
   tokens: {},
   convertedPortfolio: {},
   portfolioHistory: {},
-  portfolioOverview: {}
+  portfolioOverview: {},
+  totalValue: 0,
+  dayChange: 0,
+  totalValueBtc: 0,
+  dayChangeBtc: 0
 }
 
 export const portfolioReducer = (state = initialState, action) => {
@@ -31,7 +36,17 @@ export const portfolioReducer = (state = initialState, action) => {
     case CONVERT_PORTFOLIO_REQUEST:
       return { ...state, isConverting: true }
     case CONVERT_PORTFOLIO_SUCCESS:
-      return { ...state, isConverting: false, convertedPortfolio: { ...action.payload.convertedPortfolio }, totalValue: action.payload.totalValue, dayChange: action.payload.dayChange }
+      return { ...state,
+        isConverting: false,
+        convertedPortfolio: { ...action.payload.convertedPortfolio },
+        totalValue: action.payload.totalValue,
+        dayChange: action.payload.dayChange,
+        totalValueBtc: action.payload.totalValueBtc,
+        dayChangeBtc: action.payload.dayChangeBtc
+      }
+    case CONVERT_PORTFOLIO_ERROR: {
+      return { ...state, isConverting: false }
+    }
     case FETCH_PORTFOLIO_OVERVIEW_REQUEST: {
       return { ...state, isFetching: true }
     }

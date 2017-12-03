@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import { connect } from 'react-redux'
-import { LineChart, Line, Tooltip, XAxis, YAxis, ResponsiveContainer } from 'recharts'
+import { LineChart, Line, Tooltip, XAxis, YAxis, ResponsiveContainer } from 'recharts' // eslint-disable-line no-unused-vars
 import { getChartData } from '../../actions/priceActions'
 
 import ChartTimeRange from './ChartTimeRange'
@@ -34,10 +34,10 @@ class TransactionChart extends Component {
         <ChartTimeRange abbreviation={token.toUpperCase()} />
         { chartData
         ? <LineChart data={chartData} width={800} height={500} margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-          <XAxis dataKey='date' type='number' scale='time' domain={['dataMin', 'dataMax']} tickFormatter={tick => moment.unix(tick).calendar()} />
-          <YAxis />
+          <XAxis dataKey='time' type='number' scale='time' domain={['dataMin', 'dataMax']} tickFormatter={tick => moment.unix(tick).calendar()} />
+          <YAxis dataKey='currentAmount' yAxisId={0} />
           <Tooltip />
-          <Line dot={false} type='monotone' dataKey='currentAmount' />
+          <Line dot={false} type='monotone' dataKey='currentAmount' yAxisId={0} />
         </LineChart> : '' }
       </div>
     )
