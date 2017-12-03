@@ -11,8 +11,19 @@
     color: $alabaster;
   }
 
-  .sidebar-active {
-    // border-left: 1rem #f09465 solid;
-    color: #ff625f;
+  .SideBarItem {
+    a {
+      padding: 10px 0;
+      line-height: 2rem;
+      border-left: 5px transparent solid;
+      color: #7e8698;
+    }
+
+    .sidebar-active {
+      border-color: $peach-light;
+      color: $white;
+      background-color: #1d2027;
+    }
   }
+
 }

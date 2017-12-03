@@ -21,16 +21,20 @@ const SingleHolding = ({ portfolio, preferences, abbreviation, coinList }) => {
 
   return (
     <div className='SingleHolding'>
-      <Link to={`/portfolio/${abbreviation.toLowerCase()}`}>
-        <div className='box'>
-          <div className='media-content'>
-            <p className='link-style'>{tokenInfo.FullName}</p>
-            <p>{`${prettyCrypto(currentStats.amount)}${abbreviation}`}</p>
-            <p>{fiatInfo.symbol}{prettyFiat(currentStats.fiatValue)}</p>
-            <PrettyPercent value={prettyFiat(currentStats.percentChange)} />
+      {
+        tokenInfo ?
+        <Link to={`/portfolio/${abbreviation.toLowerCase()}`}>
+          <div className='box'>
+            <div className='media-content'>
+              <p className='link-style'>{tokenInfo.FullName}</p>
+              <p>{`${prettyCrypto(currentStats.amount)}${abbreviation}`}</p>
+              <p>{fiatInfo.symbol}{prettyFiat(currentStats.fiatValue)}</p>
+              <PrettyPercent value={prettyFiat(currentStats.percentChange)} />
+            </div>
           </div>
-        </div>
-      </Link>
+        </Link>
+        : ''
+      }
     </div>
 
   )

@@ -1,10 +1,4 @@
 @import "./variables.scss";
-$alabaster: #f8f8fd;
-$bastille: #262a33;
-$blockstack-primary: #270f34;
-$link-blue: #3273dc;
-$prim: #e5e4ef;
-$white: #fff;
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:200,400|Raleway:300,300i,400');
 
@@ -41,12 +35,12 @@ body {
 }
 
 .nav-top-bar {
-  background-color: #e9695c;
+  background-color: $peach-dark;
   grid-area: navTopBar;
 }
 
 .top-bar {
-  background-color: #f77b6e;
+  background-color: $peach-light;
   grid-area: topBar;
 }
 
