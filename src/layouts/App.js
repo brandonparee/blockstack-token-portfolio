@@ -59,6 +59,8 @@ class App extends Component {
 
     return (
       <div className={`layout ${transactions.transactionView ? 'transaction-mode' : ''}`}>
+        <div className="nav-top-bar"></div>
+        <div className="top-bar"></div>
         <div className='navigation is-bastille'>
           <Sidebar />
         </div>

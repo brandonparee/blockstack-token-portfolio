@@ -1,27 +1,32 @@
+@import "./variables.scss";
 $alabaster: #f8f8fd;
-$bastille: #2a202f;
+$bastille: #262a33;
 $blockstack-primary: #270f34;
 $link-blue: #3273dc;
 $prim: #e5e4ef;
 $white: #fff;
 
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:200,400|Raleway:300,300i,400');
+
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: $font-family-open-sans;
 }
 
 .layout {
   min-height: 100vh;
   display: grid;
   grid-template-columns: minmax(250px, 15%) 1fr;
-  grid-template-rows: 1fr;
-  grid-template-areas: "navigation main"
+  grid-template-rows: minmax(75px, 7.5vh) 1fr;
+  grid-template-areas:  "navTopBar topBar"
+                        "navigation main"
                         "navigation main";
   &.transaction-mode {
-    grid-template-columns: 15% 1fr 25%;
-    grid-template-rows: 1fr;
-    grid-template-areas: "navigation main sidePane"
+    grid-template-columns: minmax(250px, 15%) 1fr 25%;
+    grid-template-rows: minmax(75px, 7.5vh) 1fr;
+    grid-template-areas:  "navTopBar topBar topBar"
+                          "navigation main sidePane"
                           "navigation main sidePane";
   }
 }
@@ -35,8 +40,14 @@ body {
   }
 }
 
-.header {
-  grid-area: header;
+.nav-top-bar {
+  background-color: #e9695c;
+  grid-area: navTopBar;
+}
+
+.top-bar {
+  background-color: #f77b6e;
+  grid-area: topBar;
 }
 
 .sidebar {
@@ -45,6 +56,7 @@ body {
 
 .navigation {
   @extend %sticky;
+  // padding: 30px 10px;
   grid-area: navigation;
   height: 100vh;
 }

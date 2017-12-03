@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import SidebarItem from './SidebarItem'
 
 const AuthenticatedSidebar = ({user}) => {
   const { username } = user.profile
@@ -7,10 +7,10 @@ const AuthenticatedSidebar = ({user}) => {
     <aside className='menu'>
       <p className='menu-title is-size-5'>Hello, {username || 'Nameless user'}</p>
       <ul className='menu-list'>
-        <li><NavLink exact to='/portfolio' activeClassName='sidebar-active is-blockstack'>Portfolio</NavLink></li>
-        <li><NavLink to='/market-data' activeClassName='sidebar-active'>Market Data</NavLink></li>
-        <li><NavLink to='/preferences' activeClassName='sidebar-active'>Preferences</NavLink></li>
-        <li><NavLink to='/logout' activeClassName='sidebar-active'>Logout</NavLink></li>
+        <SidebarItem exact to='/portfolio' icon='database'>Portfolio</SidebarItem>
+        <SidebarItem to='/market-data' icon='line-chart'>Market Data</SidebarItem>
+        <SidebarItem to='/preferences' icon='cog'>Preferences</SidebarItem>
+        <SidebarItem to='/logout' icon='sign-out'>Logout</SidebarItem>
       </ul>
     </aside>
   )

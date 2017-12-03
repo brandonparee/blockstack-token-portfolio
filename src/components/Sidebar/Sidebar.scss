@@ -1,6 +1,10 @@
-@import "../../index.scss";
+@import "../../variables.scss";
 
 .Sidebar {
+  font-family: $font-family-raleway;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 2px;
   color: $alabaster;
 
   a {
@@ -8,7 +12,7 @@
   }
 
   .sidebar-active {
-    border-left: 1rem #f09465 solid;
+    // border-left: 1rem #f09465 solid;
     color: #ff625f;
   }
 }

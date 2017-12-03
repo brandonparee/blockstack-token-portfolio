@@ -12,12 +12,13 @@ import Section from '../../components/Bulma/Section'
 
 import './Portfolio.css'
 
-const mapStateToProps = ({ portfolio, preferences, price, transactions }) => {
+const mapStateToProps = ({ portfolio, preferences, price, transactions, marketData }) => {
   return {
     portfolio,
     preferences,
     price,
-    transactionView: transactions.transactionView
+    transactionView: transactions.transactionView,
+    loading: marketData.isFetchingCoinList
   }
 }
 
@@ -35,7 +36,7 @@ class Portfolio extends Component {
   }
 
   render () {
-    const { portfolio, preferences, transactionView } = this.props
+    const { portfolio, preferences, transactionView, loading } = this.props
     const fiat = getFiatInfo(preferences.fiat)
 
     return (
@@ -54,7 +55,7 @@ class Portfolio extends Component {
           </TransactionToggle>
           <div className='SingleHoldingLayout'>
             {
-              Object.keys(portfolio.portfolioOverview).map((token) => {
+              !loading && Object.keys(portfolio.portfolioOverview).map((token) => {
                 return (
                   <SingleHolding
                     key={token}
