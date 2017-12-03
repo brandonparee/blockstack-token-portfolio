@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import DatePicker from 'react-datepicker'
+import Flatpickr from 'react-flatpickr'
 import moment from 'moment'
 
-import 'react-datepicker/dist/react-datepicker.css'
+import 'flatpickr/dist/themes/light.css'
 
 class RenderDateTimePicker extends Component {
-  state = { date: moment() }
+  state = { date: new Date() }
 
   handleDateChange = (date) => {
     this.setState({ date })
-    this.props.input.onChange(date)
+    this.props.input.onChange(date[0])
   }
 
   render() {
@@ -19,10 +19,14 @@ class RenderDateTimePicker extends Component {
       <div className='field'>
         <div className='control'>
           <label className='label'>{label}</label>
-          <DatePicker
-            className='input'
-            selected={this.state.date}
-            showTimeSelect
+          <Flatpickr
+          options={{
+            altInput: true,
+            enableTime: true,
+            maxDate: new Date()
+          }}
+          className='input'
+            value={this.state.date}
             onChange={this.handleDateChange} />
           {
             meta.error && meta.touched &&
