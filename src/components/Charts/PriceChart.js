@@ -40,7 +40,7 @@ class PriceChart extends Component {
           <YAxis dataKey='volume' yAxisId={1} orientation='right' />
           <Tooltip />
           <Line dot={false} type='monotone' dataKey='close' yAxisId={0} />
-          <Line dot={false} type='monotone' dataKey='volume'yAxisId={1} />
+          <Line dot={false} type='monotone' dataKey='volume' yAxisId={1} />
         </LineChart>
            : '' }
       </div>

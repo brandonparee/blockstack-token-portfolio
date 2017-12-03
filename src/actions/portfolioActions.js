@@ -96,10 +96,11 @@ export const getTransactionChartData = ({ token }) => {
         const transactionDate = moment(currentTransaction.date)
 
         if (singlePriceDate.isBefore(firstTransactionDate)) {
-          return { time, currentAmount: 0 }
+          return { time, currentAmount: 0, totalAmount: 0 }
         } else if (singlePriceDate.isSameOrAfter(transactionDate)) {
           let transaction = {}
-          _.forEach(transactions, (singleTransaction) => {
+          let splicedTransactions = _.drop(transactions, transactionIndex)
+          _.forEach(splicedTransactions, (singleTransaction) => {
             const singleTransactionDate = moment(singleTransaction.date)
             if (singlePriceDate.isSameOrAfter(singleTransactionDate)) {
               transaction = transactions[transactionIndex]
@@ -109,9 +110,9 @@ export const getTransactionChartData = ({ token }) => {
             }
           })
           currentTotalAmount = transaction.totalAmount
-          return { time, currentAmount: transaction.totalAmount * singlePrice.close }
+          return { time, currentAmount: transaction.totalAmount * singlePrice.close, totalAmount: transaction.totalAmount }
         }
-        return { time, currentAmount: currentTotalAmount * singlePrice.close }
+        return { time, currentAmount: currentTotalAmount * singlePrice.close, totalAmount: currentTotalAmount }
       })
       dispatch({ type: FETCH_TRANSACTION_CHART_SUCCESS, payload: { [token]: convertedPortfolio} })
     }

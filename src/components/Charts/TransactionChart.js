@@ -35,9 +35,9 @@ class TransactionChart extends Component {
         { chartData
         ? <LineChart data={chartData} width={800} height={500} margin={{top: 5, right: 30, left: 20, bottom: 5}}>
           <XAxis dataKey='time' type='number' scale='time' domain={['dataMin', 'dataMax']} tickFormatter={tick => moment.unix(tick).calendar()} />
-          <YAxis />
+          <YAxis dataKey='currentAmount' yAxisId={0} />
           <Tooltip />
-          <Line dot={false} type='monotone' dataKey='currentAmount' />
+          <Line dot={false} type='monotone' dataKey='currentAmount' yAxisId={0} />
         </LineChart> : '' }
       </div>
     )
