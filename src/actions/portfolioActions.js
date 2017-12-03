@@ -82,27 +82,35 @@ export const getTransactionChartData = ({ token }) => {
     const state = getState()
     const priceChartData = state.charts.priceChartData[token]
     const transactions = state.portfolio.portfolioHistory[token]
-    const fiatPreference = state.preferences.fiat
-    const fiatConversion = state.price.fiatRates[fiatPreference]
 
     if (transactions && priceChartData) {
       let transactionIndex = 0
       let firstTransactionDate = moment(transactions[0].date)
+      let currentTotalAmount = 0
 
       let convertedPortfolio = priceChartData.map((singlePrice) => {
         const { time } = singlePrice
         const singlePriceDate = moment.unix(time)
         const currentTransaction = transactions[transactionIndex]
-        const transactionDate = moment.unix(currentTransaction.date)
-
-        console.log(time, singlePrice.time)
+        const transactionDate = moment(currentTransaction.date)
 
         if (singlePriceDate.isBefore(firstTransactionDate)) {
           return { time, currentAmount: 0 }
         } else if (singlePriceDate.isSameOrAfter(transactionDate)) {
-          transactionIndex = transactionIndex < transactions.length - 1 ? transactionIndex + 1 : transactionIndex
+          let transaction = {}
+          _.forEach(transactions, (singleTransaction) => {
+            const singleTransactionDate = moment(singleTransaction.date)
+            if (singlePriceDate.isSameOrAfter(singleTransactionDate)) {
+              transaction = transactions[transactionIndex]
+              transactionIndex = transactionIndex < transactions.length - 1 ? transactionIndex + 1 : transactionIndex
+            } else {
+              return false
+            }
+          })
+          currentTotalAmount = transaction.totalAmount
+          return { time, currentAmount: transaction.totalAmount * singlePrice.close }
         }
-        return { time, currentAmount: currentTransaction.totalAmount * singlePrice.close }
+        return { time, currentAmount: currentTotalAmount * singlePrice.close }
       })
       dispatch({ type: FETCH_TRANSACTION_CHART_SUCCESS, payload: { [token]: convertedPortfolio} })
     }
