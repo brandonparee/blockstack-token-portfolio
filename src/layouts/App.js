@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { getPortfolio } from '../actions/portfolioActions'
 import { getPreferences } from '../actions/preferencesActions'
 import { getExchangeRates } from '../actions/priceActions'
-import { getMarketData } from '../actions/marketDataActions'
+import { getCoinList, getMarketData } from '../actions/marketDataActions'
 
 import Authenticated from '../components/Authenticated/Authenticated'
 import Public from '../components/Public/Public'
@@ -39,6 +39,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     getMarketData: () => {
       dispatch(getMarketData())
+      dispatch(getCoinList())
     }
   }
 }

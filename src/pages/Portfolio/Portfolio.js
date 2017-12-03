@@ -56,18 +56,15 @@ class Portfolio extends Component {
           </TransactionToggle>
           <div className='SingleHoldingLayout'>
             {
-            tokenList.map((token) => {
-              if (token === 'BTC' || (price.tokenRates[`BTC_${token}`] && fiat)) {
+              Object.keys(portfolio.portfolioOverview).map((token) => {
                 return (
                   <SingleHolding
                     key={token}
-                    abbreviation={token}
-                    tokenRates={prettyFiat(1 / price.tokenRates[token])} />
+                    abbreviation={token} />
                 )
               }
-              return ''
-            })
-          }
+              )
+            }
           </div>
         </Section>
       </div>

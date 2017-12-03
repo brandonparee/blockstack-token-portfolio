@@ -12,10 +12,9 @@ body {
 }
 
 .layout {
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
   display: grid;
-  grid-template-columns: 15% 1fr;
+  grid-template-columns: minmax(250px, 15%) 1fr;
   grid-template-rows: 1fr;
   grid-template-areas: "navigation main"
                         "navigation main";
@@ -28,6 +27,7 @@ body {
 }
 
 .side-pane {
+  @extend %sticky;
   grid-area: sidePane;
   padding: 1rem;
   input, select, .select {
@@ -44,7 +44,9 @@ body {
 }
 
 .navigation {
+  @extend %sticky;
   grid-area: navigation;
+  height: 100vh;
 }
 
 .main {
@@ -55,6 +57,12 @@ body {
   grid-area: footer;
   padding-top: 0;
   padding-bottom: 0;
+}
+
+%sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
 }
 
 %is-blockstack {
@@ -83,4 +91,8 @@ body {
 
 .is-full-height {
   min-height: 100vh;
+}
+
+.react-datepicker-popper {
+  min-width: 350px;
 }

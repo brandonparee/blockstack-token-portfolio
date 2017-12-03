@@ -34,7 +34,7 @@ class TransactionChart extends Component {
         <ChartTimeRange abbreviation={token.toUpperCase()} />
         { chartData
         ? <LineChart data={chartData} width={800} height={500} margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-          <XAxis dataKey='date' type='number' scale='time' domain={['dataMin', 'dataMax']} tickFormatter={tick => moment.unix(tick).calendar()} />
+          <XAxis dataKey='time' type='number' scale='time' domain={['dataMin', 'dataMax']} tickFormatter={tick => moment.unix(tick).calendar()} />
           <YAxis />
           <Tooltip />
           <Line dot={false} type='monotone' dataKey='currentAmount' />

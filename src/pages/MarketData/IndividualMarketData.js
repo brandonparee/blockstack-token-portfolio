@@ -11,21 +11,22 @@ import LiveTradeData from '../../components/Tables/LiveTradeData'
 
 import './IndividualMarketData.css'
 
-const mapStateToProps = ({ marketData }, ownProps) => {
+const mapStateToProps = ({ marketData, portfolio }, ownProps) => {
   const { abbreviation } = ownProps.match.params
   return {
     abbreviation,
-    marketData: marketData.marketData
+    marketData: marketData.marketData,
+    loading: portfolio.isFetching
   }
 }
 
-const IndividualMarketData = ({ abbreviation, marketData }) => {
+const IndividualMarketData = ({ abbreviation, marketData, loading }) => {
   abbreviation = _.upperCase(abbreviation)
   const singleMarketData = _.find(marketData, ['symbol', abbreviation])
 
   return (
     <div>
-      { singleMarketData &&
+      { singleMarketData && !loading &&
         <Section title={`${singleMarketData.name} (${abbreviation})`}>
           <div className='IndividualMarketData'>
             <Box className='MarketData'>

@@ -23,10 +23,10 @@ const SingleHolding = ({portfolio, preferences, abbreviation}) => {
       <Link to={`/portfolio/${abbreviation.toLowerCase()}`}>
         <div className='box'>
           <div className='media-content'>
-            <p className='link-style'>{getTokenName(abbreviation)} ({abbreviation})</p>
+            <p className='link-style'>Name...{abbreviation}</p>
             <p>{`${prettyCrypto(currentStats.amount)}${abbreviation}`}</p>
             <p>{fiatInfo.symbol}{prettyFiat(currentStats.fiatValue)}</p>
-            <PrettyPercent value={prettyFiat(currentStats.percentChange * 100)} />
+            <PrettyPercent value={prettyFiat(currentStats.percentChange)} />
           </div>
         </div>
       </Link>

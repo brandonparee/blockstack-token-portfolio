@@ -24,6 +24,9 @@ import './index.css'
 import App from './layouts/App'
 import registerServiceWorker from './registerServiceWorker'
 
+import cc from 'cryptocompare'
+window.cc = cc
+
 // Setup for react-router
 const history = createHistory()
 

@@ -28,13 +28,14 @@ class PriceChart extends Component {
   render () {
     const { token, priceChartData } = this.props
     const chartData = priceChartData[token]
+    console.log(chartData)
 
     return (
       <div>
         <ChartTimeRange abbreviation={token.toUpperCase()} />
         { chartData
         ? <LineChart data={chartData} width={800} height={500} margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-          <XAxis dataKey='date' type='number' scale='time' domain={['dataMin', 'dataMax']} tickFormatter={tick => moment.unix(tick).format('MM/DD')} />
+          <XAxis dataKey='time' type='number' scale='time' domain={['dataMin', 'dataMax']} tickFormatter={tick => moment.unix(tick).format('MM/DD')} />
           <YAxis dataKey='close' yAxisId={0} />
           <YAxis dataKey='volume' yAxisId={1} orientation='right' />
           <Tooltip />

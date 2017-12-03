@@ -14,6 +14,7 @@ export const PORTFOLIO_LOCAL_EDIT = 'PORTFOLIO_LOCAL_EDIT'
 export const PORTFOLIO_SAVE = 'PORTFOLIO_SAVE'
 export const CONVERT_PORTFOLIO_REQUEST = 'CONVERT_PORTFOLIO_REQUEST'
 export const CONVERT_PORTFOLIO_SUCCESS = 'CONVERT_PORTFOLIO_SUCCESS'
+export const CONVERT_PORTFOLIO_ERROR = 'CONVERT_PORTFOLIO_ERROR'
 
 export const getPortfolio = () => {
   return (dispatch) => {
@@ -53,14 +54,15 @@ export const getPortfolioOverview = () => {
     let portfolioOverview = {}
 
     transactions.map((singleTransaction) => {
-      const { abbreviation, amount, purchasePrice } = singleTransaction
+      const { abbreviation, amount, priceBtc, priceUsd } = singleTransaction
       const currentTokenOverview = portfolioHistory[abbreviation] || {}
-      const overview = portfolioOverview[abbreviation] || { abbreviation, totalAmount: 0, totalPurchasePrice: 0 }
+      const overview = portfolioOverview[abbreviation] || { abbreviation, totalAmount: 0, totalPurchasePriceBtc: 0, totalPurchasePriceUsd: 0 }
 
       portfolioOverview[abbreviation] = {
         ...overview,
         totalAmount: overview.totalAmount + parseFloat(amount),
-        totalPurchasePrice: overview.totalPurchasePrice + parseFloat(purchasePrice)
+        totalPurchasePriceBtc: overview.totalPurchasePriceBtc + parseFloat(priceBtc),
+        totalPurchasePriceUsd: overview.totalPurchasePriceUsd + parseFloat(priceUsd)
       }
 
       portfolioHistory[abbreviation] = [...currentTokenOverview, {
@@ -77,25 +79,30 @@ export const getPortfolioOverview = () => {
 export const getTransactionChartData = ({ token }) => {
   return (dispatch, getState) => {
     dispatch({ type: FETCH_TRANSACTION_CHART_REQUEST })
-    const priceChartData = getState().charts.priceChartData[token]
-    const transactions = getState().portfolio.portfolioHistory[token]
+    const state = getState()
+    const priceChartData = state.charts.priceChartData[token]
+    const transactions = state.portfolio.portfolioHistory[token]
+    const fiatPreference = state.preferences.fiat
+    const fiatConversion = state.price.fiatRates[fiatPreference]
 
     if (transactions && priceChartData) {
       let transactionIndex = 0
       let firstTransactionDate = moment(transactions[0].date)
 
       let convertedPortfolio = priceChartData.map((singlePrice) => {
-        const { date } = singlePrice
-        const singlePriceDate = moment.unix(date)
+        const { time } = singlePrice
+        const singlePriceDate = moment.unix(time)
         const currentTransaction = transactions[transactionIndex]
         const transactionDate = moment(currentTransaction.date)
 
         if (singlePriceDate.isBefore(firstTransactionDate)) {
-          return { date, currentAmount: 0 }
+          return { time, currentAmount: 0 }
         } else if (singlePriceDate.isAfter(transactionDate)) {
+          console.log(singlePriceDate.isAfter(transactionDate))
           transactionIndex = transactionIndex < transactions.length - 1 ? transactionIndex + 1 : transactionIndex
+          console.log(singlePriceDate, transactionDate, currentTransaction.totalAmount, singlePrice.close)
         }
-        return { date, currentAmount: currentTransaction.totalAmount * singlePrice.close }
+        return { time, currentAmount: currentTransaction.totalAmount * singlePrice.close }
       })
       dispatch({ type: FETCH_TRANSACTION_CHART_SUCCESS, payload: { [token]: convertedPortfolio} })
     }
@@ -104,34 +111,38 @@ export const getTransactionChartData = ({ token }) => {
 
 export const getConvertedPortfolio = () => {
   return (dispatch, getState) => {
-    const { portfolio, price, preferences } = getState()
+    const { portfolio, price, preferences, marketData } = getState()
     let totalValue = 0
+    let totalValueBtc = 0
     let totalDayChange = 0
+    let totalDayChangeBtc = 0
 
-    if (!portfolio.isConverting) {
-      dispatch({ type: CONVERT_PORTFOLIO_REQUEST })
+    dispatch({ type: CONVERT_PORTFOLIO_REQUEST })
 
-      const tokenPortfolio = portfolio.portfolioOverview
-      const convertedPortfolio = {}
+    const tokenPortfolio = portfolio.portfolioOverview
+    const convertedPortfolio = {}
 
+    if (marketData.marketData) {
       _.forEach(tokenPortfolio, (singleOverview, abbreviation) => {
-        if (preferences.tokens[abbreviation] === true) {
-          const btcValue = (!(abbreviation === 'BTC') ? price.tokenRates[`BTC_${abbreviation}`].last : 1)
-          const conversion = preferences.fiat === 'USD' ? 1 : price.fiatRates[preferences.fiat]
-          const fiatValue = btcValue * price.tokenRates.USDT_BTC.last * singleOverview.totalAmount * conversion
-          const percentChange = parseFloat((!(abbreviation === 'BTC') ? price.tokenRates[`BTC_${abbreviation}`].percentChange : price.tokenRates[`USDT_BTC`].percentChange))
-          const dayChange = fiatValue - fiatValue / (1 + percentChange)
+        const tokenData = _.find(marketData.marketData, ['symbol', abbreviation])
+        const btcValue = tokenData.price_btc * singleOverview.totalAmount
+        const fiatValue = tokenData.price_usd * singleOverview.totalAmount
+        const percentChange = tokenData.percent_change_24h
+        const percentChangeValue = parseFloat(percentChange) / 100
+        const dayChange = fiatValue - fiatValue / (1 + percentChangeValue)
+        const dayChangeBtc = btcValue - btcValue / (1 + percentChangeValue)
 
-          totalValue += fiatValue
-          totalDayChange += dayChange
+        totalValue += fiatValue
+        totalValueBtc += btcValue
+        totalDayChange += dayChange
+        totalDayChangeBtc += dayChangeBtc
 
-          convertedPortfolio[abbreviation] = {
-            amount: singleOverview.totalAmount,
-            btcValue,
-            fiatValue,
-            percentChange,
-            dayChange
-          }
+        convertedPortfolio[abbreviation] = {
+          amount: singleOverview.totalAmount,
+          btcValue,
+          fiatValue,
+          percentChange,
+          dayChange
         }
       })
 
@@ -139,9 +150,13 @@ export const getConvertedPortfolio = () => {
         payload: {
           convertedPortfolio,
           totalValue,
-          dayChange: totalDayChange
+          dayChange: totalDayChange,
+          totalValueBtc,
+          dayChangeBtc: totalDayChangeBtc
         }
       })
+    } else {
+      dispatch({ type: CONVERT_PORTFOLIO_ERROR })
     }
   }
 }
