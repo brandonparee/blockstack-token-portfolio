@@ -55,25 +55,6 @@ const Preferences = ({preferences, handleFiatPreferenceChange, handleTokenPrefer
             </select>
           </div>
         </div>
-        <div className='field'>
-          <label className='label'>Cryptocurrenies (Tokens)</label>
-        </div>
-        {
-            tokenList.map((token) => {
-              return (
-                <div key={token.abbreviation}>
-                  <label className='checkbox'>
-                    <input
-                      type='checkbox'
-                      onChange={handleTokenPreferenceChange}
-                      checked={preferences.tokens[token.abbreviation] ? 'checked' : ''}
-                      value={token.abbreviation} />
-                    {token.name} ({token.abbreviation})
-                    </label>
-                </div>
-              )
-            })
-          }
       </div>
     </Section>
   )
