@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 import TransactionForm from '../Forms/TransactionForm'
 import TransactionToggle from '../Helpers/TransactionToggle'

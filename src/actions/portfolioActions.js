@@ -53,7 +53,8 @@ export const getPortfolioOverview = () => {
     let portfolioHistory = {}
     let portfolioOverview = {}
 
-    transactions.map((singleTransaction) => {
+    // TODO Fix lint error here, need to return both objects
+    transactions.map((singleTransaction) => { // eslint-disable-line array-callback-return
       const { abbreviation, amount, priceBtc, priceUsd } = singleTransaction
       const currentTokenOverview = portfolioHistory[abbreviation] || {}
       const overview = portfolioOverview[abbreviation] || { abbreviation, totalAmount: 0, totalPurchasePriceBtc: 0, totalPurchasePriceUsd: 0 }
@@ -119,7 +120,7 @@ export const getTransactionChartData = ({ token }) => {
 
 export const getConvertedPortfolio = () => {
   return (dispatch, getState) => {
-    const { portfolio, price, preferences, marketData } = getState()
+    const { portfolio, marketData } = getState()
     let totalValue = 0
     let totalValueBtc = 0
     let totalDayChange = 0

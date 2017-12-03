@@ -1,5 +1,4 @@
 import axios from 'axios'
-import moment from 'moment'
 import cc from '../uncompiledDependencies/cryptocompare'
 import { getConvertedPortfolio, getTransactionChartData } from './portfolioActions'
 
@@ -88,6 +87,7 @@ const getSingleChart = ({ token, chartRange, fiatPreference }) => {
     .then((history) => {
       history.map((singleHistory) => {
         singleHistory.volume = singleHistory.volumeto + singleHistory.volumefrom
+        return singleHistory
       })
       return {
         [token]: history
@@ -103,10 +103,8 @@ export const getChartData = ({ tokens, startTime, endTime, period }) => {
     const chartRange = state.charts.chartRange
     const fiatPreference = state.preferences.fiat
 
-    let singleCharts = []
-
-    tokens.map((token) => {
-      singleCharts.push(getSingleChart({ token, chartRange, fiatPreference }))
+    let singleCharts = tokens.map((token) => {
+      return getSingleChart({ token, chartRange, fiatPreference })
     })
 
     // Wait for all requests from Poloniex to finish, then dispatch success
@@ -117,7 +115,8 @@ export const getChartData = ({ tokens, startTime, endTime, period }) => {
         const chartMap = new Map()
         const combinedValues = [].concat(...Object.values(chartData))
 
-        combinedValues.map((obj) => {
+        // TODO Fix this, currently does not work
+        combinedValues.map((obj) => { // eslint-disable-line array-callback-return
           const previousState = chartMap.get(obj.time) || {}
           chartMap.set(obj.time, {
             ...previousState,

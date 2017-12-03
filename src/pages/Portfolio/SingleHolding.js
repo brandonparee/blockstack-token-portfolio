@@ -1,9 +1,7 @@
 import React from 'react'
-import _ from 'lodash'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { portfolioLocalEdit, getConvertedPortfolio } from '../../actions/portfolioActions'
-import { getTokenName, getFiatInfo, prettyFiat, prettyCrypto } from '../../utils'
+import { getFiatInfo, prettyFiat, prettyCrypto } from '../../utils'
 
 import PrettyPercent from '../../components/Helpers/PrettyPercent'
 

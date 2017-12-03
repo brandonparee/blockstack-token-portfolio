@@ -83,6 +83,7 @@ export const getTradingPairs = (symbol) => {
       .then((pairs) => {
         pairs.map((pair) => {
           pair.label = `${pair.fromSymbol}/${pair.toSymbol}`
+          return pair
         })
         dispatch({ type: TRANSACTION_FORM_PAIRS_SUCCESS, payload: { pairs, fromSymbol: symbol } })
       })

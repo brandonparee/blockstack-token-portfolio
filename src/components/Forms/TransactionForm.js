@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 import { addTransaction, getTradingPairs } from '../../actions/transactionActions'
 import { getTradePairPrice } from '../../actions/priceActions'
-import { getTokenList, getFiatList } from '../../utils'
 import { required, number, date } from './validation'
 
 import { reduxForm, Field, change } from 'redux-form'
@@ -44,8 +43,8 @@ class TransactionForm extends Component {
   }
 
   render () {
-    const { handleSubmit, addTransaction, coinList, pairsList, getTradingPairs, getTradePairPrice, price, toSymbol, fromSymbol } = this.props
-    const sortedCoinList = _.sortBy(Object.values(coinList), (coin) => { return parseInt(coin.SortOrder) })
+    const { handleSubmit, addTransaction, coinList, pairsList, getTradingPairs, getTradePairPrice, toSymbol, fromSymbol } = this.props
+    const sortedCoinList = _.sortBy(Object.values(coinList), (coin) => { return parseInt(coin.SortOrder, 0) })
     return (
       <form onSubmit={handleSubmit(addTransaction)}>
         <Field name='fromSymbol'

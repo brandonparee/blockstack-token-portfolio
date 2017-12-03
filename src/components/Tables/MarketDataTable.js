@@ -2,8 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import ReactTable from 'react-table'
 import { Link } from 'react-router-dom'
-import moment from 'moment'
-import { prettyCrypto, prettyFiat } from '../../utils'
 import 'react-table/react-table.css'
 
 import Fiat from '../Helpers/Fiat'

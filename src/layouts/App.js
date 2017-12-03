@@ -11,7 +11,6 @@ import Public from '../components/Public/Public'
 import Sidebar from '../components/Sidebar/Sidebar'
 
 import HandleLogin from '../pages/Login/HandleLogin'
-import Home from '../pages/Home/Home'
 import IndividualPortfolio from '../pages/IndividualPortfolio/IndividualPortfolio'
 import Login from '../pages/Login/Login'
 import Logout from '../pages/Logout/Logout'

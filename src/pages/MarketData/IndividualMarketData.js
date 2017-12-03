@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import { getFiatInfo, prettyFiat } from '../../utils'
 
 import Section from '../../components/Bulma/Section'
 import Box from '../../components/Bulma/Box'

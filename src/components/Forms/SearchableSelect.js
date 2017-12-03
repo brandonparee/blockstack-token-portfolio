@@ -16,12 +16,14 @@ export default class SearchableSelect extends Component {
           return this.props.dispatchOnSelect(selectedOption.Symbol)
         case 'toSymbol':
           return this.props.dispatchOnSelect(selectedOption.fromSymbol, selectedOption.toSymbol)
+        default:
+          return this.props.dispatchOnSelect(selectedOption)
       }
     }
   }
 
   render() {
-    const { input, meta, label, valueKey, labelKey, searchable, options } = this.props
+    const { meta, label, valueKey, labelKey, searchable, options } = this.props
 
     return (
       <div className='field'>

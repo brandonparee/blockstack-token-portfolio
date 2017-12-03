@@ -1,8 +1,6 @@
 import axios from 'axios'
-import _ from 'lodash'
 import cc from '../uncompiledDependencies/cryptocompare'
 import { getConvertedPortfolio } from './portfolioActions'
-import { getTokenList } from '../utils'
 
 export const COIN_LIST_FETCH = 'COIN_LIST_FETCH'
 export const COIN_LIST_SUCCESS = 'COIN_LIST_SUCCESS'
@@ -19,10 +17,10 @@ export const getMarketData = () => {
 
     axios.get(coinMarketCap)
       .then((res) => {
-        const tokens = getTokenList()
         const marketData = res.data
 
         // Maybe use this later
+        // const tokens = getTokenList()
         // res.data.filter((singleToken) => {
         //   if (_.find(tokens, ['abbreviation', singleToken.symbol])) {
         //     return true

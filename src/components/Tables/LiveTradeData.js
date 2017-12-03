@@ -73,8 +73,6 @@ class LiveTradeData extends Component {
   }
 
   render() {
-    const { token } = this.props
-
     return (
       <div>
         <h1 className="subtitle">Live Trade Data</h1>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import { connect } from 'react-redux'
-import { LineChart, Line, Tooltip, XAxis, YAxis, ResponsiveContainer } from 'recharts'
+import { LineChart, Line, Tooltip, XAxis, YAxis, ResponsiveContainer } from 'recharts' // eslint-disable-line no-unused-vars
 import { getChartData } from '../../actions/priceActions'
 
 import ChartTimeRange from './ChartTimeRange'
