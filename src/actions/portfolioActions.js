@@ -132,28 +132,35 @@ export const getConvertedPortfolio = () => {
     const tokenPortfolio = portfolio.portfolioOverview
     const convertedPortfolio = {}
 
-    if (marketData.marketData) {
+    if (marketData.marketData && tokenPortfolio) {
       _.forEach(tokenPortfolio, (singleOverview, abbreviation) => {
         const tokenData = _.find(marketData.marketData, ['symbol', abbreviation])
-        const btcValue = tokenData.price_btc * singleOverview.totalAmount
-        const fiatValue = tokenData.price_usd * singleOverview.totalAmount
-        const percentChange = tokenData.percent_change_24h
-        const percentChangeValue = parseFloat(percentChange) / 100
-        const dayChange = fiatValue - fiatValue / (1 + percentChangeValue)
-        const dayChangeBtc = btcValue - btcValue / (1 + percentChangeValue)
+        if (!_.isEmpty(tokenData)) {
+          const btcValue = tokenData.price_btc * singleOverview.totalAmount
+          const fiatValue = tokenData.price_usd * singleOverview.totalAmount
+          const percentChange = tokenData.percent_change_24h
+          const percentChangeValue = parseFloat(percentChange) / 100
+          const dayChange = fiatValue - fiatValue / (1 + percentChangeValue)
+          const dayChangeBtc = btcValue - btcValue / (1 + percentChangeValue)
 
-        totalValue += fiatValue
-        totalValueBtc += btcValue
-        totalDayChange += dayChange
-        totalDayChangeBtc += dayChangeBtc
+          totalValue += fiatValue
+          totalValueBtc += btcValue
+          totalDayChange += dayChange
+          totalDayChangeBtc += dayChangeBtc
 
-        convertedPortfolio[abbreviation] = {
-          amount: singleOverview.totalAmount,
-          btcValue,
-          fiatValue,
-          percentChange,
-          dayChange,
-          dayChangeBtc
+          convertedPortfolio[abbreviation] = {
+            amount: singleOverview.totalAmount,
+            btcValue,
+            fiatValue,
+            percentChange,
+            dayChange,
+            dayChangeBtc
+          }
+        } else {
+          convertedPortfolio[abbreviation] = {
+            amount: singleOverview.totalAmount,
+            fiatValue: singleOverview.totalAmount
+          }
         }
       })
 
