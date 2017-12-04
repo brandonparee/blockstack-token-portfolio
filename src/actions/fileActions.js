@@ -9,6 +9,7 @@ export const PUT_FILE_REQUEST = 'PUT_FILE_REQUEST'
 export const PUT_FILE_SUCCESS = 'PUT_FILE_SUCCESS'
 export const PUT_FILE_ERROR = 'PUT_FILE_ERROR'
 export const FILE_REMOVE_ERRORS = 'FILE_REMOVE_ERRORS'
+export const FILE_SETUP = 'FILE_SETUP'
 
 export const getBlockstackFile = (path, decrypt = false, cb) => {
   return (dispatch) => {
@@ -37,6 +38,7 @@ export const getBlockstackFile = (path, decrypt = false, cb) => {
               (res) => {
                 if (res === null) {
                   // TODO Put default files into an array and use a lodash includes
+                  dispatch({ type: FILE_SETUP })
                   dispatch({ type: FILE_REMOVE_ERRORS })
                   if (path === 'preferences.json' || path === 'portfolio.json' || path === 'transactions.json') {
                     dispatch(putBlockstackFile(path, JSON.stringify(defaultConfig[path]), true, getPortfolio))

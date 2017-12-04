@@ -92,7 +92,7 @@ class App extends Component {
           : null
         }
         <Modal
-          isOpen={file.error ? true : false}
+          isOpen={file.error && !file.fileSetup ? true : false}
           ariaHideApp={false}>
           <code>{file.error ? file.error.toString() : null}</code>
           <p className='is-text-4'>There was an issue loading data from Blockstack, please refresh the page and if necessary clear your cache.</p>
