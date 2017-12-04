@@ -67,7 +67,6 @@ class LiveTradeData extends Component {
         total: currentTrade[9]
       }
       const trades = this.state.data.slice(0,14)
-      console.log(trades.length)
       this.setState({ data: [tradeData, ...trades] })
     }
   }

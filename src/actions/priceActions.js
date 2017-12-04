@@ -66,7 +66,6 @@ export const getTokenExchangeRates = () => {
 export const getTradePairPrice = (fromSymbol, toSymbol) => {
   return (dispatch, getState) => {
     dispatch({ type: TRADE_PAIR_PRICE_FETCH })
-    console.log(fromSymbol, toSymbol)
 
     cc.price(fromSymbol, toSymbol)
       .then((price) => {

@@ -20,7 +20,6 @@ export const getTransactions = () => {
 }
 
 export const addTransaction = (transaction) => {
-  console.log(transaction)
   return (dispatch, getState) => {
     dispatch({ type: ADD_TRANSACTION_REQUEST })
     let { transactions } = getState().transactions
@@ -31,7 +30,6 @@ export const addTransaction = (transaction) => {
 
     cc.priceHistorical(toSymbol, ['USD', 'BTC'], date.toDate())
       .then((price) => {
-        console.log(price)
         const priceBtc = price.BTC * transaction.amount * transaction.purchasePrice * transactionSign
         const priceUsd = price.USD * transaction.amount * transaction.purchasePrice * transactionSign
         const purchasePrice = transaction.amount * transaction.purchasePrice * transactionSign * -1
@@ -77,7 +75,6 @@ export const handleTransactionToggle = () => {
 export const getTradingPairs = (symbol) => {
   return (dispatch, getState) => {
     dispatch({ type: TRANSACTION_FORM_PAIRS_FETCH })
-    console.log(symbol)
 
     cc.topPairs(symbol, 9999)
       .then((pairs) => {
@@ -88,7 +85,6 @@ export const getTradingPairs = (symbol) => {
         dispatch({ type: TRANSACTION_FORM_PAIRS_SUCCESS, payload: { pairs, fromSymbol: symbol } })
       })
       .catch((err) => {
-        console.log(err)
         dispatch({ type: TRANSACTION_FORM_PAIRS_ERROR, payload: err })
       })
   }

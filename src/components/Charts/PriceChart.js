@@ -29,7 +29,6 @@ class PriceChart extends Component {
   render () {
     const { token, priceChartData } = this.props
     const chartData = priceChartData[token]
-    console.log(chartData)
 
     return (
       <div>
