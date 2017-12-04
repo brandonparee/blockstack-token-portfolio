@@ -11,6 +11,7 @@ import Authenticated from '../components/Authenticated/Authenticated'
 import Public from '../components/Public/Public'
 import Sidebar from '../components/Sidebar/Sidebar'
 import TopBar from '../components/TopBar/TopBar'
+import NavTopBar from '../components/TopBar/NavTopBar'
 
 import HandleLogin from '../pages/Login/HandleLogin'
 import IndividualPortfolio from '../pages/IndividualPortfolio/IndividualPortfolio'
@@ -61,7 +62,7 @@ class App extends Component {
 
     return (
       <div className={`layout ${transactions.transactionView ? 'transaction-mode' : ''}`}>
-        <div className="nav-top-bar">peachy</div>
+        <NavTopBar />
         <TopBar />
         <div className='navigation is-bastille'>
           <Sidebar />

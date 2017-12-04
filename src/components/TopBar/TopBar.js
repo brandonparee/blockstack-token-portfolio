@@ -15,8 +15,11 @@ const TopBar = ({ user }) => {
       {
         user.isAuthenticated &&
         <div className="TopBar">
-          <div className="Section">
-            <p className='menu-title is-size-5'>Hello, {user.profile.username || 'Nameless user'}</p>
+          <div className="Section has-text-right">
+            <div className="Text">
+              <h1 className="is-size-2 fancy">Hello,</h1>
+              <p className='menu-title'>{user.profile.username || 'Nameless user'}</p>
+            </div>
           </div>
         </div>
       }

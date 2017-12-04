@@ -33,7 +33,7 @@ class IndividualPortfolio extends Component {
 
     return (
       <div>
-          { convertedPortfolio && coinList
+          { convertedPortfolio && coinList && tokenInfo
             ?
             <Section title={tokenInfo.FullName}>
             <div>

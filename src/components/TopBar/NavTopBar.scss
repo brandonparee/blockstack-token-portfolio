@@ -1,0 +1,14 @@
+@import "../../variables.scss";
+
+.NavTopBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 7.5vh;
+
+  .title {
+    color: $accent;
+    font-weight: 200;
+    font-style: italic;
+  }
+}
