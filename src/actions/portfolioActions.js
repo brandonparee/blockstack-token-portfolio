@@ -152,7 +152,8 @@ export const getConvertedPortfolio = () => {
           btcValue,
           fiatValue,
           percentChange,
-          dayChange
+          dayChange,
+          dayChangeBtc
         }
       })
 

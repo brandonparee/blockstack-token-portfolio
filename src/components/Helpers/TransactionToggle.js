@@ -12,8 +12,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const TransactionToggle = ({ handleToggleClick, children }) => {
   return (
-    <div onClick={() => handleToggleClick()}>
-      {children}
+    <div>
+      <span onClick={() => handleToggleClick()}>{children}</span>
     </div>
   )
 }

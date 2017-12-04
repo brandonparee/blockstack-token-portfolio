@@ -12,7 +12,11 @@
       box-sizing: border-box;
 
       .link-style {
-        color: $link-blue;
+        font-family: $font-family-source-sans-pro;
+        color: $peach-dark;
+        font-size: 1.1rem;
+        font-weight: 600;
+        letter-spacing: 2px;
       }
     }
   }

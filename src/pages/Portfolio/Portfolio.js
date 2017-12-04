@@ -2,10 +2,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getExchangeRates } from '../../actions/priceActions'
-import { getFiatInfo, prettyFiat } from '../../utils'
+import { getFiatInfo, prettyFiat, prettyCrypto } from '../../utils'
 
 import SingleHolding from './SingleHolding'
 
+import Fiat from '../../components/Helpers/Fiat'
+import Box from '../../components/Bulma/Box'
 import TransactionToggle from '../../components/Helpers/TransactionToggle'
 import Hero from '../../components/Bulma/Hero'
 import Section from '../../components/Bulma/Section'
@@ -38,34 +40,60 @@ class Portfolio extends Component {
   render () {
     const { portfolio, preferences, transactionView, loading } = this.props
     const fiat = getFiatInfo(preferences.fiat)
+    const dayChangeClass = Math.sign(portfolio.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'
 
     return (
       <div className='Portfolio'>
-        <Section title='Portfolio'>
-          <Hero
-            title={`${fiat.symbol} ${prettyFiat(portfolio.totalValue)}`}
-            subtitle={`${fiat.symbol} ${prettyFiat(portfolio.dayChange)}`}
-            subtitleClassName={Math.sign(portfolio.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'} />
+        <div className="submenu"></div>
+        <div className='content'>
+          <Section title='Portfolio'>
+          <nav className="level is-mobile">
+            <div className="level-item has-text-centered">
+              <div>
+                <p className="heading">Total Value</p>
+                <p className="is-size-4"><Fiat value={portfolio.totalValue} /></p>
+              </div>
+            </div>
+            <div className="level-item has-text-centered">
+              <div>
+                <p className="heading">Total Value (BTC)</p>
+                <p className="is-size-4">{prettyCrypto(portfolio.totalValueBtc)} BTC</p>
+              </div>
+            </div>
+            <div className="level-item has-text-centered">
+              <div>
+                <p className="heading">24h Change</p>
+                <p className={`is-size-4 ${dayChangeClass}`}><Fiat value={portfolio.dayChange} /></p>
+              </div>
+            </div>
+            <div className="level-item has-text-centered">
+              <div>
+                <p className="heading">24h Change (BTC)</p>
+                <p className={`is-size-4 ${dayChangeClass}`}>{prettyCrypto(portfolio.dayChangeBtc)} BTC</p>
+              </div>
+            </div>
+          </nav>
           <TransactionToggle>
-            {
-              (!transactionView)
-                ? <a className='button'>Add Transaction</a>
-                : <a className='button'>Close</a>
-            }
+          {
+            (!transactionView)
+            ? <a className='button'>Add Transaction</a>
+            : <a className='button'>Close</a>
+          }
           </TransactionToggle>
           <div className='SingleHoldingLayout'>
-            {
-              !loading && Object.keys(portfolio.portfolioOverview).map((token) => {
-                return (
-                  <SingleHolding
-                    key={token}
-                    abbreviation={token} />
-                )
-              }
+          {
+            !loading && Object.keys(portfolio.portfolioOverview).map((token) => {
+              return (
+                <SingleHolding
+                key={token}
+                abbreviation={token} />
               )
             }
-          </div>
+          )
+        }
+        </div>
         </Section>
+        </div>
       </div>
     )
   }

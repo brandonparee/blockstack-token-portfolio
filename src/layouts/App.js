@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
+import Modal from 'react-modal'
 import { getPortfolio } from '../actions/portfolioActions'
 import { getPreferences } from '../actions/preferencesActions'
 import { getExchangeRates } from '../actions/priceActions'
@@ -55,7 +56,7 @@ class App extends Component {
   }
 
   render () {
-    const { user, transactions } = this.props
+    const { user, transactions, file } = this.props
     const { isAuthenticated } = user
 
     return (
@@ -89,6 +90,13 @@ class App extends Component {
           ? <TransactionFormSidebar />
           : null
         }
+        <Modal
+          isOpen={file.error ? true : false}
+          ariaHideApp={false}>
+          <code>{file.error ? file.error.toString() : null}</code>
+          <p className='is-text-4'>There was an issue loading data from Blockstack, please refresh the page and if necessary clear your cache.</p>
+          <p>(Automatic error handling coming soon)</p>
+        </Modal>
       </div>
     )
   }

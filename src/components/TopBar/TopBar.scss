@@ -1,0 +1,13 @@
+@import "../../variables.scss";
+
+.TopBar {
+  display: flex;
+  flex-direction: row-reverse;
+
+  .Section {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    height: 7.5vh;
+  }
+}
