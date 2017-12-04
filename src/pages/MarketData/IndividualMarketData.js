@@ -7,6 +7,7 @@ import Box from '../../components/Bulma/Box'
 import Fiat from '../../components/Helpers/Fiat'
 import PriceChart from '../../components/Charts/PriceChart'
 import LiveTradeData from '../../components/Tables/LiveTradeData'
+import Loading from '../../components/Helpers/Loading'
 
 import './IndividualMarketData.css'
 
@@ -25,7 +26,7 @@ const IndividualMarketData = ({ abbreviation, marketData, loading }) => {
 
   return (
     <div>
-      { singleMarketData && !loading &&
+      { singleMarketData && !loading ?
         <Section title={`${singleMarketData.name} (${abbreviation})`}>
           <div className='IndividualMarketData'>
             <Box className='MarketData'>
@@ -41,6 +42,7 @@ const IndividualMarketData = ({ abbreviation, marketData, loading }) => {
           <PriceChart token={abbreviation} />
           <LiveTradeData token={abbreviation} />
         </Section>
+        : <Loading />
       }
     </div>
   )

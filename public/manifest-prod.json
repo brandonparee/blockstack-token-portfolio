@@ -1,6 +1,6 @@
 {
-  "short_name": "Blockstack Token Portfolio",
-  "name": "Blockstack Token Portfolio",
+  "short_name": "Peachy Portfolio",
+  "name": "Peachy Portfolio",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,7 +8,7 @@
       "type": "image/x-icon"
     }
   ],
-  "start_url": "portfolio.brandonparee.com",
+  "start_url": "peachyportfolio.com",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"

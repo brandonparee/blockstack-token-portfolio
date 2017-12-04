@@ -10,16 +10,17 @@ import Fiat from '../../components/Helpers/Fiat'
 import Box from '../../components/Bulma/Box'
 import Hero from '../../components/Bulma/Hero'
 import Section from '../../components/Bulma/Section'
+import Loading from '../../components/Helpers/Loading'
 
 import './Portfolio.css'
 
-const mapStateToProps = ({ portfolio, preferences, price, transactions, marketData }) => {
+const mapStateToProps = ({ portfolio, preferences, price, transactions, marketData, file }) => {
   return {
     portfolio,
     preferences,
     price,
     transactionView: transactions.transactionView,
-    loading: marketData.isFetchingCoinList
+    loading: marketData.isFetchingCoinList || file.isFetching
   }
 }
 
@@ -74,14 +75,15 @@ class Portfolio extends Component {
           </nav>
           <div className='SingleHoldingLayout'>
           {
-            !loading && Object.keys(portfolio.portfolioOverview).map((token) => {
+            !loading ?
+            Object.keys(portfolio.portfolioOverview).map((token) => {
               return (
                 <SingleHolding
                 key={token}
                 abbreviation={token} />
               )
             }
-          )
+          ) : <Loading />
         }
         </div>
         </Section>
