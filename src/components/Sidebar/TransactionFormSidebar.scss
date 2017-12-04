@@ -1,0 +1,25 @@
+@import "../../variables.scss";
+
+.TransactionFormSidebar {
+  background-color: $utility-dark;
+  font-family: $font-family-source-sans-pro;
+
+  .label {
+    font-weight: 300;
+    color: $white;
+    font-size: 1rem;
+  }
+
+  button.is-link {
+    text-transform: uppercase;
+    margin-top: 20px;
+    background-color: $utility;
+    color: $peach-light;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
+    &:hover {
+      background-color: $peach-dark;
+      color: $white;
+    }
+  }
+}

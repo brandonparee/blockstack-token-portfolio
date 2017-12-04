@@ -8,7 +8,6 @@ import SingleHolding from './SingleHolding'
 
 import Fiat from '../../components/Helpers/Fiat'
 import Box from '../../components/Bulma/Box'
-import TransactionToggle from '../../components/Helpers/TransactionToggle'
 import Hero from '../../components/Bulma/Hero'
 import Section from '../../components/Bulma/Section'
 
@@ -73,13 +72,6 @@ class Portfolio extends Component {
               </div>
             </div>
           </nav>
-          <TransactionToggle>
-          {
-            (!transactionView)
-            ? <a className='button'>Add Transaction</a>
-            : <a className='button'>Close</a>
-          }
-          </TransactionToggle>
           <div className='SingleHoldingLayout'>
           {
             !loading && Object.keys(portfolio.portfolioOverview).map((token) => {

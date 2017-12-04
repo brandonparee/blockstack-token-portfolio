@@ -26,11 +26,11 @@ a {
                         "navigation main"
                         "navigation main";
   &.transaction-mode {
-    grid-template-columns: minmax(250px, 15%) 1fr 25%;
+    grid-template-columns: minmax(250px, 15%) minmax(300px, 20%) 1fr;
     grid-template-rows: 7.5vh 92.5vh;
     grid-template-areas:  "navTopBar topBar topBar"
-                          "navigation main sidePane"
-                          "navigation main sidePane";
+                          "navigation sidePane main"
+                          "navigation sidePane main";
   }
 }
 
@@ -38,7 +38,7 @@ a {
   grid-area: sidePane;
   height: 92.5vh;
   padding: 1rem;
-  input, select, .select {
+  input, select, .select, button {
     width: 100%;
   }
 }
