@@ -96,6 +96,7 @@ class App extends Component {
           ariaHideApp={false}>
           <code>{file.error ? file.error.toString() : null}</code>
           <p className='is-text-4'>There was an issue loading data from Blockstack, please refresh the page and if necessary clear your cache.</p>
+          <p className="is-text-4">In some cases you may need to restart the Blockstack App.</p>
           <p>(Automatic error handling coming soon)</p>
         </Modal>
       </div>

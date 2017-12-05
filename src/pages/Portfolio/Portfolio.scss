@@ -5,19 +5,29 @@
     display: flex;
     flex-wrap: wrap;
 
-    .SingleHolding {
-      width: 33%;
-      min-width: 300px;
-      padding: 15px;
-      box-sizing: border-box;
+    .SingleHoldingContainer {
+      display: flex;
+      width: 25%;
+      min-width: 250px;
 
-      .link-style {
-        font-family: $font-family-source-sans-pro;
-        color: $peach-dark;
-        font-size: 1.1rem;
-        font-weight: 600;
-        letter-spacing: 2px;
+      .SingleHolding {
+        flex: 1;
+        padding: 15px;
+        box-sizing: border-box;
+
+        .box {
+          height: 100%;
+        }
+
+        .link-style {
+          font-family: $font-family-source-sans-pro;
+          color: $peach-dark;
+          font-size: 1.1rem;
+          font-weight: 600;
+          letter-spacing: 2px;
+        }
       }
     }
+
   }
 }

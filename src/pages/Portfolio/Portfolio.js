@@ -78,9 +78,11 @@ class Portfolio extends Component {
             !loading ?
             Object.keys(portfolio.portfolioOverview).map((token) => {
               return (
-                <SingleHolding
-                key={token}
-                abbreviation={token} />
+                <div className="SingleHoldingContainer">
+                  <SingleHolding
+                    key={token}
+                    abbreviation={token} />
+                </div>
               )
             }
           ) : <Loading />
