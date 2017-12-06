@@ -134,7 +134,16 @@ export const getConvertedPortfolio = () => {
 
     if (marketData.marketData && tokenPortfolio) {
       _.forEach(tokenPortfolio, (singleOverview, abbreviation) => {
-        const tokenData = _.find(marketData.marketData, ['symbol', abbreviation])
+        let tokenData = _.find(marketData.marketData, ['symbol', abbreviation])
+
+
+        if (_.isEmpty(tokenData)) {
+          const mismatchedTokens = {
+            IOT: 'MIOTA'
+          }
+          tokenData = _.find(marketData.marketData, ['symbol', mismatchedTokens[abbreviation]])
+        }
+
         if (!_.isEmpty(tokenData)) {
           const btcValue = tokenData.price_btc * singleOverview.totalAmount
           const fiatValue = tokenData.price_usd * singleOverview.totalAmount
