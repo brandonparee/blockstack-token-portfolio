@@ -20,7 +20,8 @@ const mapStateToProps = ({ portfolio, preferences, price, transactions, marketDa
     preferences,
     price,
     transactionView: transactions.transactionView,
-    loading: marketData.isFetchingCoinList || file.isFetching
+    loading: marketData.isFetchingCoinList || file.isFetching,
+    coinList: marketData.coinList
   }
 }
 
@@ -38,7 +39,7 @@ class Portfolio extends Component {
   }
 
   render () {
-    const { portfolio, preferences, transactionView, loading } = this.props
+    const { portfolio, preferences, transactionView, loading, coinList } = this.props
     const fiat = getFiatInfo(preferences.fiat)
     const dayChangeClass = Math.sign(portfolio.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'
 
@@ -77,13 +78,16 @@ class Portfolio extends Component {
           {
             !loading ?
             Object.keys(portfolio.portfolioOverview).map((token) => {
-              return (
-                <div className="SingleHoldingContainer">
-                  <SingleHolding
-                    key={token}
-                    abbreviation={token} />
-                </div>
-              )
+                const tokenInfo = coinList[token]
+                if (tokenInfo) {
+                  return (
+                    <div className="SingleHoldingContainer">
+                      <SingleHolding
+                        key={token}
+                        abbreviation={token} />
+                    </div>
+                  )
+                }
             }
           ) : <Loading />
         }
