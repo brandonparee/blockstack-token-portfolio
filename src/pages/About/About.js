@@ -27,7 +27,7 @@ const About = () => {
           <li>View raw data files stored by the application</li>
         </ul>
         <h3 className='is-size-4'>Contact</h3>
-        <p>Any questions, comments or feature requests can be sent <a href='mailto:brandon.paree@gmail.com?Subject=Peachy%20Portfolio%Comment'>here.</a></p>
+        <p>Any questions, comments or feature requests can be sent <a href='mailto:peachyportfolio@gmail.com?subject=Peachy%20Portfolio%20Comment'>here.</a></p>
         <p>Features can also be requested through an issue opened on <a href='https://github.com/brandonparee/blockstack-token-portfolio/issues'>Github</a></p>
       </Section>
     </div>
