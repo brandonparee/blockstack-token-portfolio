@@ -15,12 +15,12 @@ const AuthenticatedSidebar = ({ user, transactionView }) => {
   return (
     <aside className='menu'>
       <ul className='menu-list NavItems'>
-        <div className="NavLinks">
+        <div className='NavLinks'>
           <SidebarItem exact to='/portfolio' icon='database'>Portfolio</SidebarItem>
           <SidebarItem to='/market-data' icon='line-chart'>Market Data</SidebarItem>
         </div>
 
-        <div className="Actions">
+        <div className='Actions'>
           <TransactionToggle><SidebarItem icon='plus' active={transactionView}>Add Transaction</SidebarItem></TransactionToggle>
           <SidebarItem to='/preferences' icon='cog'>Preferences</SidebarItem>
           <SidebarItem to='/about' icon='info'>About</SidebarItem>

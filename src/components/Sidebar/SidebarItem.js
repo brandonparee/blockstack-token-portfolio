@@ -7,14 +7,13 @@ const SidebarItem = ({ to, icon, children, active }) => {
   return (
     <li className='SideBarItem has-text-centered'>
       {
-        to ?
-        <NavLink to={to} activeClassName='sidebar-active'>
-          <p>{ icon && <Icon name={icon}/> }</p>
+        to
+        ? <NavLink to={to} activeClassName='sidebar-active'>
+          <p>{ icon && <Icon name={icon} /> }</p>
           <p>{children}</p>
         </NavLink>
-        :
-        <div className={`Action ${active ? 'sidebar-active' : ''}`}>
-          <p>{ icon && <Icon name={icon}/> }</p>
+        : <div className={`Action ${active ? 'sidebar-active' : ''}`}>
+          <p>{ icon && <Icon name={icon} /> }</p>
           <p>{children}</p>
         </div>
       }

@@ -23,8 +23,8 @@ const SingleHolding = ({ portfolio, preferences, abbreviation, coinList }) => {
   return (
     <div className='SingleHolding'>
       {
-        tokenInfo ?
-        <Link to={`/portfolio/${abbreviation.toLowerCase()}`}>
+        tokenInfo
+        ? <Link to={`/portfolio/${abbreviation.toLowerCase()}`}>
           <div className='box'>
             <div className='media-content'>
               <p className='link-style has-text-centered'>{tokenInfo.FullName}</p>

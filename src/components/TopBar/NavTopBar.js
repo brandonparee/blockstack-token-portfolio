@@ -5,7 +5,7 @@ import './NavTopBar.css'
 const NavTopBar = ({ user }) => {
   return (
     <div className='nav-top-bar NavTopBar'>
-      <h1 className="title">peachy.</h1>
+      <h1 className='title'>peachy.</h1>
     </div>
   )
 }

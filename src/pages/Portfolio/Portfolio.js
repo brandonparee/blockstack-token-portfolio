@@ -45,54 +45,54 @@ class Portfolio extends Component {
 
     return (
       <div className='Portfolio'>
-        <div className="submenu"></div>
+        <div className='submenu' />
         <div className='content'>
           <Section title='Portfolio'>
-          <nav className="level is-mobile">
-            <div className="level-item has-text-centered">
-              <div>
-                <p className="heading">Total Value</p>
-                <p className="is-size-4"><Fiat value={portfolio.totalValue} /></p>
+            <nav className='level is-mobile'>
+              <div className='level-item has-text-centered'>
+                <div>
+                  <p className='heading'>Total Value</p>
+                  <p className='is-size-4'><Fiat value={portfolio.totalValue} /></p>
+                </div>
               </div>
-            </div>
-            <div className="level-item has-text-centered">
-              <div>
-                <p className="heading">Total Value (BTC)</p>
-                <p className="is-size-4">{prettyCrypto(portfolio.totalValueBtc)} BTC</p>
+              <div className='level-item has-text-centered'>
+                <div>
+                  <p className='heading'>Total Value (BTC)</p>
+                  <p className='is-size-4'>{prettyCrypto(portfolio.totalValueBtc)} BTC</p>
+                </div>
               </div>
-            </div>
-            <div className="level-item has-text-centered">
-              <div>
-                <p className="heading">24h Change</p>
-                <p className={`is-size-4 ${dayChangeClass}`}><Fiat value={portfolio.dayChange} /></p>
+              <div className='level-item has-text-centered'>
+                <div>
+                  <p className='heading'>24h Change</p>
+                  <p className={`is-size-4 ${dayChangeClass}`}><Fiat value={portfolio.dayChange} /></p>
+                </div>
               </div>
-            </div>
-            <div className="level-item has-text-centered">
-              <div>
-                <p className="heading">24h Change (BTC)</p>
-                <p className={`is-size-4 ${dayChangeClass}`}>{prettyCrypto(portfolio.dayChangeBtc)} BTC</p>
+              <div className='level-item has-text-centered'>
+                <div>
+                  <p className='heading'>24h Change (BTC)</p>
+                  <p className={`is-size-4 ${dayChangeClass}`}>{prettyCrypto(portfolio.dayChangeBtc)} BTC</p>
+                </div>
               </div>
-            </div>
-          </nav>
-          <div className='SingleHoldingLayout'>
-          {
-            !loading ?
-            Object.keys(portfolio.portfolioOverview).map((token) => {
-                const tokenInfo = coinList[token]
-                if (tokenInfo) {
-                  return (
-                    <div className="SingleHoldingContainer">
-                      <SingleHolding
-                        key={token}
-                        abbreviation={token} />
-                    </div>
-                  )
-                }
+            </nav>
+            <div className='SingleHoldingLayout'>
+              {
+            !loading
+            ? Object.keys(portfolio.portfolioOverview).map((token) => {
+              const tokenInfo = coinList[token]
+              if (tokenInfo) {
+                return (
+                  <div className='SingleHoldingContainer'>
+                    <SingleHolding
+                      key={token}
+                      abbreviation={token} />
+                  </div>
+                )
+              }
             }
           ) : <Loading />
         }
-        </div>
-        </Section>
+            </div>
+          </Section>
         </div>
       </div>
     )

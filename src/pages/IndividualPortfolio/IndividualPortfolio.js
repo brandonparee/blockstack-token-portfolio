@@ -33,45 +33,44 @@ class IndividualPortfolio extends Component {
 
     return (
       <div>
-          { convertedPortfolio && coinList && tokenInfo
-            ?
-            <Section title={tokenInfo.FullName}>
-            <div>
-              <nav className="level is-mobile">
-                <div className="level-item has-text-centered">
-                  <div>
-                    <p className="heading">Amount</p>
-                    <p className="is-size-4">{`${prettyCrypto(convertedPortfolio.amount)} ${abbreviation}`}</p>
+        { convertedPortfolio && coinList && tokenInfo
+            ? <Section title={tokenInfo.FullName}>
+              <div>
+                <nav className='level is-mobile'>
+                  <div className='level-item has-text-centered'>
+                    <div>
+                      <p className='heading'>Amount</p>
+                      <p className='is-size-4'>{`${prettyCrypto(convertedPortfolio.amount)} ${abbreviation}`}</p>
+                    </div>
                   </div>
-                </div>
-                <div className="level-item has-text-centered">
-                  <div>
-                    <p className="heading">Total Value</p>
-                    <p className="is-size-4"><Fiat value={convertedPortfolio.fiatValue} /></p>
+                  <div className='level-item has-text-centered'>
+                    <div>
+                      <p className='heading'>Total Value</p>
+                      <p className='is-size-4'><Fiat value={convertedPortfolio.fiatValue} /></p>
+                    </div>
                   </div>
-                </div>
-                <div className="level-item has-text-centered">
-                  <div>
-                    <p className="heading">Total Value (BTC)</p>
-                    <p className="is-size-4">{prettyCrypto(convertedPortfolio.btcValue)} BTC</p>
+                  <div className='level-item has-text-centered'>
+                    <div>
+                      <p className='heading'>Total Value (BTC)</p>
+                      <p className='is-size-4'>{prettyCrypto(convertedPortfolio.btcValue)} BTC</p>
+                    </div>
                   </div>
-                </div>
-                <div className="level-item has-text-centered">
-                  <div>
-                    <p className="heading">24h Change</p>
-                    <p className={`is-size-4 ${Math.sign(convertedPortfolio.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'}`}><Fiat value={convertedPortfolio.dayChange} /></p>
+                  <div className='level-item has-text-centered'>
+                    <div>
+                      <p className='heading'>24h Change</p>
+                      <p className={`is-size-4 ${Math.sign(convertedPortfolio.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'}`}><Fiat value={convertedPortfolio.dayChange} /></p>
+                    </div>
                   </div>
-                </div>
-                <div className="level-item has-text-centered">
-                  <div>
-                    <p className="heading">24h Change (BTC)</p>
-                    <p className={`is-size-4 ${Math.sign(convertedPortfolio.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'}`}>{prettyCrypto(convertedPortfolio.dayChangeBtc)} BTC</p>
+                  <div className='level-item has-text-centered'>
+                    <div>
+                      <p className='heading'>24h Change (BTC)</p>
+                      <p className={`is-size-4 ${Math.sign(convertedPortfolio.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'}`}>{prettyCrypto(convertedPortfolio.dayChangeBtc)} BTC</p>
+                    </div>
                   </div>
-                </div>
-              </nav>
-              <TransactionChart token={abbreviation} transactionChartData={transactionChartData[abbreviation]} isFetching={isFetching} />
-              <TransactionTable abbreviation={abbreviation} />
-            </div>
+                </nav>
+                <TransactionChart token={abbreviation} transactionChartData={transactionChartData[abbreviation]} isFetching={isFetching} />
+                <TransactionTable abbreviation={abbreviation} />
+              </div>
             </Section>
             : ''
           }

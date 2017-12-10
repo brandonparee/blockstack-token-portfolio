@@ -26,7 +26,7 @@ const Login = ({user, onClick, ...rest}) => {
         <div className='container has-text-centered'>
           <h1 className='title'>peachy portfolio.</h1>
           <button className='button is-medium' onClick={onClick}>
-            <img src={BlockstackLogo} className="logo" alt="logo" />Sign In With Blockstack
+            <img src={BlockstackLogo} className='logo' alt='logo' />Sign In With Blockstack
           </button>
         </div>
       </div>

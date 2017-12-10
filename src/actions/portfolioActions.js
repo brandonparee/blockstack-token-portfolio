@@ -136,7 +136,6 @@ export const getConvertedPortfolio = () => {
       _.forEach(tokenPortfolio, (singleOverview, abbreviation) => {
         let tokenData = _.find(marketData.marketData, ['symbol', abbreviation])
 
-
         if (_.isEmpty(tokenData)) {
           const mismatchedTokens = {
             IOT: 'MIOTA'

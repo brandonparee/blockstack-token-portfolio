@@ -71,8 +71,7 @@ class App extends Component {
         <div className='main is-alabaster'>
           {
               (user.isAuthenticated)
-              ?
-              <Switch>
+              ? <Switch>
                 <Authenticated path='/' exact name='home' component={Portfolio} isAuthenticated={isAuthenticated} />
                 <Authenticated path='/market-data' exact name='market-data' component={MarketData} isAuthenticated={isAuthenticated} />
                 <Authenticated path='/market-data/:abbreviation' component={IndividualMarketData} isAuthenticated={isAuthenticated} />
@@ -81,8 +80,7 @@ class App extends Component {
                 <Authenticated path='/preferences' exact name='preferences' component={Preferences} isAuthenticated={isAuthenticated} />
                 <Authenticated path='/secret' exact name='secret' component={Secret} isAuthenticated={isAuthenticated} />
               </Switch>
-              :
-              <Switch>
+              : <Switch>
                 <Public path='/' exact name='login' component={Login} isAuthenticated={isAuthenticated} />
                 <Public path='/handle-login' name='handle-login' component={HandleLogin} isAuthenticated={isAuthenticated} />
               </Switch>

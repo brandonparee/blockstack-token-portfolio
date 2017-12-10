@@ -9,7 +9,7 @@ const CustomTooltip = ({ label, payload, type, active }) => {
   if (active) {
     return (
       <Box>
-        <h3 className="has-text-2">{moment.unix(label).format('MMM DD YYYY h:mma')}</h3>
+        <h3 className='has-text-2'>{moment.unix(label).format('MMM DD YYYY h:mma')}</h3>
         {
           (payload || []).map((singleItem) => {
             const borderStyle = {

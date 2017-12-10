@@ -26,8 +26,8 @@ const IndividualMarketData = ({ abbreviation, marketData, loading }) => {
 
   return (
     <div>
-      { singleMarketData && !loading ?
-        <Section title={`${singleMarketData.name} (${abbreviation})`}>
+      { singleMarketData && !loading
+        ? <Section title={`${singleMarketData.name} (${abbreviation})`}>
           <div className='IndividualMarketData'>
             <Box className='MarketData'>
               <p><strong>Price</strong> <Fiat value={singleMarketData['price_usd']} /></p>
