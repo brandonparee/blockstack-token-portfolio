@@ -1,7 +1,12 @@
 @import "./variables.scss";
+@import "./styles/animations.scss";
 @import "../node_modules/bulma/bulma.sass";
 
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600|Raleway:300,300i,400|Sacramento|Source+Sans+Pro:400,600,700');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600|Raleway:300,300i,400|Sacramento|Source+Sans+Pro:400,600,700|Source+Code+Pro');
+
+html {
+  overflow: hidden;
+}
 
 * {
   box-sizing: border-box;
@@ -10,7 +15,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: $font-family-open-sans;
+  font-family: $font-family-open-sans
 }
 
 a {
@@ -74,17 +79,6 @@ a {
   padding-top: 0;
   padding-bottom: 0;
 }
-
-%sticky {
-  position: sticky;
-  top: 0;
-}
-
-%is-blockstack {
-  background-color: $blockstack-primary;
-  color: $white;
-}
-
 
 .hero {
   &.is-blockstack {

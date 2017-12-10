@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { loginWithBlockstack } from '../../actions/userActions'
 
 import './Login.css'
+import BlockstackLogo from './BlockstackLogo.svg'
 
 const mapStateToProps = ({user}) => {
   return {
@@ -24,8 +25,9 @@ const Login = ({user, onClick, ...rest}) => {
       <div className='hero-body'>
         <div className='container has-text-centered'>
           <h1 className='title'>peachy portfolio.</h1>
-          <h2 className='subtitle'>Login with Blockstack</h2>
-          <button className='button is-medium' onClick={onClick}>Log In</button>
+          <button className='button is-medium' onClick={onClick}>
+            <img src={BlockstackLogo} className="logo" alt="logo" />Sign In With Blockstack
+          </button>
         </div>
       </div>
     </section>

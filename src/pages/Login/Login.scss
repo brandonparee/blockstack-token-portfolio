@@ -2,7 +2,6 @@
 
 .Login {
   background-color: $peach-light;
-  overflow-y: hidden;
 
   .title {
     line-height: 1.5;
@@ -16,16 +15,19 @@
   }
 
   button {
+    @extend %is-blockstack;
+    font-family: $font-family-source-code-pro;
     border: none;
-    text-transform: uppercase;
     margin-top: 20px;
-    background-color: $utility;
-    color: $peach-light;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 
     &:hover {
-      background-color: $peach-dark;
+      background-color: #361D44;
       color: $white;
+    }
+
+    .logo {
+      padding-right: 5px;
     }
   }
 }
