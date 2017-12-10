@@ -23,6 +23,7 @@ const AuthenticatedSidebar = ({ user, transactionView }) => {
         <div className="Actions">
           <TransactionToggle><SidebarItem icon='plus' active={transactionView}>Add Transaction</SidebarItem></TransactionToggle>
           <SidebarItem to='/preferences' icon='cog'>Preferences</SidebarItem>
+          <SidebarItem to='/about' icon='info'>About</SidebarItem>
           <SidebarItem to='/logout' icon='sign-out'>Logout</SidebarItem>
         </div>
       </ul>

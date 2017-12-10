@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
-import Modal from 'react-modal'
 import { getPortfolio } from '../actions/portfolioActions'
 import { getPreferences } from '../actions/preferencesActions'
 import { getExchangeRates } from '../actions/priceActions'
@@ -12,7 +11,9 @@ import Public from '../components/Public/Public'
 import Sidebar from '../components/Sidebar/Sidebar'
 import TopBar from '../components/TopBar/TopBar'
 import NavTopBar from '../components/TopBar/NavTopBar'
+import ErrorModal from '../components/Modals/ErrorModal'
 
+import About from '../pages/About/About'
 import HandleLogin from '../pages/Login/HandleLogin'
 import IndividualPortfolio from '../pages/IndividualPortfolio/IndividualPortfolio'
 import Login from '../pages/Login/Login'
@@ -70,7 +71,8 @@ class App extends Component {
         <div className='main is-alabaster'>
           {
               (user.isAuthenticated)
-              ? <Switch>
+              ?
+              <Switch>
                 <Authenticated path='/' exact name='home' component={Portfolio} isAuthenticated={isAuthenticated} />
                 <Authenticated path='/market-data' exact name='market-data' component={MarketData} isAuthenticated={isAuthenticated} />
                 <Authenticated path='/market-data/:abbreviation' component={IndividualMarketData} isAuthenticated={isAuthenticated} />
@@ -79,11 +81,13 @@ class App extends Component {
                 <Authenticated path='/preferences' exact name='preferences' component={Preferences} isAuthenticated={isAuthenticated} />
                 <Authenticated path='/secret' exact name='secret' component={Secret} isAuthenticated={isAuthenticated} />
               </Switch>
-              : <Switch>
+              :
+              <Switch>
                 <Public path='/' exact name='login' component={Login} isAuthenticated={isAuthenticated} />
                 <Public path='/handle-login' name='handle-login' component={HandleLogin} isAuthenticated={isAuthenticated} />
               </Switch>
             }
+          <Route path='/about' exact component={About} />
           <Route path='/logout' exact component={Logout} />
         </div>
         {
@@ -91,14 +95,7 @@ class App extends Component {
           ? <TransactionFormSidebar />
           : null
         }
-        <Modal
-          isOpen={file.error && !file.fileSetup ? true : false}
-          ariaHideApp={false}>
-          <code>{file.error ? file.error.toString() : null}</code>
-          <p className='is-text-4'>There was an issue loading data from Blockstack, please refresh the page and if necessary clear your cache.</p>
-          <p className="is-text-4">In some cases you may need to restart the Blockstack App.</p>
-          <p>(Automatic error handling coming soon)</p>
-        </Modal>
+        <ErrorModal />
       </div>
     )
   }

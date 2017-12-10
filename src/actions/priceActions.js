@@ -1,4 +1,5 @@
 import axios from 'axios'
+import _ from 'lodash'
 import cc from '../uncompiledDependencies/cryptocompare'
 import { getConvertedPortfolio, getTransactionChartData } from './portfolioActions'
 
@@ -101,8 +102,13 @@ export const getChartData = ({ tokens, startTime, endTime, period }) => {
     const state = getState()
     const chartRange = state.charts.chartRange
     const fiatPreference = state.preferences.fiat
+    const marketData = state.marketData
 
     let singleCharts = tokens.map((token) => {
+      if (token === 'MIOTA') {
+        token = 'IOT'
+      }
+
       return getSingleChart({ token, chartRange, fiatPreference })
     })
 
