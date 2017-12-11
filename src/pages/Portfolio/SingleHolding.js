@@ -32,7 +32,7 @@ const SingleHolding = ({ portfolio, preferences, abbreviation, coinList }) => {
               <p className={Math.sign(currentStats.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'}>
                 <Fiat value={currentStats.dayChange} /> {`(${prettyCrypto(currentStats.dayChangeBtc)} BTC)`}
               </p>
-              <p><PrettyPercent value={prettyFiat(currentStats.percentChange)} /></p>
+              <p><Fiat value={currentStats.fiatPrice} /> <PrettyPercent value={prettyFiat(currentStats.percentChange)} /></p>
             </div>
           </div>
         </Link>

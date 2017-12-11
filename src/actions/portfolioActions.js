@@ -142,12 +142,15 @@ export const getConvertedPortfolio = () => {
         }
 
         if (!_.isEmpty(tokenData)) {
+          const fiatPrice = tokenData.price_usd
           const btcValue = tokenData.price_btc * singleOverview.totalAmount
           const fiatValue = tokenData.price_usd * singleOverview.totalAmount
           const percentChange = tokenData.percent_change_24h
           const percentChangeValue = parseFloat(percentChange) / 100
           const dayChange = fiatValue - fiatValue / (1 + percentChangeValue)
           const dayChangeBtc = btcValue - btcValue / (1 + percentChangeValue)
+          const allTimeProfitUsd = fiatValue - singleOverview.totalPurchasePriceUsd
+          const allTimeProfitBtc = btcValue - singleOverview.totalPurchasePriceBtc
 
           totalValue += fiatValue
           totalValueBtc += btcValue
@@ -160,7 +163,10 @@ export const getConvertedPortfolio = () => {
             fiatValue,
             percentChange,
             dayChange,
-            dayChangeBtc
+            dayChangeBtc,
+            fiatPrice,
+            allTimeProfitBtc,
+            allTimeProfitUsd
           }
         } else {
           convertedPortfolio[abbreviation] = {

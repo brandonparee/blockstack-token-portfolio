@@ -4,6 +4,7 @@ import _ from 'lodash'
 import { getFiatInfo, prettyFiat, prettyCrypto } from '../../utils'
 
 import Fiat from '../../components/Helpers/Fiat'
+import PrettyPercent from '../../components/Helpers/PrettyPercent'
 import Section from '../../components/Bulma/Section'
 import Hero from '../../components/Bulma/Hero'
 import TransactionChart from '../../components/Charts/TransactionChart'
@@ -28,6 +29,7 @@ class IndividualPortfolio extends Component {
     let { abbreviation } = this.props
     abbreviation = _.upperCase(abbreviation)
     const convertedPortfolio = portfolio.convertedPortfolio[abbreviation]
+    const portfolioOverview = portfolio.portfolioOverview[abbreviation]
     const fiat = getFiatInfo(preferences.fiat)
     const tokenInfo = coinList[abbreviation]
 
@@ -39,7 +41,13 @@ class IndividualPortfolio extends Component {
                 <nav className='level is-mobile'>
                   <div className='level-item has-text-centered'>
                     <div>
-                      <p className='heading'>Amount</p>
+                      <p className='heading'>All Time Profit</p>
+                      <p className='is-size-4'><Fiat value={convertedPortfolio.allTimeProfitUsd} /></p>
+                    </div>
+                  </div>
+                  <div className='level-item has-text-centered'>
+                    <div>
+                      <p className='heading'>Portfolio</p>
                       <p className='is-size-4'>{`${prettyCrypto(convertedPortfolio.amount)} ${abbreviation}`}</p>
                     </div>
                   </div>
@@ -51,10 +59,12 @@ class IndividualPortfolio extends Component {
                   </div>
                   <div className='level-item has-text-centered'>
                     <div>
-                      <p className='heading'>Total Value (BTC)</p>
-                      <p className='is-size-4'>{prettyCrypto(convertedPortfolio.btcValue)} BTC</p>
+                      <p className='heading'>Total Cost</p>
+                      <p className='is-size-4'><Fiat value={portfolioOverview.totalPurchasePriceUsd} /></p>
                     </div>
                   </div>
+                </nav>
+                <nav className='level is-mobile'>
                   <div className='level-item has-text-centered'>
                     <div>
                       <p className='heading'>24h Change</p>
@@ -65,6 +75,12 @@ class IndividualPortfolio extends Component {
                     <div>
                       <p className='heading'>24h Change (BTC)</p>
                       <p className={`is-size-4 ${Math.sign(convertedPortfolio.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'}`}>{prettyCrypto(convertedPortfolio.dayChangeBtc)} BTC</p>
+                    </div>
+                  </div>
+                  <div className='level-item has-text-centered'>
+                    <div>
+                      <p className='heading'>24h Change (%)</p>
+                      <p className='is-size-4'><PrettyPercent value={prettyFiat(convertedPortfolio.percentChange)} /></p>
                     </div>
                   </div>
                 </nav>
