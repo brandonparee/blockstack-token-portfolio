@@ -19,8 +19,6 @@ export const CONVERT_PORTFOLIO_ERROR = 'CONVERT_PORTFOLIO_ERROR'
 export const getPortfolio = () => {
   return (dispatch) => {
     dispatch({ type: FETCH_PORTFOLIO })
-
-    dispatch(getBlockstackFile('portfolio.json', true, getConvertedPortfolio))
     dispatch(getTransactions())
   }
 }

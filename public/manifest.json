@@ -1,7 +1,12 @@
 {
-  "short_name": "Blockstack Token Portfolio",
-  "name": "Blockstack Token Portfolio",
+  "short_name": "Peachy Portfolio",
+  "name": "Peachy Portfolio",
   "icons": [
+    {
+      "src": "http://localhost:3000/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
     {
       "src": "favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
