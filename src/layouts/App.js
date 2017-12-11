@@ -12,6 +12,7 @@ import Sidebar from '../components/Sidebar/Sidebar'
 import TopBar from '../components/TopBar/TopBar'
 import NavTopBar from '../components/TopBar/NavTopBar'
 import ErrorModal from '../components/Modals/ErrorModal'
+import TransactionModal from '../components/Modals/TransactionModal'
 
 import About from '../pages/About/About'
 import HandleLogin from '../pages/Login/HandleLogin'
@@ -94,6 +95,7 @@ class App extends Component {
           : null
         }
         <ErrorModal />
+        <TransactionModal />
       </div>
     )
   }

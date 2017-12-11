@@ -1,16 +1,19 @@
 import _ from 'lodash'
 import cc from '../uncompiledDependencies/cryptocompare'
 import moment from 'moment'
+import { reset } from 'redux-form'
 import { getBlockstackFile, putBlockstackFile } from './fileActions'
 import { getPortfolioOverview } from './portfolioActions'
 
 export const ADD_TRANSACTION_REQUEST = 'ADD_TRANSACTION_REQUEST'
 export const ADD_TRANSACTION_SUCCESS = 'ADD_TRANSACTION_SUCCESS'
+export const CLOSE_TRANSACTION_MODAL = 'CLOSE_TRANSACTION_MODAL'
 export const FETCH_TRANSACTIONS = 'FETCH_TRANSACTIONS'
 export const TRANSACTION_TOGGLE = 'TOGGLE_ADD_TRANSACTION'
 export const TRANSACTION_FORM_PAIRS_FETCH = 'TRANSACTION_FORM_PAIRS_FETCH'
 export const TRANSACTION_FORM_PAIRS_SUCCESS = 'TRANSACTION_FORM_PAIRS_SUCCESS'
 export const TRANSACTION_FORM_PAIRS_ERROR = 'TRANSACTION_FORM_PAIRS_ERROR'
+export const TRANSACTION_FORM_RESET = 'TRANSACTION_FORM_RESET'
 
 export const getTransactions = () => {
   return (dispatch) => {
@@ -63,9 +66,22 @@ export const addTransaction = (transaction) => {
 
         transactions = _.sortBy(transactions, 'date')
 
-        dispatch(putBlockstackFile('transactions.json', JSON.stringify(transactions), true, getPortfolioOverview))
+        dispatch(putBlockstackFile('transactions.json', JSON.stringify(transactions), true, addTransactionSuccess))
       })
   }
+}
+
+export const addTransactionSuccess = () => {
+  return (dispatch) => {
+    dispatch(reset('transaction'))
+    dispatch({ type: TRANSACTION_FORM_RESET })
+    dispatch({ type: ADD_TRANSACTION_SUCCESS })
+    dispatch(getPortfolioOverview())
+  }
+}
+
+export const closeTransactionModal = () => {
+  return { type: CLOSE_TRANSACTION_MODAL }
 }
 
 export const handleTransactionToggle = () => {
