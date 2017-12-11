@@ -41,19 +41,19 @@ class PriceChart extends Component {
             <XAxis dataKey='time' type='number' scale='time' domain={['dataMin', 'dataMax']} tickFormatter={tick => moment.unix(tick).format('MM/DD')} />
             <defs>
               <linearGradient id='colorClose' x1='0' y1='0' x2='0' y2='1'>
-                <stop offset='5%' stopColor='#ff7b5f' stopOpacity={0.8} />
-                <stop offset='95%' stopColor='#ff7b5f' stopOpacity={0} />
+                <stop offset='5%' stopColor='#ffb47b' stopOpacity={.8} />
+                <stop offset='95%' stopColor='#ffb47b' stopOpacity={0.25} />
               </linearGradient>
               <linearGradient id='colorVolume' x1='0' y1='0' x2='0' y2='1'>
-                <stop offset='5%' stopColor='#8c3a2a' stopOpacity={.8} />
-                <stop offset='95%' stopColor='#8c3a2a' stopOpacity={0.25} />
+                <stop offset='5%' stopColor='#ff7b5f' stopOpacity={0.8} />
+                <stop offset='95%' stopColor='#ff7b5f' stopOpacity={0} />
               </linearGradient>
             </defs>
             <YAxis dataKey='close' yAxisId={0} />
             <YAxis dataKey='volume' yAxisId={1} orientation='right' />
             <Tooltip content={<CustomTooltip />} />
-            <Area dot={false} name='Price' type='monotone' dataKey='close' stroke='#ff7b5f' yAxisId={0} fillOpacity={1} fill='url(#colorClose)' />
-            <Area dot={false} name='Volume' type='monotone' dataKey='volume' stroke='#8c3a2a' yAxisId={1} fillOpacity={1} fill='url(#colorVolume)' />
+            <Area dot={false} name='Price' type='monotone' dataKey='close' stroke='#ffb47b' yAxisId={0} fillOpacity={1} fill='url(#colorClose)' />
+            <Area dot={false} name='Volume' type='monotone' dataKey='volume' stroke='#ff7b5f' yAxisId={1} fillOpacity={1} fill='url(#colorVolume)' />
           </AreaChart>
         </ResponsiveContainer>
            : '' }
