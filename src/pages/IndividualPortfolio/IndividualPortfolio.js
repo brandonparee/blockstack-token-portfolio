@@ -64,6 +64,12 @@ class IndividualPortfolio extends Component {
                 <nav className='level is-mobile'>
                   <div className='level-item has-text-centered'>
                     <div>
+                      <p className='heading'>Current Price</p>
+                      <p className='is-size-4'><Fiat value={convertedPortfolio.fiatPrice} /></p>
+                    </div>
+                  </div>
+                  <div className='level-item has-text-centered'>
+                    <div>
                       <p className='heading'>24h Change</p>
                       <p className={`is-size-4 ${Math.sign(convertedPortfolio.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'}`}><Fiat value={convertedPortfolio.dayChange} /></p>
                     </div>
