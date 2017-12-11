@@ -10,8 +10,7 @@ const mapStateToProps = ({ transactions }) => {
   }
 }
 
-const AuthenticatedSidebar = ({ user, transactionView }) => {
-  const { username } = user.profile
+const AuthenticatedSidebar = ({ transactionView }) => {
   return (
     <aside className='menu'>
       <ul className='menu-list NavItems'>

@@ -8,7 +8,7 @@ const About = () => {
       <Section title='About'>
         <p className='is-size-5'>
         Peachy Portfolio is a Cryptocurrency Portfolio application built on top of Blockstack.
-        Peachy Portfolio is open source and available on            <a href='https://github.com/brandonparee/blockstack-token-portfolio'>Github</a> (feature requets welcome!)
+        Peachy Portfolio is open source and available on                      <a href='https://github.com/brandonparee/blockstack-token-portfolio'>Github</a> (feature requets welcome!)
       </p>
         <h3 className='is-size-4'>Features</h3>
         <ul>

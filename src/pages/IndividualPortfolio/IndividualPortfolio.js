@@ -1,22 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import { getFiatInfo, prettyFiat, prettyCrypto } from '../../utils'
+import { prettyFiat, prettyCrypto } from '../../utils'
 
 import Fiat from '../../components/Helpers/Fiat'
 import PrettyPercent from '../../components/Helpers/PrettyPercent'
 import Section from '../../components/Bulma/Section'
-import Hero from '../../components/Bulma/Hero'
 import TransactionChart from '../../components/Charts/TransactionChart'
 import TransactionTable from '../../components/Tables/TransactionTable'
 
-const mapStateToProps = ({ portfolio, preferences, charts, marketData }, ownProps) => {
+const mapStateToProps = ({ portfolio, charts, marketData }, ownProps) => {
   const { abbreviation } = ownProps.match.params
   const { isFetching, transactionChartData } = charts
   return {
     abbreviation,
     portfolio,
-    preferences,
     isFetching,
     transactionChartData,
     coinList: marketData.coinList
@@ -25,12 +23,11 @@ const mapStateToProps = ({ portfolio, preferences, charts, marketData }, ownProp
 
 class IndividualPortfolio extends Component {
   render () {
-    const { portfolio, preferences, transactionChartData, isFetching, coinList } = this.props
+    const { portfolio, transactionChartData, isFetching, coinList } = this.props
     let { abbreviation } = this.props
     abbreviation = _.upperCase(abbreviation)
     const convertedPortfolio = portfolio.convertedPortfolio[abbreviation]
     const portfolioOverview = portfolio.portfolioOverview[abbreviation]
-    const fiat = getFiatInfo(preferences.fiat)
     const tokenInfo = coinList[abbreviation]
 
     return (

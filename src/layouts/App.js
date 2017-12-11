@@ -59,7 +59,7 @@ class App extends Component {
   }
 
   render () {
-    const { user, transactions, file } = this.props
+    const { user, transactions } = this.props
     const { isAuthenticated } = user
 
     return (

@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import moment from 'moment'
-import { getBlockstackFile, putBlockstackFile } from './fileActions'
+import { putBlockstackFile } from './fileActions'
 import { getTransactions } from './transactionActions'
 
 export const FETCH_PORTFOLIO = 'FETCH_PORTFOLIO'

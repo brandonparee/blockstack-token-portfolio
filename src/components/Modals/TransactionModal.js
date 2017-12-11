@@ -27,8 +27,8 @@ const TransactionModal = ({ isTransactionModalOpen, handleCloseButton }) => {
       style={modalStyle}
       onRequestClose={handleCloseButton}
       >
-        <p>Transaction added successfully!</p>
-        <button className='button' onClick={() => handleCloseButton()}>Close</button>
+      <p>Transaction added successfully!</p>
+      <button className='button' onClick={() => handleCloseButton()}>Close</button>
     </Modal>
   )
 }

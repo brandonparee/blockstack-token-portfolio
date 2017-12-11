@@ -2,13 +2,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getExchangeRates } from '../../actions/priceActions'
-import { getFiatInfo, prettyFiat, prettyCrypto } from '../../utils'
+import { prettyCrypto } from '../../utils'
 
 import SingleHolding from './SingleHolding'
 
 import Fiat from '../../components/Helpers/Fiat'
-import Box from '../../components/Bulma/Box'
-import Hero from '../../components/Bulma/Hero'
 import Section from '../../components/Bulma/Section'
 import Loading from '../../components/Helpers/Loading'
 
@@ -39,8 +37,7 @@ class Portfolio extends Component {
   }
 
   render () {
-    const { portfolio, preferences, transactionView, loading, coinList } = this.props
-    const fiat = getFiatInfo(preferences.fiat)
+    const { portfolio, loading, coinList } = this.props
     const dayChangeClass = Math.sign(portfolio.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'
 
     return (
@@ -88,6 +85,7 @@ class Portfolio extends Component {
                   </div>
                 )
               }
+              return null
             }
           ) : <Loading />
         }

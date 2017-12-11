@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { getFiatInfo, prettyFiat, prettyCrypto } from '../../utils'
+import { prettyFiat, prettyCrypto } from '../../utils'
 
 import Fiat from '../../components/Helpers/Fiat'
 import PrettyPercent from '../../components/Helpers/PrettyPercent'
@@ -17,7 +17,6 @@ const mapStateToProps = ({portfolio, preferences, marketData}) => {
 const SingleHolding = ({ portfolio, preferences, abbreviation, coinList }) => {
   const { convertedPortfolio } = portfolio
   const currentStats = convertedPortfolio[abbreviation] ? convertedPortfolio[abbreviation] : {amount: 0, fiatValue: 0, dayChange: 0, percentChange: 0}
-  const fiatInfo = getFiatInfo(preferences.fiat)
   const tokenInfo = coinList[abbreviation]
 
   return (
