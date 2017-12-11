@@ -6,6 +6,10 @@
   align-items: center;
   height: 7.5vh;
 
+  .logo {
+    height: 50%;
+  }
+
   .title {
     color: $accent;
     font-weight: 200;
