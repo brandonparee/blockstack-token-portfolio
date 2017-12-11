@@ -18,7 +18,7 @@ const CustomTooltip = ({ label, payload, type, active }) => {
             }
             return (
               <div key={singleItem.name} style={borderStyle}>
-                <strong>{tooltipText[singleItem.name]}: </strong>
+                <strong>{singleItem.name}: </strong>
                 <Fiat value={singleItem.value} />
               </div>
             )
