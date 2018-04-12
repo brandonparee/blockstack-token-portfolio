@@ -38,7 +38,7 @@ export const getFiatExchangeRates = () => {
   return (dispatch, getState) => {
     dispatch({ type: FIAT_EXCHANGE_RATES_REQUEST })
 
-    return axios.get(`http://api.fixer.io/latest?base=USD`)
+    return axios.get(`https://api.fixer.io/latest?base=USD`)
     .then((res) => {
       res.data.rates.USD = 1
       dispatch({type: FIAT_EXCHANGE_RATES_SUCCESS, payload: res.data})
