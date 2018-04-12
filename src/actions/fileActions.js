@@ -15,7 +15,7 @@ export const getBlockstackFile = (path, decrypt = false, cb) => {
   return (dispatch) => {
     dispatch({ type: FETCH_FILE_REQUEST })
 
-    return blockstack.getFile(path, decrypt)
+    return blockstack.getFile(path, {decrypt})
       .then(
         (res) => {
           dispatch({
@@ -56,7 +56,7 @@ export const putBlockstackFile = (path, content, encrypt = false, cb) => {
   return (dispatch) => {
     dispatch({ type: PUT_FILE_REQUEST })
 
-    return blockstack.putFile(path, content, encrypt)
+    return blockstack.putFile(path, content, {encrypt})
       .then(
         (res) => {
           dispatch({
