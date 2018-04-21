@@ -13,7 +13,7 @@ const mapStateToProps = ({ file }) => {
 const ErrorModal = ({ file }) => {
   return (
     <Modal
-      isOpen={!!(file.error && !file.fileSetup)}
+      isOpen={false}
       ariaHideApp={false}
       style={modalStyle} >
       <code>{file.error ? file.error.toString() : null}</code>

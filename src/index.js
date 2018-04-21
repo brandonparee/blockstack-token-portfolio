@@ -24,6 +24,10 @@ import './index.css'
 import App from './layouts/App'
 import registerServiceWorker from './registerServiceWorker'
 
+import * as blockstack from 'blockstack'
+
+window.blockstack = blockstack
+
 // Setup for react-router
 const history = createHistory()
 
