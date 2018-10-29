@@ -1,0 +1,23 @@
+<svg width="299px" height="274px" viewBox="0 0 299 274" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-1.3%" y="-1.3%" width="105.3%" height="104.4%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="7" dy="5" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="0.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.126726676 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-3" transform="translate(-95.000000, -122.000000)">
+            <g id="Group" filter="url(#filter-1)" transform="translate(84.000000, 74.000000)">
+                <circle id="Oval" fill="#FFB47B" cx="179.5" cy="193.5" r="122.5"></circle>
+                <path d="M28.9273417,166.38473 C28.9273417,166.38473 149.219125,202.519306 213.033916,71.5442637 C213.033916,71.5442637 55.96292,3.34409024 10.2219695,151.41396 C10.2219695,151.41396 97.4335121,98.5428314 130.69419,107.67884 C130.69419,107.653249 41.6782707,140.179485 28.9273417,166.38473 Z" id="Shape" fill="#338C59" fill-rule="nonzero" transform="translate(111.627943, 113.408905) scale(-1, 1) rotate(-313.000000) translate(-111.627943, -113.408905) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

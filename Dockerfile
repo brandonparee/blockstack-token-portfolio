@@ -1,6 +1,4 @@
-FROM node:8.7.0
-
-ENV NPM_CONFIG_LOGLEVEL warn
+FROM node:8.9.1
 
 RUN npm install -g yarn
 
@@ -13,7 +11,7 @@ COPY public/manifest-prod.json ./public/manifest.json
 COPY config ./config
 COPY scripts ./scripts
 COPY src ./src
-COPY server/server.js server.js
+COPY server ./server
 
 RUN yarn build
-CMD ["node", "./server.js"]
+CMD ["node", "./server/server.js"]

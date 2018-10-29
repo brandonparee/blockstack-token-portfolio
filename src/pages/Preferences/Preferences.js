@@ -4,11 +4,9 @@ import { connect } from 'react-redux'
 import Section from '../../components/Bulma/Section'
 
 import { updateFiatPreference, updateTokenPreference } from '../../actions/preferencesActions'
-import { getFiatList, getTokenList } from '../../utils'
+import { getFiatList } from '../../utils'
 
 const fiatList = getFiatList()
-
-const tokenList = getTokenList()
 
 const mapStateToProps = ({preferences}) => {
   return {

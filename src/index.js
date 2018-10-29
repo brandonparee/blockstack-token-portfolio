@@ -19,10 +19,14 @@ import { priceReducer } from './reducers/priceReducer'
 import { preferencesReducer } from './reducers/preferencesReducer'
 import { chartReducer } from './reducers/chartReducer'
 import { marketDataReducer } from './reducers/marketDataReducer'
-import 'bulma/css/bulma.css'
+import 'font-awesome/css/font-awesome.css'
 import './index.css'
 import App from './layouts/App'
 import registerServiceWorker from './registerServiceWorker'
+
+import * as blockstack from 'blockstack'
+
+window.blockstack = blockstack
 
 // Setup for react-router
 const history = createHistory()

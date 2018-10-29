@@ -1,14 +1,54 @@
-@import "../../index.scss";
+@import "../../variables.scss";
 
 .Sidebar {
-  color: $alabaster;
+  height: 100%;
+  font-family: $font-family-raleway;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: $utility;
+
+  .menu, .NavItems {
+    height: 100%;
+  }
+
+  .NavItems {
+    display: flex;
+    flex-direction: column;
+
+    .NavLinks {
+      flex: 1;
+    }
+  }
+
 
   a {
     color: $alabaster;
   }
 
-  .sidebar-active {
-    border-left: 1rem #f09465 solid;
-    color: #ff625f;
+  .SideBarItem {
+    a, .Action {
+      cursor: pointer;
+      padding: 10px 0;
+      line-height: 2rem;
+      border-left: 5px transparent solid;
+      color: #7e8698;
+
+      &:hover {
+        @extend %sidebar-active;
+
+      }
+    }
+
+    .sidebar-active {
+      @extend %sidebar-active;
+    }
   }
+
+}
+
+%sidebar-active {
+  border-color: $peach-light;
+  color: $white;
+  background-color: $utility-dark;
 }

@@ -1,0 +1,34 @@
+@import "../../variables.scss";
+
+.TopBar {
+  display: flex;
+  flex-direction: row-reverse;
+  color: $accent;
+
+
+  .Section {
+    padding-right: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 7.5vh;
+
+    .Text {
+      height: 7.5vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .menu-title {
+        line-height: 1;
+      }
+
+      .fancy {
+        padding: 0;
+        line-height: .75;
+        font-family: $font-family-sacramento;
+      }
+    }
+
+  }
+}

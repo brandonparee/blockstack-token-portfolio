@@ -2,8 +2,11 @@ import {
   TRANSACTION_FORM_PAIRS_FETCH,
   TRANSACTION_FORM_PAIRS_SUCCESS,
   TRANSACTION_FORM_PAIRS_ERROR,
+  TRANSACTION_FORM_RESET,
   FETCH_TRANSACTIONS,
   ADD_TRANSACTION_REQUEST,
+  ADD_TRANSACTION_SUCCESS,
+  CLOSE_TRANSACTION_MODAL,
   TRANSACTION_TOGGLE
 } from '../actions/transactionActions'
 
@@ -29,17 +32,25 @@ const initialState = {
     price: 0
   },
   transactionView: false,
-  error: null
+  error: null,
+  isTransactionModalOpen: false
 }
 
 export const transactionReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ADD_TRANSACTION_SUCCESS:
+      return { ...state, isTransactionModalOpen: true }
+    case CLOSE_TRANSACTION_MODAL:
+      return { ...state, isTransactionModalOpen: false }
     case TRANSACTION_FORM_PAIRS_FETCH:
       return { ...state, isFetchingPairs: true }
     case TRANSACTION_FORM_PAIRS_SUCCESS:
       return { ...state, isFetchingPairs: false, form: { ...state.form, ...action.payload } }
     case TRANSACTION_FORM_PAIRS_ERROR: {
       return { ...state, isFetchingPairs: false, error: action.payload }
+    }
+    case TRANSACTION_FORM_RESET: {
+      return { ...state, form: initialState.form }
     }
     case TRADE_PAIR_PRICE_FETCH:
       return { ...state, isFetchingPairs: true }

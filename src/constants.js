@@ -48,3 +48,9 @@ export const chartTimes = {
     }
   }
 }
+
+export const CHART_TOOLTIP_TEXT = {
+  currentAmount: 'Fiat Value: ',
+  close: 'Price: ',
+  volume: 'Volume: '
+}

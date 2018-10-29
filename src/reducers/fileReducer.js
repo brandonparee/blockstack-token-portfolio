@@ -4,7 +4,9 @@ import {
   FETCH_FILE_SUCCESS,
   PUT_FILE_ERROR,
   PUT_FILE_REQUEST,
-  PUT_FILE_SUCCESS
+  PUT_FILE_SUCCESS,
+  FILE_REMOVE_ERRORS,
+  FILE_SETUP
 } from '../actions/fileActions'
 
 const initialState = {
@@ -12,7 +14,8 @@ const initialState = {
   isEncrypted: false,
   content: null,
   path: null,
-  error: null
+  error: null,
+  fileSetup: false
 }
 
 export const fileReducer = (state = initialState, action) => {
@@ -29,6 +32,11 @@ export const fileReducer = (state = initialState, action) => {
       return { ...state, isFetching: true }
     case PUT_FILE_SUCCESS:
       return { ...state, isFetching: false, ...action.payload }
+    case FILE_REMOVE_ERRORS:
+      return { ...state, error: null }
+    case FILE_SETUP: {
+      return { ...state, fileSetup: true }
+    }
     default:
       return state
   }

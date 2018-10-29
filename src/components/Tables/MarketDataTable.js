@@ -63,7 +63,7 @@ const TransactionTable = ({ marketData, fiatPreference }) => {
             sortMethod: floatSort
           }
         ]}
-        defaultPageSize={10}
+        defaultPageSize={100}
       />
     </div>
   )

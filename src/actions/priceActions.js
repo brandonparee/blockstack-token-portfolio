@@ -38,7 +38,7 @@ export const getFiatExchangeRates = () => {
   return (dispatch, getState) => {
     dispatch({ type: FIAT_EXCHANGE_RATES_REQUEST })
 
-    return axios.get(`http://api.fixer.io/latest?base=USD`)
+    return axios.get(`https://api.fixer.io/latest?base=USD`)
     .then((res) => {
       res.data.rates.USD = 1
       dispatch({type: FIAT_EXCHANGE_RATES_SUCCESS, payload: res.data})
@@ -66,7 +66,6 @@ export const getTokenExchangeRates = () => {
 export const getTradePairPrice = (fromSymbol, toSymbol) => {
   return (dispatch, getState) => {
     dispatch({ type: TRADE_PAIR_PRICE_FETCH })
-    console.log(fromSymbol, toSymbol)
 
     cc.price(fromSymbol, toSymbol)
       .then((price) => {
@@ -104,6 +103,10 @@ export const getChartData = ({ tokens, startTime, endTime, period }) => {
     const fiatPreference = state.preferences.fiat
 
     let singleCharts = tokens.map((token) => {
+      if (token === 'MIOTA') {
+        token = 'IOT'
+      }
+
       return getSingleChart({ token, chartRange, fiatPreference })
     })
 

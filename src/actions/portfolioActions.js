@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import moment from 'moment'
-import { getBlockstackFile, putBlockstackFile } from './fileActions'
+import { putBlockstackFile } from './fileActions'
 import { getTransactions } from './transactionActions'
 
 export const FETCH_PORTFOLIO = 'FETCH_PORTFOLIO'
@@ -19,8 +19,6 @@ export const CONVERT_PORTFOLIO_ERROR = 'CONVERT_PORTFOLIO_ERROR'
 export const getPortfolio = () => {
   return (dispatch) => {
     dispatch({ type: FETCH_PORTFOLIO })
-
-    dispatch(getBlockstackFile('portfolio.json', true, getConvertedPortfolio))
     dispatch(getTransactions())
   }
 }
@@ -132,27 +130,49 @@ export const getConvertedPortfolio = () => {
     const tokenPortfolio = portfolio.portfolioOverview
     const convertedPortfolio = {}
 
-    if (marketData.marketData) {
+    if (marketData.marketData && tokenPortfolio) {
       _.forEach(tokenPortfolio, (singleOverview, abbreviation) => {
-        const tokenData = _.find(marketData.marketData, ['symbol', abbreviation])
-        const btcValue = tokenData.price_btc * singleOverview.totalAmount
-        const fiatValue = tokenData.price_usd * singleOverview.totalAmount
-        const percentChange = tokenData.percent_change_24h
-        const percentChangeValue = parseFloat(percentChange) / 100
-        const dayChange = fiatValue - fiatValue / (1 + percentChangeValue)
-        const dayChangeBtc = btcValue - btcValue / (1 + percentChangeValue)
+        let tokenData = _.find(marketData.marketData, ['symbol', abbreviation])
 
-        totalValue += fiatValue
-        totalValueBtc += btcValue
-        totalDayChange += dayChange
-        totalDayChangeBtc += dayChangeBtc
+        if (_.isEmpty(tokenData)) {
+          const mismatchedTokens = {
+            IOT: 'MIOTA'
+          }
+          tokenData = _.find(marketData.marketData, ['symbol', mismatchedTokens[abbreviation]])
+        }
 
-        convertedPortfolio[abbreviation] = {
-          amount: singleOverview.totalAmount,
-          btcValue,
-          fiatValue,
-          percentChange,
-          dayChange
+        if (!_.isEmpty(tokenData)) {
+          const fiatPrice = tokenData.price_usd
+          const btcValue = tokenData.price_btc * singleOverview.totalAmount
+          const fiatValue = tokenData.price_usd * singleOverview.totalAmount
+          const percentChange = tokenData.percent_change_24h
+          const percentChangeValue = parseFloat(percentChange) / 100
+          const dayChange = fiatValue - fiatValue / (1 + percentChangeValue)
+          const dayChangeBtc = btcValue - btcValue / (1 + percentChangeValue)
+          const allTimeProfitUsd = fiatValue - singleOverview.totalPurchasePriceUsd
+          const allTimeProfitBtc = btcValue - singleOverview.totalPurchasePriceBtc
+
+          totalValue += fiatValue
+          totalValueBtc += btcValue
+          totalDayChange += dayChange
+          totalDayChangeBtc += dayChangeBtc
+
+          convertedPortfolio[abbreviation] = {
+            amount: singleOverview.totalAmount,
+            btcValue,
+            fiatValue,
+            percentChange,
+            dayChange,
+            dayChangeBtc,
+            fiatPrice,
+            allTimeProfitBtc,
+            allTimeProfitUsd
+          }
+        } else {
+          convertedPortfolio[abbreviation] = {
+            amount: singleOverview.totalAmount,
+            fiatValue: singleOverview.totalAmount
+          }
         }
       })
 

@@ -9,7 +9,12 @@ import { getCoinList, getMarketData } from '../actions/marketDataActions'
 import Authenticated from '../components/Authenticated/Authenticated'
 import Public from '../components/Public/Public'
 import Sidebar from '../components/Sidebar/Sidebar'
+import TopBar from '../components/TopBar/TopBar'
+import NavTopBar from '../components/TopBar/NavTopBar'
+import ErrorModal from '../components/Modals/ErrorModal'
+import TransactionModal from '../components/Modals/TransactionModal'
 
+import About from '../pages/About/About'
 import HandleLogin from '../pages/Login/HandleLogin'
 import IndividualPortfolio from '../pages/IndividualPortfolio/IndividualPortfolio'
 import Login from '../pages/Login/Login'
@@ -59,6 +64,8 @@ class App extends Component {
 
     return (
       <div className={`layout ${transactions.transactionView ? 'transaction-mode' : ''}`}>
+        <NavTopBar />
+        <TopBar />
         <div className='navigation is-bastille'>
           <Sidebar />
         </div>
@@ -79,6 +86,7 @@ class App extends Component {
                 <Public path='/handle-login' name='handle-login' component={HandleLogin} isAuthenticated={isAuthenticated} />
               </Switch>
             }
+          <Route path='/about' exact component={About} />
           <Route path='/logout' exact component={Logout} />
         </div>
         {
@@ -86,6 +94,8 @@ class App extends Component {
           ? <TransactionFormSidebar />
           : null
         }
+        <ErrorModal />
+        <TransactionModal />
       </div>
     )
   }

@@ -1,42 +1,62 @@
-$alabaster: #f8f8fd;
-$bastille: #2a202f;
-$blockstack-primary: #270f34;
-$link-blue: #3273dc;
-$prim: #e5e4ef;
-$white: #fff;
+@import "./variables.scss";
+@import "./styles/animations.scss";
+@import "../node_modules/bulma/bulma.sass";
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300+400,600|Raleway:300,300i,400|Sacramento|Source+Sans+Pro:400,600,700|Source+Code+Pro');
+
+html {
+  overflow: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: $font-family-open-sans
+}
+
+a {
+  color: $peach-dark;
 }
 
 .layout {
-  min-height: 100vh;
+  max-height: 100vh;
   display: grid;
   grid-template-columns: minmax(250px, 15%) 1fr;
-  grid-template-rows: 1fr;
-  grid-template-areas: "navigation main"
+  grid-template-rows: 7.5vh 92.5vh;
+  grid-template-areas:  "navTopBar topBar"
+                        "navigation main"
                         "navigation main";
   &.transaction-mode {
-    grid-template-columns: 15% 1fr 25%;
-    grid-template-rows: 1fr;
-    grid-template-areas: "navigation main sidePane"
-                          "navigation main sidePane";
+    grid-template-columns: minmax(250px, 15%) minmax(300px, 20%) 1fr;
+    grid-template-rows: 7.5vh 92.5vh;
+    grid-template-areas:  "navTopBar topBar topBar"
+                          "navigation sidePane main"
+                          "navigation sidePane main";
   }
 }
 
 .side-pane {
-  @extend %sticky;
   grid-area: sidePane;
+  height: 92.5vh;
   padding: 1rem;
-  input, select, .select {
+  input, select, .select, button {
     width: 100%;
   }
+  overflow: scroll;
 }
 
-.header {
-  grid-area: header;
+.nav-top-bar {
+  background-color: $peach-dark;
+  grid-area: navTopBar;
+}
+
+.top-bar {
+  background-color: $peach-light;
+  grid-area: topBar;
 }
 
 .sidebar {
@@ -44,13 +64,15 @@ body {
 }
 
 .navigation {
-  @extend %sticky;
+  // padding: 30px 10px;
   grid-area: navigation;
-  height: 100vh;
+  height: 92.5vh;
 }
 
 .main {
   grid-area: main;
+  height: 92.5vh;
+  overflow: auto;
 }
 
 .footer {
@@ -58,18 +80,6 @@ body {
   padding-top: 0;
   padding-bottom: 0;
 }
-
-%sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-}
-
-%is-blockstack {
-  background-color: $blockstack-primary;
-  color: $white;
-}
-
 
 .hero {
   &.is-blockstack {

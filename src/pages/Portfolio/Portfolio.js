@@ -2,22 +2,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getExchangeRates } from '../../actions/priceActions'
-import { getFiatInfo, prettyFiat } from '../../utils'
+import { prettyCrypto } from '../../utils'
 
 import SingleHolding from './SingleHolding'
 
-import TransactionToggle from '../../components/Helpers/TransactionToggle'
-import Hero from '../../components/Bulma/Hero'
+import Fiat from '../../components/Helpers/Fiat'
 import Section from '../../components/Bulma/Section'
+import Loading from '../../components/Helpers/Loading'
 
 import './Portfolio.css'
 
-const mapStateToProps = ({ portfolio, preferences, price, transactions }) => {
+const mapStateToProps = ({ portfolio, preferences, price, transactions, marketData, file }) => {
   return {
     portfolio,
     preferences,
     price,
-    transactionView: transactions.transactionView
+    transactionView: transactions.transactionView,
+    loading: marketData.isFetchingCoinList || file.isFetching,
+    coinList: marketData.coinList
   }
 }
 
@@ -35,36 +37,61 @@ class Portfolio extends Component {
   }
 
   render () {
-    const { portfolio, preferences, transactionView } = this.props
-    const fiat = getFiatInfo(preferences.fiat)
+    const { portfolio, loading, coinList } = this.props
+    const dayChangeClass = Math.sign(portfolio.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'
 
     return (
       <div className='Portfolio'>
-        <Section title='Portfolio'>
-          <Hero
-            title={`${fiat.symbol} ${prettyFiat(portfolio.totalValue)}`}
-            subtitle={`${fiat.symbol} ${prettyFiat(portfolio.dayChange)}`}
-            subtitleClassName={Math.sign(portfolio.dayChange) >= 0 ? 'has-text-success' : 'has-text-danger'} />
-          <TransactionToggle>
-            {
-              (!transactionView)
-                ? <a className='button'>Add Transaction</a>
-                : <a className='button'>Close</a>
-            }
-          </TransactionToggle>
-          <div className='SingleHoldingLayout'>
-            {
-              Object.keys(portfolio.portfolioOverview).map((token) => {
+        <div className='submenu' />
+        <div className='content'>
+          <Section title='Portfolio'>
+            <nav className='level is-mobile'>
+              <div className='level-item has-text-centered'>
+                <div>
+                  <p className='heading'>Total Value</p>
+                  <p className='is-size-4'><Fiat value={portfolio.totalValue} /></p>
+                </div>
+              </div>
+              <div className='level-item has-text-centered'>
+                <div>
+                  <p className='heading'>Total Value (BTC)</p>
+                  <p className='is-size-4'>{prettyCrypto(portfolio.totalValueBtc)} BTC</p>
+                </div>
+              </div>
+              <div className='level-item has-text-centered'>
+                <div>
+                  <p className='heading'>24h Change</p>
+                  <p className={`is-size-4 ${dayChangeClass}`}><Fiat value={portfolio.dayChange} /></p>
+                </div>
+              </div>
+              <div className='level-item has-text-centered'>
+                <div>
+                  <p className='heading'>24h Change (BTC)</p>
+                  <p className={`is-size-4 ${dayChangeClass}`}>{prettyCrypto(portfolio.dayChangeBtc)} BTC</p>
+                </div>
+              </div>
+            </nav>
+            <div className='SingleHoldingLayout'>
+              {
+            !loading
+            ? Object.keys(portfolio.portfolioOverview).map((token) => {
+              const tokenInfo = coinList[token]
+              if (tokenInfo) {
                 return (
-                  <SingleHolding
-                    key={token}
-                    abbreviation={token} />
+                  <div className='SingleHoldingContainer'>
+                    <SingleHolding
+                      key={token}
+                      abbreviation={token} />
+                  </div>
                 )
               }
-              )
+              return null
             }
-          </div>
-        </Section>
+          ) : <Loading />
+        }
+            </div>
+          </Section>
+        </div>
       </div>
     )
   }

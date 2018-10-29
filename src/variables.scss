@@ -1,0 +1,38 @@
+@import "../node_modules/bulma/sass/utilities/initial-variables";
+@import "../node_modules/bulma/sass/utilities/functions";
+// Colors
+$alabaster: #eff0f0;
+$bastille: #262a33;
+$blockstack-primary: #270f34;
+$link-blue: #3273dc;
+$prim: #e5e4ef;
+$white: #fff;
+$peach-light: #ff7b5f;
+$peach-dark: #e6684e;
+$utility-dark: #1d2027;
+$utility: #262a33;
+$accent: #ffb47b;
+$green: #009833;
+$red: #e64d4d;
+
+// Font Family
+$font-family-raleway: 'Raleway', sans-serif;
+$font-family-sacramento: 'Sacramento', sans-serif;
+$font-family-open-sans: 'Open Sans', sans-serif;
+$font-family-source-sans-pro: 'Source Sans Pro', sans-serif;
+$font-family-source-code-pro: 'Source Code Pro', sans-serif;
+$font-family-sans-serif: sans-serif;
+
+// Overwrite bulma
+$success: $green;
+$danger: $red;
+
+%sticky {
+  position: sticky;
+  top: 0;
+}
+
+%is-blockstack {
+  background-color: $blockstack-primary;
+  color: $white;
+}

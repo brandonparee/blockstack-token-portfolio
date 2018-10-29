@@ -79,12 +79,12 @@ export const getFiatInfo = (code) => {
 
 export const prettyFiat = (value) => {
   if (Math.abs(value) > 1 || value === 0) {
-    return parseFloat(value).toFixed(2)
+    return parseFloat(parseFloat(value).toFixed(2))
   }
 
-  return parseFloat(value).toFixed(6)
+  return parseFloat(parseFloat(value).toFixed(6))
 }
 
 export const prettyCrypto = (value) => {
-  return parseFloat(value).toFixed(6)
+  return parseFloat(parseFloat(value).toFixed(6))
 }
