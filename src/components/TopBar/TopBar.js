@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import './TopBar.css'
+import './TopBar.scss'
 
 const mapStateToProps = ({user}) => {
   return {

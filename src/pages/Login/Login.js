@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { loginWithBlockstack } from '../../actions/userActions'
 
-import './Login.css'
+import './Login.scss'
 import BlockstackLogo from './BlockstackLogo.svg'
 
 const mapStateToProps = ({user}) => {
