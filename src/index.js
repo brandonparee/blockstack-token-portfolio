@@ -20,7 +20,7 @@ import { preferencesReducer } from './reducers/preferencesReducer'
 import { chartReducer } from './reducers/chartReducer'
 import { marketDataReducer } from './reducers/marketDataReducer'
 import 'font-awesome/css/font-awesome.css'
-import './index.css'
+import './index.scss'
 import App from './layouts/App'
 import registerServiceWorker from './registerServiceWorker'
 

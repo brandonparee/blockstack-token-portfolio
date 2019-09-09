@@ -10,7 +10,7 @@ import Fiat from '../../components/Helpers/Fiat'
 import Section from '../../components/Bulma/Section'
 import Loading from '../../components/Helpers/Loading'
 
-import './Portfolio.css'
+import './Portfolio.scss'
 
 const mapStateToProps = ({ portfolio, preferences, price, transactions, marketData, file }) => {
   return {
