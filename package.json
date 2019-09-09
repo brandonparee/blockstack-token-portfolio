@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "autoprefixer": "7.1.6",
     "axios": "^0.17.1",
+<<<<<<< HEAD
     "babel-core": "6.26.0",
     "babel-eslint": "7.2.3",
     "babel-jest": "20.0.3",
@@ -48,6 +48,13 @@
     "react-cryptocoins": "^1.0.9",
     "react-dates": "^15.1.0",
     "react-dev-utils": "^4.2.1",
+=======
+    "blockstack": "^0.13.4",
+    "bulma": "^0.6.1",
+    "history": "^4.7.2",
+    "lodash": "^4.17.4",
+    "react": "^16.0.0",
+>>>>>>> parent of 358f2e1... Eject Webpack and fix build. fix a few bugs, improve first sign in experience
     "react-dom": "^16.0.0",
     "react-flatpickr": "^3.6.3",
     "react-fontawesome": "^1.6.1",
@@ -56,13 +63,18 @@
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.8",
+<<<<<<< HEAD
     "react-select": "^1.1.0",
     "react-table": "^6.7.4",
     "react-with-direction": "^1.1.0",
     "recharts": "^1.0.0-beta.5",
+=======
+    "react-scripts": "1.0.17",
+>>>>>>> parent of 358f2e1... Eject Webpack and fix build. fix a few bugs, improve first sign in experience
     "redux": "^3.7.2",
     "redux-form": "^7.1.2",
     "redux-logger": "^3.0.6",
+<<<<<<< HEAD
     "redux-thunk": "^2.2.0",
     "socket.io-client": "^2.0.4",
     "style-loader": "0.19.0",
@@ -72,14 +84,18 @@
     "webpack-dev-server": "2.9.4",
     "webpack-manifest-plugin": "1.3.2",
     "whatwg-fetch": "2.0.3"
+=======
+    "redux-thunk": "^2.2.0"
+>>>>>>> parent of 358f2e1... Eject Webpack and fix build. fix a few bugs, improve first sign in experience
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
-    "start-js": "node scripts/start.js",
+    "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
-    "build": "npm run build-css && node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom",
+    "build": "npm run build-css && react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
     "standard": "standard",
     "standard-fix": "standard --fix"
   },
@@ -95,47 +111,5 @@
       "fetch",
       "localStorage"
     ]
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,mjs}"
-    ],
-    "setupFiles": [
-      "<rootDir>/config/polyfills.js"
-    ],
-    "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
-      "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"
-    ],
-    "testEnvironment": "node",
-    "testURL": "http://localhost",
-    "transform": {
-      "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
-      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
-    },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
-    ],
-    "moduleNameMapper": {
-      "^react-native$": "react-native-web"
-    },
-    "moduleFileExtensions": [
-      "web.js",
-      "mjs",
-      "js",
-      "json",
-      "web.jsx",
-      "jsx",
-      "node"
-    ]
-  },
-  "babel": {
-    "presets": [
-      "react-app"
-    ]
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   }
 }
