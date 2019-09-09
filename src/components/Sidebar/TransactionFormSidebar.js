@@ -3,7 +3,7 @@ import React from 'react'
 import TransactionForm from '../Forms/TransactionForm'
 import TransactionToggle from '../Helpers/TransactionToggle'
 
-import './TransactionFormSidebar.css'
+import './TransactionFormSidebar.scss'
 
 const TransactionFormSidebar = () => {
   return (

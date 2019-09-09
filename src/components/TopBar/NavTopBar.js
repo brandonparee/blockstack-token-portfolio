@@ -1,6 +1,6 @@
 import React from 'react'
 
-import './NavTopBar.css'
+import './NavTopBar.scss'
 import logo from './Logo.svg'
 
 const NavTopBar = ({ user }) => {

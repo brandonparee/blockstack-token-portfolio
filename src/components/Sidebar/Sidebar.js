@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import AuthenticatedSidebar from './AuthenticatedSidebar'
 import PublicSidebar from './PublicSidebar'
 
-import './Sidebar.css'
+import './Sidebar.scss'
 
 const mapStateToProps = ({user, router}) => {
   return {
