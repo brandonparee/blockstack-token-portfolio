@@ -3,7 +3,7 @@
   "name": "Peachy Portfolio",
   "icons": [
     {
-      "src": "http://localhost:3000/logo.png",
+      "src": "http://peachyportfolio.com/logo.png",
       "sizes": "512x512",
       "type": "image/png"
     },
@@ -13,7 +13,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "./index.html",
+  "start_url": "peachyportfolio.com",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
