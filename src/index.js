@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-import createHistory from 'history/createBrowserHistory'
+import { createBrowserHistory } from 'history'
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux'
 import { createLogger } from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
@@ -29,7 +29,7 @@ import * as blockstack from 'blockstack'
 window.blockstack = blockstack
 
 // Setup for react-router
-const history = createHistory()
+const history = createBrowserHistory()
 
 // Setup for redux
 export const store = createStore(
@@ -46,7 +46,9 @@ export const store = createStore(
     charts: chartReducer,
     marketData: marketDataReducer
   }),
-  applyMiddleware(routerMiddleware(history), thunkMiddleware, createLogger())
+  applyMiddleware(routerMiddleware(history), thunkMiddleware,
+    //  createLogger()
+  )
 )
 
 store.dispatch(fetchUserData())

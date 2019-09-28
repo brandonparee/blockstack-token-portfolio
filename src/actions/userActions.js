@@ -1,4 +1,5 @@
 import * as blockstack from 'blockstack'
+import { userSession } from 'utils/blockstack';
 
 export const FETCH_USER_DATA = 'FETCH_USER_DATA'
 export const USER_LOGIN = 'USER_LOGIN'
@@ -11,7 +12,7 @@ export const USER_LOGIN_ERROR = 'USER_LOGIN_ERROR'
 export const fetchUserData = () => {
   const type = FETCH_USER_DATA
 
-  if (blockstack.isUserSignedIn()) {
+  if (userSession.isUserSignedIn()) {
     return {
       type,
       payload: {

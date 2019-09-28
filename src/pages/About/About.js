@@ -19,13 +19,13 @@ const About = () => {
           <li>Up to date market data for more than 1300 Cryptocurrencies</li>
           <li>And more!</li>
         </ul>
-        <h3 className='is-size-4'>Coming Soon</h3>
+        {/* <h3 className='is-size-4'>Coming Soon</h3>
         <ul>
           <li>More metrics -- Get a deeper dive into your investments</li>
           <li>Real Time Price Updates</li>
           <li>ICO Tracking</li>
           <li>View raw data files stored by the application</li>
-        </ul>
+        </ul> */}
         <h3 className='is-size-4'>Contact</h3>
         <p>Any questions, comments or feature requests can be sent <a href='mailto:peachyportfolio@gmail.com?subject=Peachy%20Portfolio%20Comment'>here.</a></p>
         <p>Features can also be requested through an issue opened on <a href='https://github.com/brandonparee/blockstack-token-portfolio/issues'>Github</a></p>
