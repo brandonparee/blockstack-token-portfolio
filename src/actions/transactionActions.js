@@ -31,6 +31,8 @@ export const addTransaction = (transaction) => {
     const transactionSign = transaction.type === 'BUY' ? 1 : -1
     const date = moment(transaction.date)
 
+            console.log(transaction)
+
     cc.priceHistorical(toSymbol, ['USD', 'BTC'], date.toDate())
       .then((price) => {
         const priceBtc = price.BTC * transaction.amount * transaction.purchasePrice * transactionSign
@@ -47,6 +49,8 @@ export const addTransaction = (transaction) => {
           priceUsd,
           purchasePrice
         }]
+
+        console.log(transactionDetails)
 
         if (transaction.deduct.value) {
           transactionDetails.push({
@@ -92,7 +96,7 @@ export const getTradingPairs = (symbol) => {
   return (dispatch, getState) => {
     dispatch({ type: TRANSACTION_FORM_PAIRS_FETCH })
 
-    cc.topPairs(symbol, 9999)
+    cc.topPairs(symbol, 25)
       .then((pairs) => {
         pairs.map((pair) => {
           pair.label = `${pair.fromSymbol}/${pair.toSymbol}`

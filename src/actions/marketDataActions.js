@@ -9,7 +9,10 @@ export const MARKET_DATA_ERROR = 'MARKET_DATA_ERROR'
 export const MARKET_DATA_FETCH = 'MARKET_DATA_FETCH'
 export const MARKET_DATA_SUCCESS = 'MARKET_DATA_SUCCESS'
 
-const coinMarketCap = `https://api.coinmarketcap.com/v1/ticker/?limit=0`
+const coinMarketCap = `https://api.coincap.io/v2/assets?limit=2000`
+
+const arrayToObject = (arr, keyField) =>
+  Object.assign({}, ...arr.map(item => ({[item[keyField]]: item})))
 
 export const getMarketData = () => {
   return (dispatch, getState) => {
@@ -18,7 +21,7 @@ export const getMarketData = () => {
     axios.get(coinMarketCap)
       .then((res) => {
         const marketData = res.data
-
+        const formattedMarketData = arrayToObject(marketData.data, 'symbol')
         // Maybe use this later
         // const tokens = getTokenList()
         // res.data.filter((singleToken) => {
@@ -26,7 +29,7 @@ export const getMarketData = () => {
         //     return true
         //   }
         // })
-        dispatch({ type: MARKET_DATA_SUCCESS, payload: marketData })
+        dispatch({ type: MARKET_DATA_SUCCESS, payload: formattedMarketData })
         dispatch(getConvertedPortfolio())
       })
       .catch((error) => {

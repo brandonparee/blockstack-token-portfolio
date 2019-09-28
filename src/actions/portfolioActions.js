@@ -54,7 +54,7 @@ export const getPortfolioOverview = () => {
     // TODO Fix lint error here, need to return both objects
     transactions.map((singleTransaction) => { // eslint-disable-line array-callback-return
       const { abbreviation, amount, priceBtc, priceUsd } = singleTransaction
-      const currentTokenOverview = portfolioHistory[abbreviation] || {}
+      const currentTokenOverview = portfolioHistory[abbreviation] || [];
       const overview = portfolioOverview[abbreviation] || { abbreviation, totalAmount: 0, totalPurchasePriceBtc: 0, totalPurchasePriceUsd: 0 }
 
       portfolioOverview[abbreviation] = {
@@ -119,7 +119,8 @@ export const getTransactionChartData = ({ token }) => {
 
 export const getConvertedPortfolio = () => {
   return (dispatch, getState) => {
-    const { portfolio, marketData } = getState()
+    const { portfolio, marketData: { marketData } } = getState();
+    const btcPrice = _.get(marketData, 'BTC.priceUsd');
     let totalValue = 0
     let totalValueBtc = 0
     let totalDayChange = 0
@@ -130,22 +131,22 @@ export const getConvertedPortfolio = () => {
     const tokenPortfolio = portfolio.portfolioOverview
     const convertedPortfolio = {}
 
-    if (marketData.marketData && tokenPortfolio) {
+    if (marketData && tokenPortfolio) {
       _.forEach(tokenPortfolio, (singleOverview, abbreviation) => {
-        let tokenData = _.find(marketData.marketData, ['symbol', abbreviation])
+        let tokenData = _.get(marketData, abbreviation)
 
         if (_.isEmpty(tokenData)) {
           const mismatchedTokens = {
             IOT: 'MIOTA'
           }
-          tokenData = _.find(marketData.marketData, ['symbol', mismatchedTokens[abbreviation]])
+          tokenData = _.get(marketData,  mismatchedTokens[abbreviation])
         }
 
         if (!_.isEmpty(tokenData)) {
-          const fiatPrice = tokenData.price_usd
-          const btcValue = tokenData.price_btc * singleOverview.totalAmount
-          const fiatValue = tokenData.price_usd * singleOverview.totalAmount
-          const percentChange = tokenData.percent_change_24h
+          const fiatPrice = tokenData.priceUsd
+          const btcValue = (fiatPrice / btcPrice) * singleOverview.totalAmount
+          const fiatValue = tokenData.priceUsd * singleOverview.totalAmount
+          const percentChange = tokenData.changePercent24Hr
           const percentChangeValue = parseFloat(percentChange) / 100
           const dayChange = fiatValue - fiatValue / (1 + percentChangeValue)
           const dayChangeBtc = btcValue - btcValue / (1 + percentChangeValue)

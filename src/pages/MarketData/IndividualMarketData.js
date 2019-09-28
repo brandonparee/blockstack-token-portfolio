@@ -21,39 +21,40 @@ const mapStateToProps = ({ marketData, portfolio }, ownProps) => {
 
 const IndividualMarketData = ({ abbreviation, marketData, loading }) => {
   abbreviation = _.upperCase(abbreviation)
-  const singleMarketData = _.find(marketData, ['symbol', abbreviation])
+  const btcPrice = _.get(marketData, 'BTC.priceUsd');
+  const singleMarketData = _.get(marketData, abbreviation);
 
   return (
     <div>
-      { singleMarketData && !loading
+      {singleMarketData && !loading
         ? <Section title={`${singleMarketData.name} (${abbreviation})`}>
           <div className='IndividualMarketData'>
-          <nav className='level is-mobile'>
-            <div className='level-item has-text-centered'>
-              <div>
-                <p className='heading'>Price</p>
-                <p className='is-size-4'><Fiat value={singleMarketData['price_usd']} /></p>
+            <nav className='level is-mobile'>
+              <div className='level-item has-text-centered'>
+                <div>
+                  <p className='heading'>Price</p>
+                  <p className='is-size-4'><Fiat value={singleMarketData['priceUsd']} /></p>
+                </div>
               </div>
-            </div>
-            <div className='level-item has-text-centered'>
-              <div>
-                <p className='heading'>Price (BTC)</p>
-                <p className='is-size-4'>{prettyCrypto(singleMarketData['price_btc'])} BTC</p>
+              <div className='level-item has-text-centered'>
+                <div>
+                  <p className='heading'>Price (BTC)</p>
+                  <p className='is-size-4'>{prettyCrypto(singleMarketData['priceUsd'] / btcPrice)} BTC</p>
+                </div>
               </div>
-            </div>
-            <div className='level-item has-text-centered'>
-              <div>
-                <p className='heading'>Market Cap</p>
-                <p className='is-size-4'><Fiat value={singleMarketData['market_cap_usd']} /></p>
+              <div className='level-item has-text-centered'>
+                <div>
+                  <p className='heading'>Market Cap</p>
+                  <p className='is-size-4'><Fiat value={singleMarketData['marketCapUsd']} /></p>
+                </div>
               </div>
-            </div>
-            <div className='level-item has-text-centered'>
-              <div>
-                <p className='heading'>24 Hour Volume</p>
-                <p className='is-size-4'><Fiat value={singleMarketData['24h_volume_usd']} /></p>
+              <div className='level-item has-text-centered'>
+                <div>
+                  <p className='heading'>24 Hour Volume</p>
+                  <p className='is-size-4'><Fiat value={singleMarketData['volumeUsd24Hr']} /></p>
+                </div>
               </div>
-            </div>
-          </nav>
+            </nav>
           </div>
           <PriceChart token={abbreviation} />
           <LiveTradeData token={abbreviation} />

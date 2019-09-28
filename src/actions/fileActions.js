@@ -1,4 +1,5 @@
 import * as blockstack from 'blockstack'
+import { userSession } from 'utils/blockstack'
 import { defaultConfig } from '../utils'
 import { getPortfolio } from './portfolioActions'
 
@@ -15,38 +16,30 @@ export const getBlockstackFile = (path, decrypt = false, cb) => {
   return (dispatch) => {
     dispatch({ type: FETCH_FILE_REQUEST })
 
-    return blockstack.getFile(path, {decrypt})
+    return userSession.getFile(path, {decrypt})
       .then(
         (res) => {
-          dispatch({
-            type: FETCH_FILE_SUCCESS,
-            payload: {
-              isEncrypted: decrypt,
-              content: res,
-              path
+          if (res !== null) {
+            dispatch({
+              type: FETCH_FILE_SUCCESS,
+              payload: {
+                isEncrypted: decrypt,
+                content: res,
+                path
+              }
+            })
+            if (cb) dispatch(cb())
+          } else {
+            dispatch({ type: FILE_SETUP })
+            dispatch({ type: FILE_REMOVE_ERRORS })
+            if (path === 'preferences.json' || path === 'portfolio.json' || path === 'transactions.json') {
+              dispatch(putBlockstackFile(path, JSON.stringify(defaultConfig[path]), true, getPortfolio))
             }
-          })
-          if (cb) dispatch(cb())
+          }
         },
 
         (error) => {
           dispatch({ type: FETCH_FILE_ERROR, payload: error })
-
-          // TODO Clean this up
-          blockstack.getFile(path)
-            .then(
-              (res) => {
-                if (res === null) {
-                  // TODO Put default files into an array and use a lodash includes
-                  dispatch({ type: FILE_SETUP })
-                  dispatch({ type: FILE_REMOVE_ERRORS })
-                  if (path === 'preferences.json' || path === 'portfolio.json' || path === 'transactions.json') {
-                    dispatch(putBlockstackFile(path, JSON.stringify(defaultConfig[path]), true, getPortfolio))
-                  }
-                }
-              },
-              err => dispatch({ type: FETCH_FILE_ERROR, payload: error })
-            )
         }
       )
   }
@@ -56,7 +49,7 @@ export const putBlockstackFile = (path, content, encrypt = false, cb) => {
   return (dispatch) => {
     dispatch({ type: PUT_FILE_REQUEST })
 
-    return blockstack.putFile(path, content, {encrypt})
+    return userSession.putFile(path, content, {encrypt})
       .then(
         (res) => {
           dispatch({

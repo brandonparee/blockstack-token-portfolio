@@ -1,10 +1,6 @@
 # [Peachy Portfolio](http://peachyportfolio.com)
 ## Blockstack Token Portfolio App
 
-
-
-[![Build Status](https://drone.swannairlines.com/api/badges/brandonparee/blockstack-token-portfolio/status.svg)](https://drone.swannairlines.com/brandonparee/blockstack-token-portfolio)
-
 Cryptocurrency portfolio tracking application built with [Blockstack](https://blockstack.org/).
 
 ### Screenshots
@@ -28,4 +24,4 @@ Cryptocurrency portfolio tracking application built with [Blockstack](https://bl
 
 #### Special Thanks
 
-Shoutout to [Conner Swann](https://github.com/yourbuddyconner) (https://connerswann.me/) for help with DevOps stuff.
+Shoutout to [Conner Swann](https://github.com/yourbuddyconner) (https://connerswann.me/) for earlier help with DevOps stuff.
