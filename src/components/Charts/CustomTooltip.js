@@ -1,7 +1,6 @@
 import React from 'react'
 import moment from 'moment'
 
-import { CHART_TOOLTIP_TEXT as tooltipText } from '../../constants'
 import Box from '../Bulma/Box'
 import Fiat from '../Helpers/Fiat'
 
