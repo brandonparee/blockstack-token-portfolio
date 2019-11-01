@@ -9,7 +9,7 @@ const TransactionFormSidebar = () => {
   return (
     <div className='side-pane TransactionFormSidebar'>
       <TransactionToggle>
-        <a className='button is-pulled-right'>Close</a><br />
+        <button type="button" className='button is-pulled-right'>Close</button><br />
       </TransactionToggle>
       <TransactionForm />
     </div>
