@@ -4,7 +4,6 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import { createBrowserHistory } from 'history'
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux'
-import { createLogger } from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import 'react-dates/initialize'
 

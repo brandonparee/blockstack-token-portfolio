@@ -4,7 +4,6 @@ import _ from 'lodash'
 import { prettyCrypto } from '../../utils'
 
 import Section from '../../components/Bulma/Section'
-import Box from '../../components/Bulma/Box'
 import Fiat from '../../components/Helpers/Fiat'
 import PriceChart from '../../components/Charts/PriceChart'
 import LiveTradeData from '../../components/Tables/LiveTradeData'

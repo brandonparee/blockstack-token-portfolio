@@ -1,4 +1,3 @@
-import * as blockstack from 'blockstack'
 import { userSession } from 'utils/blockstack'
 import { defaultConfig } from '../utils'
 import { getPortfolio } from './portfolioActions'

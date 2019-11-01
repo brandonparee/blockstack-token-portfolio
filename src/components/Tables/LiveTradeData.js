@@ -75,7 +75,7 @@ class LiveTradeData extends Component {
     return (
       <div>
         <h1 className="subtitle">Live Trade Data</h1>
-        <a className="button" onClick={this.toggleLiveData.bind(this)}>Toggle Live Data</a>
+        <button type="button" className="button" onClick={this.toggleLiveData.bind(this)}>Toggle Live Data</button>
         <ReactTable
         data={this.state.data}
         noDataText='Click Toggle Live Data to enable Live Trade Data'
