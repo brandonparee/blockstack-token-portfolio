@@ -1,4 +1,3 @@
-'use strict'
 const test = require('tape')
 
 if (!global.fetch) global.fetch = require('node-fetch')

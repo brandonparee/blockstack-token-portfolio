@@ -1,5 +1,3 @@
-'use strict'
-
 // NOT_USD_TRADABLE is a cryptocurrency which does not trade directly with USD.
 // This value is used in testing tryConversion. Currently, this is set to MRSA.
 // If MRSA trades directly with USD in the future, tests will fail.

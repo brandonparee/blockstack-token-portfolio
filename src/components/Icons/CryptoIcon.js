@@ -1,8 +1,8 @@
-import React from 'react'
-import * as Icon from 'react-cryptocoins'
+// import React from 'react'
+// import * as Icon from 'react-cryptocoins'
 
-const CryptoIcon = ({}) => {
+// const CryptoIcon = ({}) => {
 
-}
+// }
 
-export default CryptoIcon
+// export default CryptoIcon
