@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-redeclare
 /* global fetch */
 
 const baseUrl = 'https://min-api.cryptocompare.com/data/'
