@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import cc from '../uncompiledDependencies/cryptocompare'
+import cc from 'cryptocompare'
 import moment from 'moment'
 import { reset } from 'redux-form'
 import { getBlockstackFile, putBlockstackFile } from './fileActions'
