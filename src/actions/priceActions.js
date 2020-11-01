@@ -1,5 +1,5 @@
 import axios from 'axios'
-import cc from '../uncompiledDependencies/cryptocompare'
+import cc from 'cryptocompare'
 import { getConvertedPortfolio, getTransactionChartData } from './portfolioActions'
 
 export const PRICE_CHART_DATA_REQUEST = 'PRICE_CHART_DATA_REQUEST'

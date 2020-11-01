@@ -1,5 +1,5 @@
 import axios from 'axios'
-import cc from '../uncompiledDependencies/cryptocompare'
+import cc from 'cryptocompare'
 import { getConvertedPortfolio } from './portfolioActions'
 
 export const COIN_LIST_FETCH = 'COIN_LIST_FETCH'
