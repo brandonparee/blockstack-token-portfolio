@@ -13,7 +13,7 @@
     "history": "^4.9.0",
     "http-proxy-middleware": "^0.20.0",
     "input-moment": "^0.4.0",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "moment": "^2.24.0",
     "react": "^16.11.0",
     "react-dates": "^20.3.0",
